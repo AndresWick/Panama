@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="fontawesome-free-5.2.0-web/css/all.css">
+    <link rel="stylesheet" href="Muli/muli.css">
+    <link rel="stylesheet" href="mdb/css/bootstrap.min.css">
+    <link rel="stylesheet" href="mdb/css/mdb.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Academia de Reciclaje</title>
+</head>
+<style>
+    *{
+	    font-family: Muli!important;
+    }
+    #_title{
+        font-size: 1.8em;
+        height: 20%;
+        text-align: center;
+        width:100%;
+    }
+    #text_title{
+        color: #000;
+        font-weight: 900;
+        position: relative;
+        margin-bottom: 3%;
+    }
+
+    @media only screen and (max-width: 600px) {
+	    #text_title {
+	        font-size: 1.5em;
+	    }
+	    #_title,h1{
+	    	font-size: 1.2em;
+	    }
+	}
+
+    #content_title{
+		margin-top: 1em;
+    }
+
+    #content_left,#content_right{
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+    z-index: 1;
+    margin-top: 15rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.3em;
+}
+
+</style>
+<body>
+        <div id="_title" style=" display: inline-block;">
+            <h1 id="text_title">Canal de Panama</h1>
+            <h4 id="content_title">Gestión de reservas y paso.</h4>
+        </div>
+    <div class="container">
+            <div class="one-half left">
+                    <h1>¿Quieres registrar el buque?</h1>
+                    <div id="content_left">Registrar Buque.</div>
+                    <a href="reciclar.html" class="cta">Registrar</a>
+                  </div>
+                  <div class="one-half right">
+                    <h1>¿Quieres registrar la reserva?</h1>
+                    <div id="content_right">Registrar Reserva.</div>
+                    <a href="registrarReserva.html" class="cta">Registrar</a>
+                  </div>
+    </div>
+
+
+</body>
+<script type="text/javascript" src="mdb/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="mdb/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="mdb/js/mdb.min.js"></script>
+    <script type="text/javascript" src="mdb/js/popper.min.js"></script>
+    <script>
+$l = $('.left')
+$r = $('.right')
+
+$l.mouseenter(function() {
+  $('.container').addClass('left-is-hovered');
+}).mouseleave(function() {
+  $('.container').removeClass('left-is-hovered');
+});
+
+$r.mouseenter(function() {
+  $('.container').addClass('right-is-hovered');
+}).mouseleave(function() {
+  $('.container').removeClass('right-is-hovered');
+});
+    </script>
+</html>
