@@ -1,0 +1,902 @@
+<html><head><title>Principal Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mdb/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/w3css/4/w3.css">
+<link rel="stylesheet" href="loader/css/loader.css">
+<link rel="stylesheet" href="css/sidenavBtn.css">
+<link rel="stylesheet" href="fontawesome-free-5.2.0-web/css/all.min.css">
+<link rel="stylesheet" href="mdb/css/mdb.min.css">
+<link rel="stylesheet" href="css/theme-panama.css">
+<link rel="stylesheet" href="Muli/muli.css"> 
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Muli", sans-serif}
+#modal_edit_user_index{overflow:auto;}
+body.modal-open {
+    overflow: initial;}
+    	#modal_edit_user_index .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user_index .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user_index .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+	
+	@media (min-height: 800px){
+	#modal_edit_user_index .modal-body {
+	    height: 690px!important;
+	    overflow-y: auto!important;
+	}
+	
+	
+
+/* _sidebar.tmpl  */
+
+.accordion {
+    color: #372112!important;
+    text-align: center;
+    font-weight:bold;
+}
+
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+.active, .accordion:hover {
+    background-color: #6C4D3C!important;
+    color:#EAEAEA!important;
+}
+
+.accordion:after {
+    color: #EAEAEA!important;
+}
+
+.vertical-menu {
+    padding-left: 8%;
+}
+
+.vertical-menu a {
+    background-color: #EAEAEA!important;
+    color: #372112!important;
+    text-align:auto;
+}
+
+.vertical-menu a:hover {
+   /* background-color: #ccc;*/
+ 	font-weight: bold;
+    padding-left:20px;
+}
+
+/* index.jsp */
+
+#title_dashboard{
+	color:#372112;
+	text-align:center;
+	font-weight: bold; 
+	padding-bottom: 1em; 
+	border-bottom: 1.5px solid #372112;
+}
+
+#menusSidebarNav{
+	background-color:#EAEAEA!important;
+}
+
+.w3-bar w3-top w3-black w3-large{
+	background-color:#3c2f2f!important;
+}
+
+#btn_cerrar_sesion{
+	border-radius: 15px;
+	color:#eaeaea!important; 
+	background-color:#3c2f2f!important;
+}
+
+#btn_cerrar_sesion:hover{
+	background-color:#6C4D3C!important;
+}
+
+#btn_notifications:hover{
+	background-color:#6C4D3C!important;
+	color:#eaeaea!important;
+}
+
+.w3-dropdown-hover:hover > .w3-button:first-child{
+	background-color:#6C4D3C!important;
+  	color:#eaeaea!important;
+}
+
+#a_filter:hover{
+	background-color:#6C4D3C!important;
+	color:#eaeaea!important;
+}
+
+.w3-black{
+    color: #eaeaea!important;
+    background-color: #3c2f2f!important;
+}
+
+#img_logo{
+	padding: 0px 5px;
+	content:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtkAAAEuCAYAAABbMg6iAAAACXBIWXMAABcRAAAXEQHKJvM/AAAgAElEQVR42u3df1RVVcI38G+t+ecMM9F4mGoVPyolYEwklaExvPKKDgYjiY4Kao2AKYtUUEN6verro+IbUoj5Y6EJOKkB9vgjHBgZtRcv5EiiIWYXQicvUKsaLkU9PfdP3j/w8iCiwr1nn3vuud/PWq6ZFPY9Z99z9vmeffbZ+4Genh4I9DCAMABRt/73SQBjQURERESkrisAbgJoBFBz648wDwgI2Q8DWARgJoDJ/D6JiIiISKM+BHDi1p8ftBqyo26F67/w+yIiIiIiN/NXABvR29utiZAddWuD2GtNRERERO7uHHo7jp0K2w868bsPAzgA4P8xYBMRERGRTkwG8CWAglt51yGO9mTPvBWwvfk9EBEREZFOdd/KvTXD/UVHerIPADjOgE1EREREOueN3lEbBcP9xeH0ZD98K8VzCj4iIiIi8jTn0NurPaRZSIbakx3GgE1EREREHmzyrTw8pHHaQ+nJtgdsDg8hIiIiIk93Bb2z692zR/t+Pdn2GUQYsImIiIiIekd21OA+Pdr3C9k14BARIiIiIqKBQfuAoyH7AAM2EREREdGgXkLvgoyDutuY7JnonaaPiIiIiIju7n9hkHm0BwvZD6N3GUmOwyYiIiIiujcLeicKue1FyMGGixQwYBMRERERDUkAgMyBfzmwJzsKvavaEBERERHR0D2F3tEgAO7syd7I+iEiIiIiGrbbcnT/nuwosBebiIiIiMhRfb3Z/XuyF7FeiIiIiIgc1jc2296T/TCA71kvREREREQO676Vq/t6shexToiIiIiInOKN3vVm+kL2TNYJEREREZHTZgK9w0U4VISIiIiISBndAB5+EL0r1BARERERkfO8AYQ9iN6p+4iIiIiISBlR7MkmIiIiIlLWkw8CeJL1QERERESkmLAHevot+UhERERERE6zMGQTERERESnsQVYBERERERFDNhERERERQzYREREREUM2ERERERExZBMRERERMWQTERERETFkExERERERQzYREREREUM2ERERERFDNhERERERDfALVgEReTpLqxmnj5Witfkavvv2WwCAl5cXRj4TjOj4PyM0YhIriYiIhuWBnp6eHlYDEXmiuuoKFO3YhuYW8z1/TpZl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ZKSpvhY5a5YP+fuWJAmvGze59EkMERExZHskey/exYv1dw2gwUEhmB4/665jRt1Fd1cnit/efM8QJUkSpkyZipeXZ7tVeLS0mnH6WCk+PveRw732Q7nJGjM2DPELUnU/7KCpvhYVh4tw9Uqj0zcw9npT8pgqL8zHsdL37rpt9puglNXrNT90h4iIGLJ1r6m+Fj/+8P1tfzcmfKIuL9KWVjPa/9V629899PBvdBMe66or0NzYgNbma/ju229habs5rF784KAQeHl5YeQzwQg3ROv2OBjqzdnVi+dx0XQW33zdge++/RYA7riZ8ff1wy+9ftVXb0HPjsULMfFC682+bf35PR3oEYtPERERQzaR5gL4YDw5SBMRERFDNhERERGR4jiFHxERERERQzYREREREUM2ERERERFDNhERERERMWQTERERETFkExERERExZBMREREREUM2ERERERFDNhERERERQzYREREREQ30C1YBEZH7sLSacXBnLm5cv47mFvNt/xYcFIIXJk/BnFdXwHuEDyuLiMiFHujp6elhNRARaVt3Vye2rl4Kk6nmvj8rSRJmvDQbK3N2sOKIiBiyiYhoME31tchMTYLNZhvW7/n7+mHf8TPs1SYiYsgmJXR3deLqxfP4sasTLZ9d6fv7G1804+eff77tZx959FE89rhv33+HG6IBAJEx8axIIjcO2AzaREQM2eQES6sZF87+Ha2fNw06RtMZkiQhwP9JhD43HkHPjsULMfG8UBOpfMO8YPpEWK1Wp8oJDgpBSVUdK5SIiCGb7nXRPXXkPVyu/xjXrl11+uI7XP6+fhgzNgxRcbPY200k2HZjBo6UHVKkrMwsI+alrWKlEhExZFN/5YX5qD1bjUuXGzSzTZIkITw8AgvSMhEaMYlfEpHCN9QJhjCHh4kMJMsy/vbJF6xYIiKVcAo/DbNP1fXRR2cUu9AqyWazwWSqgclUA1mWMXN2IqcOI1LIqSPvKXreW61WNNXX8oaYiEgl7MnWoLrqCpws++uQpurSGvvUYSmr1zNsEzkhO3m24m3A3MSFnNbPw64jA4cVSpKE34WMxqToGA4fImLI9hyWVjM2Zryq6MuLDNtE7ik5NlLxtsBgiEJuyVFWro411dciZ81ytHW0D6mdft24CbFJKaw4IgG4rLoGdHd1Ijt5NhKnR+oiYAO9Q0mOlB1CgiEM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');
+}
+	
+</style>
+
+</head><body class="w3-light-grey"><div id="full-size" style="display: none;">
+  <div id="loader"></div>
+
+</div>
+
+<!-- Top container -->
+<div id="topNav" class="w3-bar w3-top w3-black w3-large" style="z-index:4; height: 50px;">
+
+  <a href="#" class="w3-bar-item w3-hide-small" style="width:300px;"><i class="w3-margin-right"></i><img id="img_logo" src="img/logo_acp.gif" style="width:100px;" alt="GIS-LABS"></a>
+  <button class="w3-bar-item w3-button  w3-hover-none w3-hover-text-light-grey" onclick="sidenavBtn.click()"><i id="sidenav-btn" class="arrow-right"></i> &nbsp;Menu</button>
+    
+  <div class="w3-dropdown-hover  w3-right  w3-right ">
+    <button id="btn_notifications" class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-cog"></i></button>     
+    <div class="w3-animate-right w3-dropdown-content w3-card-4  w3-round w3-bar-block" style=" width:200px; position: fixed; right: 0;">
+        <div class="w3-container">
+         <h4 id="firstAndLastName" class="w3-center">Carlos Andrés Aguirre Cañas</h4>
+         <p class="w3-center"><img id="img_usuario" src="img/w3images/avatar3.png" class="w3-circle img_avatar" style="height:106px;width:106px" alt="Avatar"></p>
+         <hr>
+         <p id="rolDinamic"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Administrador</p>
+         <p id="empresaDinamic"><i class="fa fa-building fa-fw w3-margin-right w3-text-theme"></i>UD</p>
+         <p><button id="btn_cerrar_sesion" class="w3-button w3-dark-grey" style="border-radius: 15px;" onclick="closeRedirect();">cerrar  sesión <i class="fa fa-sign-out" aria-hidden="true"></i></button></p>
+      </div>  
+      <!-- <a href="#" class="w3-bar-item   w3-button w3-right" onclick="closeRedirect();">Salir. <i class="fa fa-sign-out" aria-hidden="true"></i></a> -->
+    </div>
+  </div>  
+ 
+</div>
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar  w3-white w3-animate-left w3-card-4" id="menusSidebarNav" style="height: 94%; display: block; z-index: 3; width: 300px; transition: all 0.5s ease 0s;"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img id="img_empresa" src="img/w3images/avatar2.png" class="w3-circle w3-margin-right img_avatar" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Bienvenido, <strong id="nameDInamic">Carlos Andrés</strong></span><br>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i><span class="w3-badge w3-right w3-small w3-green">3</span></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-key"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+  
+  </div>
+<div id="menusSidebar">
+
+<style>
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+     font-weight: bold;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.panel {
+    padding-left:18px;
+    background-color: #eee;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.vertical-menu {
+    width: 100%;
+}
+
+.vertical-menu a {
+    background-color: #eee;
+    color: #black;
+    display: block;
+    padding: 12px;
+    text-align:auto;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+	background-color:#ccc;
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+</style>
+
+
+    <button id="_Configuración" class="accordion"><i class="fa fa-cog"></i>Administración</button>
+    <div class="panel">
+        	<div class="vertical-menu">
+        	
+            	<a onclick="renderUtils.RenderContent('./templates/admin/_addusuarios.tmpl.jsp','Añadir usuario','ContentContainer',true); return false;"><i class="fas fa-trophy"></i>Ofertar cupos</a>
+        	
+        	</div>
+   	</div>
+
+   <button id="_Diagnosticos" class="accordion"><i class="fa fa-ship"></i>Reservas</button>
+    <div class="panel">
+        	<div class="vertical-menu">
+        	
+            	<a onclick="renderUtils.RenderContent('./templates/ppf/PlaneacionPPF/enfoque/_listaInformeEnfoque.tmpl.jsp?map%3D%7B%22mapConfig%22%3A%7B%22baseMap%22%3A%22stamenTerrain%22%2C%22enable3d%22%3Afalse%7D%2C%22mapTools%22%3A%7B%22enable3d%22%3Atrue%2C%22baseMap%22%3Atrue%7D%2C%22zoomTools%22%3Atrue%7D','Diagnostico EISA','ContentContainer',true); return false;"><i class="fa fa-ship"></i>Crear Reserva</a>
+        	
+        	</div>
+   	</div>
+
+    <button id="_Dashboard's" class="accordion"><i class="fas fa-eye"></i>Visitas</button>
+    <div class="panel">
+        	<div class="vertical-menu">
+        	
+            	<a onclick="renderUtils.RenderContent('./templates/admin/_dashboardEISA.tmpl.jsp','Dashboard EISA','ContentContainer',true); return false;"><i class="fas fa-eye"></i>Crear Visita</a>
+        	
+            	<a onclick="renderUtils.RenderContent('./templates/admin/_formatos.tmpl.jsp','Dashboard AVC','ContentContainer',true); return false;"><i class="fas fa-eye-slash"></i>Cancelar Visita</a>
+        	
+        	</div>
+   	</div>
+
+    <button id="_Geovisor" class="accordion"><i class="fas fa-calendar-alt"></i>Calendario</button>
+    <div class="panel">
+        	<div class="vertical-menu">
+        	
+            	<a onclick="renderUtils.RenderContent('./templates/admin/_mapMain.tmpl.jsp?map%3D%7B%22mapConfig%22%3A%7B%22baseMap%22%3A%22stamenWatercolor%22%2C%22enable3d%22%3Atrue%7D%2C%22zoomTools%22%3Atrue%7D','Mapas','ContentContainer',true); return false;"><i class="fas fa-calendar-check"></i>Ver Calendario</a>
+        	
+        	</div>
+   	</div>
+
+
+<script>
+
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function()
+  {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+    //RECORRER OTROS PANELES
+    var accIn = document.getElementsByClassName("accordion");
+    console.log("elementos del acordeon"+accIn.length);
+     for(var j=0;j<accIn.length;j++)
+     {
+    	 if(this!=acc[j])
+    	 {
+    		 if(accIn[j].classList=='accordion active')
+    		{
+    			 accIn[j].click();
+    			 this.click();
+    		}
+    	 }
+     }
+  }
+  );
+}
+</script>
+
+</div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="sidenavBtn.click()" style="display: block; cursor: pointer;" title="close side menu" id="myOverlay"></div>
+
+<div id="left-panel-content" class="w3-animate-right w3-dropdown-content w3-card-4  w3-round w3-bar-block" style="display:none; width:300px; position: fixed; right: 0; height: 100%; z-index: 3;">
+</div>
+
+<!-- !PAGE CONTENT! old margin-left:300px; -->
+<div class="w3-main" style="margin-top:43px;">
+
+<div class="w3-container">
+<div id="MapContainer" class="w3-card-4 w3-white"></div>
+</div>
+
+<div id="ContentContainer" style="transition: margin-left .5s;"></div>
+<!-- End page content -->
+</div>
+<div id="ContentUpdatePassword"><div id="modals">
+
+<!--  MODAL TABLE EDIT PASSWORD -->
+<div class="modal fade" id="modal_password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      <div class="modal-body">        
+
+      <span class="fa fa-key"><h1>Cambiar Contraseña</h1></span>
+		<br>Se recomienda usar una contraseña segura que no uses en ningún otro sitio.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-green" onclick="edit_password_index()">Editar</button>
+        <button type="button" class="btn btn-red" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  END MODAL TABLE EDIT PASSWORD -->
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_edit_password_index" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h3 class="modal-title">Cambiar Contraseña</h3>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="form" class="form-horizontal">
+                    <input type="hidden" value="" name="id"> 
+                    <div class="form-body">
+                   	 	<div class="form-group">
+                            <label class="control-label col-md-3">Actual</label>
+                            <div class="col-md-9">
+                                <input name="id" placeholder="Contraseña Actual" class="form-control" id="input_usua_actual_password_index" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Nueva</label>
+                            <div class="col-md-9">
+                                <input name="username" placeholder="Contraseña Nueva" class="form-control" id="input_new_password_index" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Repetir Contraseña Nueva</label>
+                            <div class="col-md-9">
+                                <input name="firstName" placeholder="Contraseña Nueva" class="form-control" id="input_new_repet_password_index" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSaveContraseña" onclick="save_password_one_index()" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_confirm_edit_password_index" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h3 class="modal-title">¿Está seguro de actualizar la contraseña?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSaveIndex" onclick="save_password_index()" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+<!-- Central Modal Medium Success Registration -->
+			<div class="modal fade" id="modal_success_edition_password_index" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-success" role="document">
+    				<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Cambio de contraseña exitoso</p>
+				            <button id="closeExit" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px;">
+				                <span aria-hidden="true" class="white-text">×</span>
+				            </button>
+        				</div>
+				        <!--Body-->
+				        <div class="modal-body">
+				            <div class="text-center">
+				                <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+				                <p>El cambio de contraseña se ha realizado con exito.</p>
+				            </div>
+        				</div>
+				        <!--Footer-->
+				        <div class="modal-footer justify-content-center">
+				            <a type="button" class="btn btn-success" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+				        </div>
+    				</div>
+    			<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Medium Success Registration -->
+							
+					<!-- Central Modal Invalid Password -->
+			<div class="modal fade" id="modal_invalid_password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    				<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">La Contraseña NO coincide</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px;">
+               	 				<span aria-hidden="true" class="white-text">×</span>
+            				</button>
+        				</div>
+        				<!--Body-->
+        				<div class="modal-body">
+				            <div class="text-center">
+				                <i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+				                <p>La nueva contraseña no coincide, favor verifique ambos campos.</p>
+				            </div>
+				        </div>
+				        <!--Footer-->
+				        <div class="modal-footer justify-content-center">
+				            <a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+				        </div>
+				    </div>
+   				<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Password-->
+			<!-- Central Modal Invalid Password -->
+			<div class="modal fade" id="modal_invalid_actual_password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    				<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">La Contraseña NO coincide</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px;">
+               	 				<span aria-hidden="true" class="white-text">×</span>
+            				</button>
+        				</div>
+        				<!--Body-->
+        				<div class="modal-body">
+				            <div class="text-center">
+				                <i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+				                <p>La contraseña actual no coincide, favor verifiquela.</p>
+				            </div>
+				        </div>
+				        <!--Footer-->
+				        <div class="modal-footer justify-content-center">
+				            <a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+				        </div>
+				    </div>
+   				<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Password-->
+</div></div>
+<div id="ContentEditOwnUser"><div id="modals">
+
+    <!-- Modal -->
+<div class="modal fade" id="modal_cog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      <div class="modal-body">        
+        <table class="table">
+  <caption style="font-weight: 700;">Datos de Usuario</caption>
+  <thead>
+    <tr>
+      <th scope="col" style="font-weight: 700;">Username</th>
+      <th scope="col" id="cog_username"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" style="font-weight: 700;">CC</th>
+      <td id="cog_identifica"></td>
+    </tr>
+    <tr>
+      <th scope="row" style="font-weight: 700;">Nombres</th>
+      <td id="cog_nombres"></td>
+    </tr>
+    <tr>
+      <th scope="row" style="font-weight: 700;">Apellidos</th>
+      <td id="cog_apellidos"></td>
+    </tr>
+      <tr>
+      <th scope="row" style="font-weight: 700;">Rol</th>
+      <td id="cog_rol"></td>
+    </tr>
+      <tr>
+      <th scope="row" style="font-weight: 700;">Empresa</th>
+      <td id="cog_empresa"></td>
+    </tr>
+        <tr>
+      <th scope="row" style="font-weight: 700;">Dirección</th>
+      <td id="cog_direccion"></td>
+    </tr>
+        <tr>
+      <th scope="row" style="font-weight: 700;">Email</th>
+      <td id="cog_email"></td>
+    </tr>
+        <tr>
+      <th scope="row" style="font-weight: 700;">Telefono</th>
+      <td id="cog_telefono"></td>
+    </tr>
+  </tbody>
+</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-green" onclick="edit_user_index()">Editar</button>
+        <button type="button" class="btn btn-red" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--map dependency-->
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_edit_user_index" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -2px;"><span aria-hidden="true">×</span></button>
+                <h3 class="modal-title">Editar Usuario</h3>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="formUser" class="form-horizontal">
+                    <input type="hidden" value="" name="id"> 
+                    <div class="form-body">
+                   	 	<div class="form-group">
+                            <label class="control-label col-md-3">CC</label>
+                            <div class="col-md-9">
+                                <input name="id" placeholder="CC" class="form-control" id="input_usua_identifica_index" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Nombre Usuario</label>
+                            <div class="col-md-9">
+                                <input disabled="" name="username" placeholder="Username" class="form-control" id="input_username_index" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nombres</label>
+                            <div class="col-md-9">
+                                <input name="firstName" placeholder="First Name" class="form-control" id="input_usua_nombres_index" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Apellidos</label>
+                            <div class="col-md-9">
+                                <input name="lastName" placeholder="Last Name" class="form-control" id="input_usua_apellidos_index" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input name="email" placeholder="Email" class="form-control" id="input_usua_email_index" type="email">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Telefono</label>
+                            <div class="col-md-9">
+                                <input name="telefono" placeholder="Telefono" class="form-control" id="input_usua_telefonos_index" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Rol</label>
+                            <div class="col-md-9">
+                                <select disabled="" id="input_usua_rol_index" name="gender" class="form-control">
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Empresa</label>
+                            <div class="col-md-9">
+                                <select disabled="" id="input_usua_empresa_index" name="gender" class="form-control">
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Dirección</label>
+                            <div class="col-md-9">
+                                <textarea id="input_usua_direccion_index" name="address" placeholder="Address" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" id="photo-preview">
+                            <label class="control-label col-md-3">Foto</label>
+                            <div class="col-md-9">
+                                 <div id="foto-perfil-own">(sin foto)</div>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" id="label-photo">Cargar Foto</label>
+                        </div>
+                    </div>
+                </form>
+                         <!--TODO:revisar camilo y carlos INICIO foto mongo-->
+		            <div class="w3-card-4" style="background-color:white; padding: 20px;">
+			            <div id="fieldset3-content">
+			                 <form method="POST" enctype="multipart/form-data" id="formularioPhoto" onchange="FileManager.cargarArchivo()">
+			                 <input type="file" class="btn info" name="archivo png" id="archivoOwn" style="   border-color: #2196F3; color: dodgerblue;border: 2px solid dodgerblue; margin-left: auto;margin-right: auto;width:100%;max-width:500px;min-width:240px;">
+			                 </form>
+			            </div>
+		            </div>
+		            <!--TODO:revisar camilo y carlos FIN foto mongo-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" onclick="save_own_user()" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_confirm_edit_user_index" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h3 class="modal-title">¿Está seguro de guardar los cambios realizados?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="save_user_index()" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+<!-- Central Modal Medium Success Registration -->
+			<div class="modal fade" id="modal_success_edition_index" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-success" role="document">
+    				<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Edición Exitosa</p>
+				            <button id="closeExit" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px;">
+				                <span aria-hidden="true" class="white-text">×</span>
+				            </button>
+        				</div>
+				        <!--Body-->
+				        <div class="modal-body">
+				            <div class="text-center">
+				                <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+				                <p>La edición de usuario se ha realizado con exito.</p>
+				            </div>
+        				</div>
+				        <!--Footer-->
+				        <div class="modal-footer justify-content-center">
+				            <a type="button" class="btn btn-success" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+				        </div>
+    				</div>
+    			<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Medium Success Registration -->
+		
+									<!-- Central Modal Invalid Email -->
+			<div class="modal fade" id="centralModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    			<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Email no valido</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -25px;">
+                				<span aria-hidden="true" class="white-text">×</span>
+            				</button>
+        				</div>
+       		 			<!--Body-->
+        				<div class="modal-body">
+            				<div class="text-center">
+                				<i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+                				<p>Por favor ingrese un Email valido. Ej: pepito999@gmail.com</p>
+            				</div>
+        				</div>
+        				<!--Footer-->
+        				<div class="modal-footer justify-content-center">
+            				<a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+        				</div>
+    				</div>
+    			<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Email -->
+			<!-- Central Modal Invalid Email -->
+			<div class="modal fade" id="centralModalDangerRepeat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    			<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Email no valido</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -25px;">
+                				<span aria-hidden="true" class="white-text">×</span>
+            				</button>
+        				</div>
+       		 			<!--Body-->
+        				<div class="modal-body">
+            				<div class="text-center">
+                				<i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+                				<p>El Email ingresado ya se encuentra registrado</p>
+            				</div>
+        				</div>
+        				<!--Footer-->
+        				<div class="modal-footer justify-content-center">
+            				<a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+        				</div>
+    				</div>
+    			<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Email -->
+			<!-- Central Modal Invalid Email -->
+			<div class="modal fade" id="centralModalDangerRepeatIdentifica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    			<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Identificación no valida</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -25px;">
+                				<span aria-hidden="true" class="white-text">×</span>
+            				</button>
+        				</div>
+       		 			<!--Body-->
+        				<div class="modal-body">
+            				<div class="text-center">
+                				<i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+                				<p>La identificación ingresada ya se encuentra registrada</p>
+            				</div>
+        				</div>
+        				<!--Footer-->
+        				<div class="modal-footer justify-content-center">
+            				<a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+        				</div>
+    				</div>
+    			<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Email -->
+			<!-- Central Modal Invalid Phone -->
+			<div class="modal fade" id="modal_invalid_phone" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    				<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Telefono no valido</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -25px;">
+               	 				<span aria-hidden="true" class="white-text">×</span>
+            				</button>
+        				</div>
+        				<!--Body-->
+        				<div class="modal-body">
+				            <div class="text-center">
+				                <i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+				                <p>Por favor ingrese un número de telefono valido. Ej: 299-99-99 o 310-999-9999 'Sin - '</p>
+				            </div>
+				        </div>
+				        <!--Footer-->
+				        <div class="modal-footer justify-content-center">
+				            <a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+				        </div>
+				    </div>
+   				<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Phone-->
+
+</div></div>
+
+<script src="mdb/js/jquery-3.3.1.min.js"></script>
+<script src="mdb/js/popper.min.js"></script>
+<script src="mdb/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="mdb/js/mdb.min.js"></script>
+<script src="loader/js/loader.js"></script>
+<script src="js/sidenavBtn.js"></script>
+<script src="js/leftPanelContent.js"></script>
+
+<div id="snackbar"></div>
+
+<script>
+
+var empresa = null;
+var rol= null;
+var user='caaguirre';
+var nombres='Carlos Andrés';
+var apellidos='Aguirre Cañas';
+var perfil = 'O';
+var ambienteLabel = 'UD';
+var email = 'carlos.andres.aguirre.c@gmail.com';
+var telefono = '+57 3105638030';
+var direccion = 'Bogotá';
+var identifica = '1020799232';
+
+
+var manejarDownloadLogin=function(data){
+	console.log("peticion recibida"+JSON.stringify(data));
+	$("#img_usuario").attr('src', ''+data.url);
+};
+
+function loadUser(user){
+	$.ajax({
+		  type: "POST",
+		  enctype: 'multipart/form-data',
+		  url: 'LoadOwnUser',
+		  data: {
+		  	registro:user,
+		  	tipo:'usuario'
+		  },
+		  success: function (data) {
+		  	var objData = JSON.parse(data); 		 
+		 	rol = objData[0].nombre_rol ;
+		 	empresa = objData[0].nombre_empresa;	
+		 	$("#rolDinamic").append('<i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>'+rol);
+		 	$("#empresaDinamic").append(empresa);
+			 
+		  }
+		 });
+}
+	
+/*loadUser(user);
+
+console.log(user);
+console.log(perfil);
+
+$("#nameDInamic").append(nombres);
+$("#firstAndLastName").append(nombres+' '+apellidos);
+*/
+function closeRedirect()
+{
+	window.location.href = "index.html";	
+}
+
+</script>
+</body></html>

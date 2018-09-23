@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="fontawesome-free-5.2.0-web/css/all.min.css">
@@ -84,16 +82,16 @@
 			}
 			#btn-login{
 			    margin-bottom: 16px;
-			    background-color: #714C0B;
+			    background-color: #343a40!important;
 			    margin-left: 30%;
 			    border-radius: 2rem; 
 			}
 			#send_pass{
-			    background-color: #714C0B;
+			    background-color: #0035ff!important;
 			    border-radius: 2rem;
 			}
 			#nextBtn,#prevBtn {
-		    	background-color: #714C0B!important;
+		    	background-color: #0035ff!important;
 		    	border-radius: 2rem;
 			}
 			#login_form{
@@ -103,24 +101,8 @@
 			    flex-direction: column;
 			}
 			.grey-text {
-		    	color: #714C0B!important;
+		    	color: #343a40!important;
 			}
-		</style>
-		<style type="text/css">
-			.w3-modal{z-index:3;display:none;padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4)}
-			.w3-modal-content{margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px}
-			.w3-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}
-			.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
-			.w3-cell-row:before,.w3-cell-row:after,.w3-clear:after,.w3-clear:before,.w3-bar:before,.w3-bar:after{content:"";display:table;clear:both}
-			@media (max-width:600px){.w3-modal-content{margin:0 10px;width:auto!important}.w3-modal{padding-top:30px}
-			.w3-dropdown-hover.w3-mobile .w3-dropdown-content,.w3-dropdown-click.w3-mobile .w3-dropdown-content{position:relative}	
-			.w3-hide-small{display:none!important}.w3-mobile{display:block;width:100%!important}.w3-bar-item.w3-mobile,.w3-dropdown-hover.w3-mobile,.w3-dropdown-click.w3-mobile{text-align:center}
-			.w3-dropdown-hover.w3-mobile,.w3-dropdown-hover.w3-mobile .w3-btn,.w3-dropdown-hover.w3-mobile .w3-button,.w3-dropdown-click.w3-mobile,.w3-dropdown-click.w3-mobile .w3-btn,.w3-dropdown-click.w3-mobile .w3-button{width:100%}}
-			@media (max-width:768px){.w3-modal-content{width:500px}.w3-modal{padding-top:50px}}
-			@media (min-width:993px){.w3-modal-content{width:900px}.w3-hide-large{display:none!important}.w3-sidebar.w3-collapse{display:block!important}}
-			@media (max-width:992px) and (min-width:601px){.w3-hide-medium{display:none!important}}
-			@media (max-width:992px){.w3-sidebar.w3-collapse{display:none}.w3-main{margin-left:0!important;margin-right:0!important}}
-			.w3-top,.w3-bottom{position:fixed;width:100%;z-index:1}.w3-top{top:0}.w3-bottom{bottom:0}
 		</style>
 		<style>
 			input, a, h1,h2,h3,h4, .btn , .tab, .modal,#modal-olvido{
@@ -179,7 +161,7 @@
 			}
 			.tab{
 			    font-weight: bold;
-		    	color: #714C0B!important;
+		    	color: #0035ff!important;
 			}
 			.step.finish {
 		    	background-color: #3A1E06!important;
@@ -191,7 +173,7 @@
   		<div id="loader"></div>
 	</div>
 		<div class="bg-img">
-	  		<form name="loginform" method="post" action="login">
+	  		<form name="loginform">
 	  			<div class="transp-frame">
 	      		<div class="container">
 	            	<div class="modal-header">
@@ -199,24 +181,23 @@
 	            	</div>  
 
 	                <div id="modal_" class="mx-2">
-	                	<div class="md-form mb-2" style="border-bottom: 2px solid #6C4D3C">
+	                	<div class="md-form mb-2" style="border-bottom: 2px solid #343a40">
 	                        <i class="fa fa-user prefix grey-text"></i>
-	                        <input type="text" name="usuario" required class="form-control">
+	                        <input type="text" id="user" name="usuario" required class="form-control">
 	                    </div>
-	                    <div class="md-form mb-2" style="border-bottom: 2px solid #6C4D3C">
+	                    <div class="md-form mb-2" style="border-bottom: 2px solid #343a40">
 	                        <i class="fa fa-lock prefix grey-text"></i>
-	                        <input type="password" name="clave"  class="form-control">
+	                        <input type="password"  id="pass" name="clave" required class="form-control">
 	                    </div>
-	                    <button type="submit"  id="btn-login" class="btn btn-deep">Login</button>
+	                    <button id="btn-login" class="btn btn-deep" onclick="return sendData();">Login</button>
 	                      <div class="" id="login_footer">
-	                        <p style="text-align: center;"><a href="#" onclick="document.getElementById('modal-registro').style.display='block'">¿No tienes cuenta?</a></p>
-	                        <p style="text-align: center;"><a href="#" onclick="document.getElementById('modal-olvido').style.display='block'">¿Olvidaste tu contraseña?</a></p>	                    
+	                        <p style="text-align: center;"><a href="#" onclick="">¿No tienes cuenta?</a></p>
+	                        <p style="text-align: center;"><a href="#" onclick="">¿Olvidaste tu contraseña?</a></p>	                    
 	                    </div>
 	                </div>
 	      		</div>
 	      		</div>
 	  		</form>
-  			
 		<!-- End img -->
 		</div>
 	</body>
@@ -225,7 +206,17 @@
 	<script type="text/javascript" src="mdb/js/mdb.min.js"></script>
 	<script type="text/javascript" src="mdb/js/popper.min.js"></script>
 	<script src="loader/js/loader.js"></script>
-	
 
 </html>
+
+<script>
+	function sendData(){
+		var user=document.getElementById("user").value;
+		var pass=document.getElementById("pass").value;
+		if(user!="" && pass!=""){
+			window.location.href = 'indexP.html';
+			return false;
+		}
+	}
+</script>
     
