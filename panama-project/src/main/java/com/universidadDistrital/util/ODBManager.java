@@ -4,17 +4,22 @@ import java.sql.Connection;
 import java.sql.*;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
+
+import com.universidadDistrital.negocio.Usuario;
+
 
 /**
  * Recursos Humanos
  * @author Alba Consuelo Nieto
  */
+@Repository
 public class ODBManager {
 
 	/**
 	 * Instancia del ServiceLocator
 	 */
-	private static ODBManager instance = null;
+	//private static ODBManager instance = null;
 
 	/**
 	 * Conexion compartida a la Base de Datos
@@ -29,7 +34,7 @@ public class ODBManager {
 	/**
 	 * @return instancia del ServiceLocator para el manejo de la conexion
 	 */
-	public static ODBManager getInstance() {
+	/*public static ODBManager getInstance() {
 		if (instance == null) {
 			try {
 				instance = new ODBManager();
@@ -39,23 +44,19 @@ public class ODBManager {
 		}
 
 		return instance;
-	}
+	}*/
 
 	/**
 	 * @throws Exception
 	 *             dice si no se pudo crear la conexion
 	 */
-	private ODBManager() throws Exception {
-		try {
+	public void conectar(Usuario usuario) throws Exception {
 			 /** TODO Establecer la conexion a la bd. usuario= hr, password= hr **/
                      Class.forName("oracle.jdbc.driver.OracleDriver");
-                     conexion=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
+                     conexion=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe"
+                    		 ,usuario.getUser(),
+                    		 usuario.getPassword());
 				     conexion.setAutoCommit(false);
-				     System.out.println(conexion);
-		} catch (Exception e) {
-			   System.out.println(e);
-			  //throw new RHException("ServiceLocator","ERROR_CONEXION_BD "+ e);
-		}
 	}
 
 	/**

@@ -26,7 +26,7 @@ public class EmpleadoDAO {
      * @throws RHException
      */
     public void incluirEmpleado(Empleado empleado) throws RHException {
-      try {
+    	 /*try {
       
         String strSQL = "INSERT INTO employees (employee_id, first_name, last_name, job_id, email,salary, hire_date) VALUES(?,?,?,?,?,?,?)";
         Connection conexion = ODBManager.getInstance().tomarConexion();
@@ -39,14 +39,14 @@ public class EmpleadoDAO {
         prepStmt.setDouble(6, empleado.getSalary());  
         prepStmt.setDate(7, java.sql.Date.valueOf(empleado.getHire_date()));
         prepStmt.executeUpdate();
-        prepStmt.close();
-        ODBManager.getInstance().commit();
-      } catch (SQLException e) {
+        prepStmt.close();*/
+       // ODBManager.getInstance().commit();
+      /*} catch (SQLException e) {
     	  System.out.println(e);
            //throw new RHException( "EmpleadoDAO", "No pudo crear el empleado"+ e.getMessage());
       }  finally {
-         ODBManager.getInstance().liberarConexion();
-      }
+        // ODBManager.getInstance().liberarConexion();
+      }*/
       
     }
     
@@ -54,21 +54,19 @@ public class EmpleadoDAO {
        /** TODO Implementar el método**/
     }
     
-    public Empleado buscarEmpleado(Integer employee_id){
+    /*public Empleado buscarEmpleado(Integer employee_id){
       Empleado e = new Empleado(); //Instancia el objeto para retornar los datos del empleado
       try{
-         String strSQL = "SELECT employee_id, first_name, last_name, job_id, email, hire_date FROM employees WHERE employee_id = ?";
-         Connection conexion = ODBManager.getInstance().tomarConexion();
+          String strSQL = "SELECT employee_id, first_name, last_name, job_id, email, hire_date FROM employees WHERE employee_id = ?";
+          Connection conexion = ODBManager.getInstance().tomarConexion();
           PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
           prepStmt.setInt(1,employee_id);
-          ResultSet rs = prepStmt.executeQuery();
-          /**TODO Leer el ResultSet, settear los atributos del empleado y retornarlo**/
       }
       catch(SQLException ex){
-         /** TODO Tratar la excepcion**/
+        
       }
       return e;
-    }
+    }*/
     
     public void actualizarSalario(Empleado empleado) {
         /** TODO Implementar el método**/

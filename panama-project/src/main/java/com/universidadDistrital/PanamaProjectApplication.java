@@ -1,8 +1,10 @@
-package com.universidadDistrital.panamaproject;
+package com.universidadDistrital;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
+import com.universidadDistrital.controladores.LoginController;
 import com.universidadDistrital.util.ODBManager;
 
 @SpringBootApplication
