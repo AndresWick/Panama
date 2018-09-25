@@ -256,7 +256,7 @@ body.modal-open {
     <div class="panel">
         	<div class="vertical-menu">
         	
-            	<a onclick="renderUtils.RenderContent('./templates/ppf/PlaneacionPPF/enfoque/_listaInformeEnfoque.tmpl.jsp?map%3D%7B%22mapConfig%22%3A%7B%22baseMap%22%3A%22stamenTerrain%22%2C%22enable3d%22%3Afalse%7D%2C%22mapTools%22%3A%7B%22enable3d%22%3Atrue%2C%22baseMap%22%3Atrue%7D%2C%22zoomTools%22%3Atrue%7D','Diagnostico EISA','ContentContainer',true); return false;"><i class="fa fa-ship"></i>Crear Reserva</a>
+            	<a onclick="$('#ContentContainer').load('reservas.html');"><i class="fa fa-ship"></i>Crear Reserva</a>
         	
         	</div>
    	</div>
@@ -859,6 +859,9 @@ var telefono = '+57 3105638030';
 var direccion = 'Bogotá';
 var identifica = '1020799232';
 
+function loadTemplate(div,template){
+	$("#"+div).load(template);	
+}
 
 var manejarDownloadLogin=function(data){
 	console.log("peticion recibida"+JSON.stringify(data));

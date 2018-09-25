@@ -23,7 +23,7 @@ click:function()
 		   document.getElementById("menusSidebarNav").style.display = "block";
 		   document.getElementById("ContentContainer").style.marginLeft = "300px";
 		   document.getElementById("MapContainer").style.marginLeft = "300px";
-		   basicMap.sidenavOpen();
+		
 		}		 
 		sidenavBtn.opened=true;
 		document.getElementById("sidenav-btn").className = "arrow-right";
@@ -44,7 +44,7 @@ click:function()
 		  document.getElementById("menusSidebarNav").style.display = "none";
 		  document.getElementById("ContentContainer").style.marginLeft= "0px" ;
 		  document.getElementById("MapContainer").style.marginLeft= "0px" ;
-		  basicMap.sidenavClose();
+		
 		}
 		sidenavBtn.opened=false;
 		document.getElementById("sidenav-btn").className = "arrow-left";
