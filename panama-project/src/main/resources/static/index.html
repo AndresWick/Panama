@@ -173,7 +173,7 @@
   		<div id="loader"></div>
 	</div>
 		<div class="bg-img">
-	  		<form name="loginform">
+	  		<form id="form_login" name="loginform">
 	  			<div class="transp-frame">
 	      		<div class="container">
 	            	<div class="modal-header">
@@ -189,7 +189,7 @@
 	                        <i class="fa fa-lock prefix grey-text"></i>
 	                        <input type="password"  id="pass" name="clave" required class="form-control">
 	                    </div>
-	                    <button id="btn-login" class="btn btn-deep" onclick="return sendData();">Login</button>
+	                    <button id="btn-login" type="submit" class="btn btn-deep">Login</button>
 	                      <div class="" id="login_footer">
 	                        <p style="text-align: center;"><a href="#" onclick="">¿No tienes cuenta?</a></p>
 	                        <p style="text-align: center;"><a href="#" onclick="">¿Olvidaste tu contraseña?</a></p>	                    
@@ -210,12 +210,30 @@
 </html>
 
 <script>
+
+$('#form_login').submit(function(evento) {
+	var user=document.getElementById("user").value;
+	var pass=document.getElementById("pass").value;
+	
+    $.ajax({
+        url: 'login',
+        type: 'POST',
+        data: JSON.stringify({user: user, 
+            password: pass}),
+        processData: false,
+        contentType: "application/json"
+    })
+    evento.preventDefault();
+});
+
 	function sendData(){
-		var user=document.getElementById("user").value;
-		var pass=document.getElementById("pass").value;
+
 		if(user!="" && pass!=""){
-			window.location.href = 'indexP.html';
-			return false;
+			
+	
+
+	         
+			
 		}
 	}
 </script>
