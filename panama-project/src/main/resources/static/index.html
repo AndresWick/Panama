@@ -214,14 +214,20 @@
 $('#form_login').submit(function(evento) {
 	var user=document.getElementById("user").value;
 	var pass=document.getElementById("pass").value;
-	
+	console.log('post')
     $.ajax({
         url: 'login',
         type: 'POST',
         data: JSON.stringify({user: user, 
             password: pass}),
         processData: false,
-        contentType: "application/json"
+        contentType: "application/json",
+        success:function(data){
+        	alert(data);
+        },
+        error:function(data){
+        	alert(data.responseText)
+        }
     })
     evento.preventDefault();
 });
