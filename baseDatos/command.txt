@@ -1,0 +1,11 @@
+CREATE TABLESPACE reservasfunc DATAFILE 'C:\temporal\reservafunc.DBF' SIZE 400M AUTOEXTEND ON;
+
+CREATE USER adminBDPan IDENTIFIED BY panamaUD DEFAULT TABLESPACE reservasfunc;
+
+GRANT dba, connect, resource TO adminBDPan;
+
+CREATE ROLE agent;
+
+CREATE ROLE guest;
+
+

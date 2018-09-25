@@ -96,7 +96,6 @@ CREATE TABLE subasta
 
 CREATE TABLE visita
 (
-	k_cod_acp             VARCHAR2(50) NOT NULL,
 	k_buque               NUMBER(8) NOT NULL,
 	k_agente              VARCHAR2(50) NOT NULL,
 	f_eta                 DATE NOT NULL,
@@ -123,7 +122,7 @@ ALTER TABLE compania ADD CONSTRAINT PK_compania
 ;
 
 ALTER TABLE cupo ADD CONSTRAINT PK_cupo 
-	PRIMARY KEY (k_cupo, f_cupo)
+	PRIMARY KEY (k_cupo)
 ;
 
 ALTER TABLE oferta ADD CONSTRAINT PK_oferta 
@@ -148,7 +147,7 @@ ADD CONSTRAINT C_tipo_buque CHECK (i_tipo_buque in ('Neopanamax','Super','Regula
 ;
 
 ALTER TABLE buque
-ADD CONSTRAINT C_tipo_carga CHECK (id_tipo_carga in ('Comercial','Carga Peligrosa','Barcaza','Contenedores'))
+ADD CONSTRAINT C_tipo_carga CHECK (i_tipo_carga in ('Comercial','Carga Peligrosa','Barcaza','Contenedores'))
 ;
 
 ALTER TABLE buque
@@ -175,12 +174,8 @@ ALTER TABLE reserva
 ADD CONSTRAINT C_tipo_reserva CHECK (i_tipo_reserva in ('Solicitud','Justo a tiempo','Mismo dia'))
 ;
 
-ALTER TABLE reserva
-ADD CONSTRAINT C_tipo_periodo CHECK (i_tipo_periodo in ('1','2','3','Especial'))
-;
-
 ALTER TABLE visita
-ADD CONSTRAINT C_carga_transportada CHECK (v_carga_transpotada > 0)
+ADD CONSTRAINT C_carga_transportada CHECK (q_carga_transportada > 0)
 ;
 
 
@@ -201,7 +196,7 @@ ALTER TABLE oferta ADD CONSTRAINT FK_oferta_visita
 ;
 
 ALTER TABLE reserva ADD CONSTRAINT FK_reserva_cupo 
-	FOREIGN KEY (k_cupo) REFERENCES cupo (k_cupo, f_cupo)
+	FOREIGN KEY (k_cupo) REFERENCES cupo (k_cupo)
 ;
 
 ALTER TABLE reserva ADD CONSTRAINT FK_reserva_visita 
@@ -209,7 +204,7 @@ ALTER TABLE reserva ADD CONSTRAINT FK_reserva_visita
 ;
 
 ALTER TABLE subasta ADD CONSTRAINT FK_subasta_cupo 
-	FOREIGN KEY (k_cupo) REFERENCES cupo (k_cupo, f_cupo)
+	FOREIGN KEY (k_cupo) REFERENCES cupo (k_cupo)
 ;
 
 ALTER TABLE visita ADD CONSTRAINT FK_visita_agente 

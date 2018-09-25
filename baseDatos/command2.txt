@@ -1,0 +1,31 @@
+CREATE USER pepe IDENTIFIED BY pepito123 DEFAULT TABLESPACE reservasfunc;
+
+CREATE USER invitado IDENTIFIED BY 1 DEFAULT TABLESPACE reservasfunc;
+
+GRANT agent TO pepe;
+
+GRANT guest TO pepe;
+
+GRANT guest TO invitado;
+
+GRANT CREATE SESSION TO pepe;
+
+GRANT CREATE SESSION TO invitado;
+
+CREATE PUBLIC SYNONYM reserva FOR adminBDPan.reserva;
+
+CREATE PUBLIC SYNONYM cupo FOR adminBDPan.cupo;
+
+CREATE PUBLIC SYNONYM visita FOR adminBDPan.visita;
+
+CREATE PUBLIC SYNONYM oferta FOR adminBDPan.oferta;
+
+GRANT SELECT, INSERT ON visita TO agent;
+
+GRANT SELECT, INSERT ON reserva TO agent;
+
+GRANT SELECT, INSERT ON oferta TO agent;
+
+GRANT SELECT ON subasta TO agent;
+
+GRANT SELECT ON cupo TO guest;
