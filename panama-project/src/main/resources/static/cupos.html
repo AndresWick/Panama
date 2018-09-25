@@ -1,55 +1,253 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Gestion de cupos</title>
-</head>
-<body>
-<form method='' action="">
-	<table>
-		<tr>
-			<td colspan="2">
-				Hola
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Tipo de Buque:
-			</td>
-			<td>
-				<input type="text" name="buque">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Fecha del cupo:
-			</td>
-			<td>
-				<input type="text" name="fecha">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Tipo de periodo:
-			</td>
-			<td>
-				<input type="text" name="periodo">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Sentido:
-			</td>
-			<td>
-				<select name="sentido">
-                <option value="Norte">
-                    Norte
-                </option>
-                <option value="Sur">
-                    Sur
-                </option>
-			</td>
-		</tr>		
-	</table>
-</form>
-</body>
-<html>
+<style>
+	.txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		.txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+
+</style>
+<meta charset="ISO-8859-1">
+<div id="busqUsuarios" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Registrar Cupo</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+				<input id=kCupo type="text" placeholder="Identificador Cupo"
+					class="form-control txtBusqueda" required="" />
+				<input id=tipoBuque type="text" placeholder="Tipo de Buque"
+					class="form-control txtBusqueda" required="" />
+				<input id="fechaCupo" type="text" placeholder="Fecha yyyy-mm-dd"
+					class="form-control txtBusqueda" required="" />
+				<input id="tipoPeriodo" type="text" placeholder="Tipo de Periodo"
+					class="form-control txtBusqueda" required="" />
+					<input id="estadoCupo" type="text" placeholder="Estado"
+					class="form-control txtBusqueda" required="" />
+				<div>Sentido</div>
+				<br>
+				<select id="sentido">
+				    <option value="Norte">Norte</option>
+				    <option value="Sur">Sur</option>
+				  </select>
+				  <div>
+				  <button class="btn btn-success"  onclick="registarCupo()">Registrar Cupo</button>
+				  </div>
+		</div>
+	</div>
+</div>
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_edit_user" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Editar Usuario</h3>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="form" class="form-horizontal">
+                    <input type="hidden" value="" name="id"/> 
+                    <div class="form-body">
+                   	 	<div class="form-group">
+                            <label class="control-label col-md-3">CC</label>
+                            <div class="col-md-9">
+                                <input name="id" placeholder="CC" class="form-control" id="input_usua_identifica" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Nombre Usuario</label>
+                            <div class="col-md-9">
+                                <input name="username" placeholder="Username" class="form-control" id="input_usualogin" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nombres</label>
+                            <div class="col-md-9">
+                                <input name="firstName" placeholder="First Name" class="form-control" id="input_usua_nombres" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Apellidos</label>
+                            <div class="col-md-9">
+                                <input name="lastName" placeholder="Last Name" class="form-control" id="input_usua_apellidos" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input name="email" placeholder="Email" class="form-control" id="input_usua_email" type="email">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Telefono</label>
+                            <div class="col-md-9">
+                                <input name="telefono" placeholder="Telefono" class="form-control" id="input_usua_telefonos" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Rol</label>
+                            <div class="col-md-9">
+                                <select id="input_usua_rol" name="gender" class="form-control">
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Empresa</label>
+                            <div class="col-md-9">
+                                <select id="input_usua_empresa" name="gender" class="form-control">
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Dirección</label>
+                            <div class="col-md-9">
+                                <textarea id="input_usua_direccion" name="address" placeholder="Address" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+           
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary">Guardar</button>
+                <button type="button" onclick="resetColorsUser()" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+
+<<script type="text/javascript">
+	function buscar_visita(){
+		$("#modal_edit_user").modal("show");
+	}
+	
+	function registarCupo(){
+		console.log("registrando");
+		var tipoBuque=document.getElementById("tipoBuque").value;
+		var fechaCupo=document.getElementById("fechaCupo").value;
+		var tipoPeriodo=document.getElementById("tipoPeriodo").value;
+		var sentido=document.getElementById("sentido").value;
+		var kCupo=document.getElementById("kCupo").value;
+		var estadoCupo=document.getElementById("estadoCupo").value;
+		console.log(tipoBuque);
+		console.log(fechaCupo);
+		console.log(tipoPeriodo);
+		console.log(sentido);
+		console.log(kCupo);
+		console.log(estadoCupo);
+		$.ajax({
+	        url: 'cupo',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	kcupo: kCupo, 
+	        	icupobuque: tipoBuque,
+	        	fcupo:fechaCupo,
+	        	itipoperiodo:tipoPeriodo,
+	        	isentido:sentido,
+	        	iestado:estadoCupo
+	            }),
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert(data);
+	        },
+	        error:function(data){
+	        	alert(data.responseText)
+	        }
+	    })
+	   
+	}
+	
+</script>
+
+
+
+
