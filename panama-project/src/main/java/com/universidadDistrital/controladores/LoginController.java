@@ -26,7 +26,6 @@ public class LoginController {
  
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public ResponseEntity<String> login(@RequestBody Usuario usuario) throws Exception {
-    	System.out.println(usuario.getUser()+","+usuario.getPassword());
     	try {
     	odbManager.conectar(usuario);
     	}catch(Exception e) {
