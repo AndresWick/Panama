@@ -224,6 +224,7 @@ $('#form_login').submit(function(evento) {
         contentType: "application/json",
         success:function(data){
         	alert(data);
+        	window.location.href = 'indexP.html';
         },
         error:function(data){
         	alert(data.responseText)
@@ -232,15 +233,5 @@ $('#form_login').submit(function(evento) {
     evento.preventDefault();
 });
 
-	function sendData(){
-
-		if(user!="" && pass!=""){
-			
-	
-
-	         
-			
-		}
-	}
 </script>
     
