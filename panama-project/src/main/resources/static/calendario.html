@@ -39,16 +39,43 @@
     <!--Custom scripts-->
     <script>
     
+     var jsonEvents= [
+         {
+             title: 'Long Event',
+             start: '2017-08-07',
+             end: '2017-08-10'
+         },
+         {
+             id: 999,
+             title: 'Repeating Event',
+             start: '2018-09-28T16:00:00'
+         },
+         {
+             title: 'Meeting',
+             start: '2018-09-26T10:30:00',
+             end: '2018-09-27T12:30:00'
+         },
+         {
+             title: 'Dinner',
+             start: '2018-09-26T20:00:00'
+         },
+         {
+             title: 'Cupo Neopanamax',
+             url: 'http://google.com/',
+             start: '2018-09-25'
+         },
+         {
+             title: 'Regular - 5',
+             //url: 'http://google.com/',
+             start: '2018-09-25'
+         },
+         {
+             title: 'Neopanamax - 3',
+           //  url: 'http://google.com/',
+             start: '2018-09-25'
+         }
+         ];
     
-     /*   // SideNav Initialization
-        $(".button-collapse").sideNav();
-
-        var container = document.querySelector('.custom-scrollbar');
-        Ps.initialize(container, {
-            wheelSpeed: 2,
-            wheelPropagation: true,
-            minScrollbarLength: 20
-        });*/
         $(document).ready(function() {
             $('#calendar').fullCalendar({
                 header: {
@@ -60,62 +87,7 @@
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2017-08-01'
-                    },
-                    {
-                        title: 'Long Event',
-                        start: '2017-08-07',
-                        end: '2017-08-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-08-09T16:00:00'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-08-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2017-08-11',
-                        end: '2017-08-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-08-12T10:30:00',
-                        end: '2017-08-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: '2017-08-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-08-12T14:30:00'
-                    },
-                    {
-                        title: 'Happy Hour',
-                        start: '2017-08-12T17:30:00'
-                    },
-                    {
-                        title: 'Dinner',
-                        start: '2017-08-12T20:00:00'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: '2017-08-13T07:00:00'
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2017-08-28'
-                    }
-                ]
+                events: jsonEvents
             })
         });
     </script>
