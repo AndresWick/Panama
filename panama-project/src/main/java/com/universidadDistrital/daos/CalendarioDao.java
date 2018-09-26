@@ -35,6 +35,7 @@ public class CalendarioDao {
 	        cuposDia.add(cupo);
 	      }
 	      st.close();
+	      odbManager.liberarConexion();
 		 }
 		return cuposDia;
 	}
