@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- FullCalendar -->
+    <link rel="stylesheet" href="js/vendor/fullcalendar-3.4.0/fullcalendar.min.css">
+
+</head>
+
+<body class="fixed-sn white-skin">
+
+	<div class="container-fluid" style="padding: 5%;">
+
+            <!-- Section: Calendar -->
+            <section>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="calendar" class="fc fc-unthemed fc-ltr">
+                   </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Section: Calendar -->
+
+	</div>
+
+
+</body>
+    <script src="mdb/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/fullcalendar-3.4.0/lib/moment.min.js"></script>
+    <!-- Moment -->
+    <script type="text/javascript" src="js/vendor/fullcalendar-3.4.0/fullcalendar.min.js"></script>
+	<script src="mdb/js/popper.min.js"></script>
+    <!--Custom scripts-->
+    <script>
+    
+    
+     /*   // SideNav Initialization
+        $(".button-collapse").sideNav();
+
+        var container = document.querySelector('.custom-scrollbar');
+        Ps.initialize(container, {
+            wheelSpeed: 2,
+            wheelPropagation: true,
+            minScrollbarLength: 20
+        });*/
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listWeek'
+                },
+                defaultDate: '2018-09-27',
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: [
+                    {
+                        title: 'All Day Event',
+                        start: '2017-08-01'
+                    },
+                    {
+                        title: 'Long Event',
+                        start: '2017-08-07',
+                        end: '2017-08-10'
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2017-08-09T16:00:00'
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2017-08-16T16:00:00'
+                    },
+                    {
+                        title: 'Conference',
+                        start: '2017-08-11',
+                        end: '2017-08-13'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2017-08-12T10:30:00',
+                        end: '2017-08-12T12:30:00'
+                    },
+                    {
+                        title: 'Lunch',
+                        start: '2017-08-12T12:00:00'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2017-08-12T14:30:00'
+                    },
+                    {
+                        title: 'Happy Hour',
+                        start: '2017-08-12T17:30:00'
+                    },
+                    {
+                        title: 'Dinner',
+                        start: '2017-08-12T20:00:00'
+                    },
+                    {
+                        title: 'Birthday Party',
+                        start: '2017-08-13T07:00:00'
+                    },
+                    {
+                        title: 'Click for Google',
+                        url: 'http://google.com/',
+                        start: '2017-08-28'
+                    }
+                ]
+            })
+        });
+    </script>
+</body>
+
+</html>
