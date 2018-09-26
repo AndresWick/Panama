@@ -4,19 +4,20 @@ public class CuposPorDia {
 	/* fecha */
 	private String start;
 	/* tipoBuque-cantidadCupos*/
-	private String titulo;
-	
+	private String title;
 	public String getStart() {
 		return start;
 	}
 	public void setStart(String start) {
 		this.start = start;
 	}
-	public String getTitulo() {
-		return titulo;
+	public String getTitle() {
+		return title;
 	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
+	
+	
 	
 }

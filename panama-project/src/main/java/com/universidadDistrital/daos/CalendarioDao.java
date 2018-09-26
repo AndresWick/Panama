@@ -25,13 +25,13 @@ public class CalendarioDao {
 		 System.out.println(conexion);
 		 if(conexion != null) {
 		 Statement st = conexion.createStatement();
-	     ResultSet rec = st.executeQuery("select F_CUPO \"start\",I_CUPO_BUQUE||'-'||cantidad titulo from calendar");
+	     ResultSet rec = st.executeQuery("select F_CUPO \"start\",I_CUPO_BUQUE||'-'||cantidad title from calendar");
 	     System.out.println(rec);
 	      while (rec.next()) {
 	        System.out.println(rec.getString(1) + "\t" + rec.getString(2));
 	        CuposPorDia cupo= new CuposPorDia();
 	        cupo.setStart(rec.getString(1));
-	        cupo.setTitulo(rec.getString(2));
+	        cupo.setTitle(rec.getString(2));
 	        cuposDia.add(cupo);
 	      }
 	      st.close();
