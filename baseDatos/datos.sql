@@ -57,3 +57,4 @@
 	SELECT * FROM visita WHERE k_visita=1;
 
 	/* --- BARCOS QUE VAN A TRANSITAR EL DIA DE HOY --- */
+	SELECT V.n_puerto_llegada, V.n_puerto_salida FROM visita V, reserva R WHERE TO_CHAR(R.f_arribo,'dd/mm/yyyy') = TO_CHAR(sysdate,'dd/mm/yyyy') AND R.k_visita = V.k_visita;
