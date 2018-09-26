@@ -25,7 +25,7 @@ public class CalendarioDao {
 		 System.out.println(conexion);
 		 if(conexion != null) {
 		 Statement st = conexion.createStatement();
-	     ResultSet rec = st.executeQuery("select F_CUPO \"start\",I_CUPO_BUQUE||'-'||cantidad title from calendar");
+	     ResultSet rec = st.executeQuery("select to_char(F_CUPO,'yyyy/mm/dd') \"start\",I_CUPO_BUQUE||'-'||cantidad title from calendar");
 	     System.out.println(rec);
 	      while (rec.next()) {
 	        System.out.println(rec.getString(1) + "\t" + rec.getString(2));
