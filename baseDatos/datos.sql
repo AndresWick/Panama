@@ -35,7 +35,9 @@
 	SELECT f_cupo, i_cupo_buque, COUNT(i_cupo_buque) cantidad  FROM cupo WHERE TO_CHAR(f_cupo,'dd/mm/yyyy') = TO_CHAR(sysdate+1,'dd/mm/yyyy') AND i_estado='BK' GROUP BY f_cupo, i_cupo_buque;	
 
 	/* --- CUPOS DISPONIBLES PARA UN BARCO EN ESPECIFICO --- */
-	SELECT C.f_cupo, C.i_cupo_buque, COUNT(C.k_cupo) "Espacios Disponibles" FROM cupo C, visita V, buque B WHERE V.k_visita = 1 AND TO_CHAR(C.f_cupo,'dd/mm/yyyy') = '25/09/2018' AND C.i_estado = 'AV' AND C.i_cupo_buque = B.i_tipo_buque AND B.k_num_serie = V.k_buque GROUP BY C.f_cupo, C.i_cupo_buque;
+	/* - Requiere codigo de visita, fecha para buscar - */
+	SELECT C.f_cupo, C.i_cupo_buque, COUNT(C.i_cupo_buque) "Espacios Disponibles" FROM cupo C, visita V, buque B WHERE V.k_visita = 1 AND TO_CHAR(C.f_cupo,'dd/mm/yyyy') = '25/09/2018' AND C.i_estado = 'AV' AND C.i_cupo_buque = B.i_tipo_buque AND B.k_num_serie = V.k_buque GROUP BY C.f_cupo, C.i_cupo_buque;
 
 	/* --- DATOS DE LA VISITA POR ID --- */
-	 
+	/* - Requiere codigo de visita - */
+	SELECT * FROM visita WHERE k_visita=1;
