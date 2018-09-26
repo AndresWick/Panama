@@ -8,10 +8,6 @@ GRANT guest TO pepe;
 
 GRANT guest TO invitado;
 
-GRANT CREATE SESSION TO pepe;
-
-GRANT CREATE SESSION TO invitado;
-
 CREATE PUBLIC SYNONYM reserva FOR adminBDPan.reserva;
 
 CREATE PUBLIC SYNONYM cupo FOR adminBDPan.cupo;
@@ -20,12 +16,32 @@ CREATE PUBLIC SYNONYM visita FOR adminBDPan.visita;
 
 CREATE PUBLIC SYNONYM oferta FOR adminBDPan.oferta;
 
+CREATE PUBLIC SYNONYM subasta FOR adminBDPan.subasta;
+
+CREATE PUBLIC SYNONYM buque FOR adminBDPan.buque;
+
 GRANT SELECT, INSERT ON visita TO agent;
 
 GRANT SELECT, INSERT ON reserva TO agent;
 
 GRANT SELECT, INSERT ON oferta TO agent;
 
+GRANT SELECT ON buque TO agent;
+
 GRANT SELECT ON subasta TO agent;
 
 GRANT SELECT ON cupo TO guest;
+
+CREATE VIEW calendar AS (SELECT f_cupo, i_cupo_buque, COUNT(i_cupo_buque) cantidad  FROM cupo WHERE i_estado='AV' GROUP BY f_cupo, i_cupo_buque);
+
+CREATE PUBLIC SYNONYM calendar FOR adminBDPan.calendar;
+
+GRANT SELECT ON calendar TO agent;
+
+GRANT SELECT ON calendar TO guest;
+
+CREATE VIEW cuposDisp AS (SELECT C.f_cupo, C.i_cupo_buque, COUNT(C.i_cupo_buque) "Espacios Disponibles" FROM cupo C, visita V, buque B WHERE V.k_visita = 1 AND TO_CHAR(C.f_cupo,'dd/mm/yyyy') = '25/09/2018' AND C.i_estado = 'AV' AND C.i_cupo_buque = B.i_tipo_buque AND B.k_num_serie = V.k_buque GROUP BY C.f_cupo, C.i_cupo_buque);
+
+CREATE PUBLIC SYNONYM cuposDisp FOR adminBDPan.cuposDisp;
+
+GRANT SELECT ON cuposDisp TO agent;

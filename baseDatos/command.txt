@@ -6,6 +6,6 @@ GRANT dba, connect, resource TO adminBDPan;
 
 CREATE ROLE agent;
 
+GRANT create session TO agent;
+
 CREATE ROLE guest;
-
-
