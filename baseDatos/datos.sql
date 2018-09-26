@@ -15,10 +15,24 @@
 	INSERT INTO visita (k_buque,k_agente,f_eta,k_visita,n_puerto_salida,n_puerto_llegada,v_tarifa_paso,q_carga_transportada) VALUES (123,'pepetrep','23/05/2018',3,'San Francsico','Miramar',200,100);
 
 	/* --- CUPO --- */
-	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_00','Regular','25/09/2018',1,'Norte','AV');	
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_00','Regular','25/09/2018',1,'Norte','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_01','Regular','25/09/2018',1,'Norte','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_02','Regular','25/09/2018',1,'Norte','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_03','Regular','25/09/2018',2,'Sur','BK');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_04','Regular','25/09/2018',3,'Sur','BK');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Regular_05','Regular','25/09/2018',2,'Norte','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('26_Regular_01','Regular','26/09/2018',2,'Sur','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('26_Regular_02','Regular','26/09/2018',3,'Sur','BK');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Super_00','Super','25/09/2018',1,'Norte','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Super_01','Super','25/09/2018',1,'Norte','AV');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Super_02','Super','25/09/2018',1,'Norte','BK');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Super_03','Super','25/09/2018',2,'Sur','BK');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('25_Super_04','Super','25/09/2018',3,'Sur','BK');
+	INSERT INTO cupo (k_cupo,i_cupo_buque,f_cupo,i_tipo_periodo,i_sentido,i_estado) VALUES ('26_Super_05','Super','26/09/2018',2,'Sur','BK');
 
 	/* --- RESERVA --- */
 	INSERT INTO reserva (k_reserva, i_estado, i_tipo_reserva, f_reserva, f_arribo, k_visita, k_cupo, v_tarifa_reserva) VALUES (111,'Pendiente','Solicitud','25/09/2018','26/09/2018',1,'25_Regular_00',200.00);	
+	INSERT INTO reserva (k_reserva, i_estado, i_tipo_reserva, f_reserva, f_arribo, k_visita, k_cupo, v_tarifa_reserva) VALUES (112,'Activa','Solicitud','24/09/2018','25/09/2018',2,'25_Super_03',100.00);
 
 /* SELECT */
 
@@ -41,3 +55,5 @@
 	/* --- DATOS DE LA VISITA POR ID --- */
 	/* - Requiere codigo de visita - */
 	SELECT * FROM visita WHERE k_visita=1;
+
+	/* --- BARCOS QUE VAN A TRANSITAR EL DIA DE HOY --- */
