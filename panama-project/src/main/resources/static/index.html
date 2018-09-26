@@ -214,7 +214,6 @@
 $('#form_login').submit(function(evento) {
 	var user=document.getElementById("user").value;
 	var pass=document.getElementById("pass").value;
-	console.log('post')
     $.ajax({
         url: 'login',
         type: 'POST',

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.*;
 import java.sql.SQLException;
 
+import javax.annotation.PreDestroy;
+
 import org.springframework.stereotype.Repository;
 
 import com.universidadDistrital.negocio.Usuario;
@@ -140,5 +142,7 @@ public class ODBManager {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 }
