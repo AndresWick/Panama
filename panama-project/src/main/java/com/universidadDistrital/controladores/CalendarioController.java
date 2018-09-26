@@ -27,7 +27,7 @@ public class CalendarioController {
 	    	try {
 	    		 cuposDia=calendarioDao.consultarCalendario();
 	    	}catch(Exception e) {
-	    		e.printStackTrace();
+	    		System.out.println(e.getMessage());
 	    	}
 	    	return cuposDia;
 	    }

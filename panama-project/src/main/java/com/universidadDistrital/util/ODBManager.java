@@ -66,6 +66,7 @@ public class ODBManager {
 	 * @return da la conexion a la base de datos
 	 */
 	public synchronized Connection tomarConexion() {
+		if(conexion != null) {
 		while (!conexionLibre) {
 			try {
 			  wait();
@@ -73,10 +74,11 @@ public class ODBManager {
 				e.printStackTrace();
 			}
 		}
-
 		conexionLibre = false;
 		notify();
 		return conexion;
+		}
+		return null;
 	}
 
 	/**

@@ -22,6 +22,8 @@ public class CalendarioDao {
 		 ArrayList<CuposPorDia> cuposDia = new ArrayList<CuposPorDia>();
 		 Connection conexion = odbManager.tomarConexion();
 		 System.out.println("Consultando calendario");
+		 System.out.println(conexion);
+		 if(conexion != null) {
 		 Statement st = conexion.createStatement();
 	     ResultSet rec = st.executeQuery("select F_CUPO \"start\",I_CUPO_BUQUE||'-'||cantidad titulo from calendar");
 	     System.out.println(rec);
@@ -33,6 +35,7 @@ public class CalendarioDao {
 	        cuposDia.add(cupo);
 	      }
 	      st.close();
+		 }
 		return cuposDia;
 	}
 
