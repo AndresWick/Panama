@@ -147,6 +147,7 @@ public class ODBManager {
 	
 	public void cerrarConexion() throws Exception{
 		//cerrar la conexion con la base de datos
+		System.out.println("cerrando conexion a BD");
 		conexion.close();
 	}
 	
