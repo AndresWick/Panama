@@ -32,7 +32,7 @@ GRANT SELECT ON subasta TO agent;
 
 GRANT SELECT ON cupo TO guest;
 
-CREATE VIEW calendar AS (SELECT f_cupo, i_cupo_buque, COUNT(i_cupo_buque) cantidad  FROM cupo WHERE i_estado='AV' GROUP BY f_cupo, i_cupo_buque);
+CREATE VIEW calendar AS (SELECT f_cupo, i_cupo_buque, COUNT(i_cupo_buque) cantidad FROM cupo WHERE i_estado='AV' GROUP BY f_cupo, i_cupo_buque);
 
 CREATE PUBLIC SYNONYM calendar FOR adminBDPan.calendar;
 
