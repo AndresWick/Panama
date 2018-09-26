@@ -17,17 +17,6 @@ import com.universidadDistrital.util.ShutDownHook;
 @SpringBootApplication
 public class PanamaProjectApplication {
 
-	@Bean
-	public GracefulShutdown gracefulShutdown() {
-	    return new GracefulShutdown();
-	}
-	@Bean
-	public ConfigurableServletWebServerFactory webServerFactory(final GracefulShutdown gracefulShutdown) {
-	    TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-	    factory.addConnectorCustomizers(gracefulShutdown);
-	    return factory;
-	}
-
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new ShutDownHook());
 		SpringApplication.run(PanamaProjectApplication.class, args);
