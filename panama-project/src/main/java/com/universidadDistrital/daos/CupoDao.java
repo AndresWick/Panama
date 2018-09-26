@@ -18,7 +18,6 @@ public class CupoDao {
 	public void almacenarCupo(Cupo cupo) throws SQLException {
 			String strSQL = "INSERT INTO cupo (K_cupo, I_cupo_buque , F_cupo, I_tipo_periodo, I_sentido,I_estado) VALUES(?,?,?,?,?,?)";
 	        Connection conexion = odbManager.tomarConexion();
-	        System.out.println(conexion);
 	        PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
 	        prepStmt.setString(1,cupo.getKcupo()); 
 	        prepStmt.setString(2,cupo.getIcupobuque()); 

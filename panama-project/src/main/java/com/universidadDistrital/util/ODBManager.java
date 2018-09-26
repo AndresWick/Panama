@@ -143,10 +143,14 @@ public class ODBManager {
 		}
 	}
 	
+	public void cerrarConexion() throws Exception{
+		//cerrar la conexion con la base de datos
+		conexion.close();
+	}
+	
 	@PreDestroy
 	public void cleanUp() throws Exception {
-	//cerrar la conexion con la base de datos
-	  conexion.close();
+		cerrarConexion();
 	}
 
 }

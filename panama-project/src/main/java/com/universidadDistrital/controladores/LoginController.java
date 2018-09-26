@@ -34,4 +34,14 @@ public class LoginController {
     	}
     	return new ResponseEntity<>("Conectado a la base de datos",HttpStatus.OK);
     }
+    
+    @RequestMapping(value="/logout",method=RequestMethod.GET)
+    public ResponseEntity<String> logout() throws Exception {
+    	try {
+    	odbManager.cerrarConexion();
+    	}catch(Exception e) {
+    		return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+    	}
+    	return new ResponseEntity<>("Conexion cerrada",HttpStatus.OK);
+    }
 }
