@@ -8,6 +8,14 @@ public class Visita {
 	private String puertoSalida;
 	private String puertoLLegada;
 	private float carga;
+	private String tipoBuque;
+	
+	public String getTipoBuque() {
+		return tipoBuque;
+	}
+	public void setTipoBuque(String tipoBuque) {
+		this.tipoBuque = tipoBuque;
+	}
 	
 	public int getSerialBuque() {
 		return serialBuque;
