@@ -81,6 +81,10 @@
     overflow-y: auto!important;
 }
 
+.modal-header .close {
+    padding: 0!important;
+    margin: 0!important;
+ }
 
 </style>
 <head>
@@ -121,7 +125,7 @@
                        <div class="form-group">
                             <label class="control-label col-md-12">Numero de visita</label>
                             <div class="col-md-12">
-                                <input name="username" placeholder="Username" class="form-control" id="input_usualogin" type="text">
+                                <input disabled name="username" placeholder="Numero de visita" class="form-control" id="input_numero_visita" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -129,7 +133,7 @@
                    	 	<div class="form-group">
                             <label class="control-label col-md-12">ETA</label>
                             <div class="col-md-12">
-                                <input name="id" placeholder="CC" class="form-control" id="input_usua_identifica" type="number">
+                                <input disabled name="id" placeholder="ETA" class="form-control" id="input_ETA" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -137,28 +141,35 @@
                         <div class="form-group">
                             <label class="control-label col-md-12">Nombre puerto de salida</label>
                             <div class="col-md-12">
-                                <input name="firstName" placeholder="First Name" class="form-control" id="input_usua_nombres" type="text">
+                                <input disabled name="firstName" placeholder="Puerto de salida" class="form-control" id="input_puerto_salida" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-12">Nombre puerto de llegada</label>
                             <div class="col-md-12">
-                                <input name="lastName" placeholder="Last Name" class="form-control" id="input_usua_apellidos" type="text">
+                                <input disabled name="lastName" placeholder="Puerto de llegada" class="form-control" id="input_puerto_llegada" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-12">Valor tarifa de paso</label>
                             <div class="col-md-12">
-                                <input name="email" placeholder="Email" class="form-control" id="input_usua_email" type="email">
+                                <input disabled name="tarifaPaso" placeholder="" class="form-control" id="input_tarifa_paso" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Numero Buque</label>
+                            <div class="col-md-12">
+                                <input disabled name="NumBuque" placeholder="Numero Buque" class="form-control" id="input_numero_buque" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-12">Carga a transportar</label>
                             <div class="col-md-12">
-                                <input name="telefono" placeholder="Telefono" class="form-control" id="input_usua_telefonos" type="text">
+                                <input disabled name="telefono" placeholder="Carga a transportar" class="form-control" id="input_carga_transporte" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -168,7 +179,11 @@
                        <div class="form-group">
                             <label class="control-label col-md-12">Tipo Reserva</label>
                             <div class="col-md-12">
-                                <textarea id="input_usua_direccion" name="address" placeholder="Address" class="form-control"></textarea>
+                                <select id="input_tipo_arribo" name="tipoReserva" placeholder="Tipo Reserva" class="form-control">
+                                	<option value="Solicitud">Solicitud</option>
+                                	<option value="Justo a tiempo">Justo a tiempo</option>
+                                	<option value="Mismo dia">Mismo dia</option>
+                                </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -176,11 +191,10 @@
                         <div class="form-group">
                             <label class="control-label col-md-12">Fecha arribo</label>
                             <div class="col-md-12">
-                                <select id="input_usua_rol" name="gender" class="form-control">
-                                </select>
+                                <input id="input_fecha_arribo" name="gender" class="form-control" type="date">
                                 <span class="help-block"></span>
                             </div>
-                            <button type="button" id="btnSave" class="btn btn-primary">Consultar Disponibilidad</button>
+                            <button onclick="$('#modal_confirm_add_reserva').modal('show');" type="button" id="btnSave" class="btn btn-primary">Consultar Disponibilidad</button>
                             <!-- Se despliega ventana emergente con la siguiente inormación:
                             	* Dia requerido
                             	* Tipo de barco
@@ -192,8 +206,7 @@
                          <div class="form-group">
                             <label class="control-label col-md-12">Valor tarifa reserva</label>
                             <div class="col-md-12">
-                                <select id="input_usua_empresa" name="gender" class="form-control">
-                                </select>
+                                <input id="input_utarifa_reserva" name="gender" class="form-control" disabled>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -212,8 +225,67 @@
 </div><!-- /.modal -->
 <!--  END MODAL TABLE EDIT USER -->
 
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_confirm_add_reserva" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button style="margin: 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 style="margin-left: auto;margin-right: auto;" class="modal-title">Disponibilidad</h3>
+            </div>
+            <div style="text-align:center;" id="contentDisponibilidad">hay 3 cupos :D</div>
+            <div class="modal-footer">
+                <button type="button" onclick="" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+
+
 <<script type="text/javascript">
 	function buscar_visita(){
-		$("#modal_edit_user").modal("show");
+		resetFormReserva();
+		var numVisita = $('#txtBusqueda').val();
+		$.ajax({
+	        url: 'visita/'+numVisita,
+	        type: 'GET',
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        
+	        	if(data.eta==null||data.puertoSalida==null||data.puertoLLegada==null||data.serialBuque==null||data.carga==null){
+	        		alert('no existe una visita con ese id...');
+	        	}else{
+	        	
+		    		$('#input_numero_visita').val(numVisita);
+		    		$('#input_ETA').val(data.eta);
+		    		$('#input_puerto_salida').val(data.puertoSalida);
+		    		$('#input_puerto_llegada').val(data.puertoLLegada);
+		    		$('#input_tarifa_paso').val('');
+		    		$('#input_numero_buque').val(data.serialBuque);
+		    		$('#input_carga_transporte').val(data.carga);
+		    		$('#input_utarifa_reserva').val('');
+		    		$("#modal_edit_user").modal("show");
+	        	}
+	        },
+	        error:function(data){
+	        	alert(data.responseText);
+	        }
+	    });
 	}
+	
+	function resetFormReserva(){
+ 		$('#input_numero_visita').val('');
+		$('#input_ETA').val('');
+		$('#input_puerto_salida').val('');
+		$('#input_puerto_llegada').val('');
+		$('#input_tarifa_paso').val('');
+		$('#input_numero_buque').val('');
+		$('#input_carga_transporte').val('');
+		$('#input_utarifa_reserva').val('');
+	}
+	
 </script>
