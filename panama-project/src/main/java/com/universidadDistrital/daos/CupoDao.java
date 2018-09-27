@@ -2,12 +2,15 @@ package com.universidadDistrital.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.universidadDistrital.negocio.Cupo;
+import com.universidadDistrital.negocio.Visita;
 import com.universidadDistrital.util.ODBManager;
 
 @Repository
@@ -28,6 +31,23 @@ public class CupoDao {
 	        prepStmt.executeUpdate();
 	        prepStmt.close();
 	        odbManager.commit();
+	}
+	
+	public String CuposDiaBuque(String fecha,String tipoBuque) throws SQLException {
+		Connection conexion = odbManager.tomarConexion();
+		String respuesta="";
+		 if(conexion != null) {
+			 Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("SELECT to_char(C.f_cupo), C.i_cupo_buque, COUNT(C.i_cupo_buque) \"Espacios Disponibles\" FROM cupo C, visita V, buque B WHERE V.k_visita = 1 AND TO_CHAR(C.f_cupo,'dd/mm/yyyy') = '25/09/2018' AND C.i_estado = 'AV' AND C.i_cupo_buque = B.i_tipo_buque AND B.k_num_serie = V.k_buque GROUP BY C.f_cupo, C.i_cupo_buque");
+		      while (rec.next()) {
+		    	  System.out.println(rec.getString(1)+"\t "+rec.getString(2)+"\t "+rec.getInt(3));
+		    	  respuesta= "Fecha: "+rec.getString(1)+"\t TipoBuque: "+rec.getString(2)+"\t Cupos Disponibles: "+rec.getInt(3);
+		      }
+		      st.close();
+		      odbManager.liberarConexion();
+		      return respuesta;
+			 }
+		return null;
 	}
 	
 }
