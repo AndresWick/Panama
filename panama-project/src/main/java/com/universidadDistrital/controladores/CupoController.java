@@ -30,7 +30,7 @@ public class CupoController {
 		} catch (SQLException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}finally {
-			 odbManager.liberarConexion();
+			 //odbManager.liberarConexion();
 		}
 		return new ResponseEntity<>("Cupo Regristrado",HttpStatus.OK);
     }
