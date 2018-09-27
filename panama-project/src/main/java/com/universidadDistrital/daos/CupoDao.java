@@ -37,6 +37,7 @@ public class CupoDao {
 		Connection conexion = odbManager.tomarConexion();
 		String respuesta="No hay Cupos";
 		System.out.println(fecha+','+tipoBuque);
+		System.out.println("cambio");
 		 if(conexion != null) {
 			 Statement st = conexion.createStatement();
 		     ResultSet rec = st.executeQuery("SELECT to_char(C.f_cupo), C.i_cupo_buque, COUNT(C.i_cupo_buque) \"Espacios Disponibles\" FROM cupo C, buque B WHERE  TO_CHAR(C.f_cupo,'yyyy-mm-dd') = '"+fecha+"' AND C.i_estado = 'AV' AND C.i_cupo_buque = B.i_tipo_buque AND B.i_tipo_buque= '"+tipoBuque+"' GROUP BY C.f_cupo, C.i_cupo_buque");
