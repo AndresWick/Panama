@@ -81,7 +81,6 @@
     overflow-y: auto!important;
 }
 
-
 </style>
 <meta charset="ISO-8859-1">
 <div id="busqUsuarios" class="widget-box">
@@ -93,38 +92,53 @@
 		        <div>Identificador Cupo</div>
 				<input id=kCupo type="text" placeholder="Identificador Cupo" class="form-control txtBusqueda" required />
 				<div>Tipo Buque</div>
-				<input id=tipoBuque type="text" placeholder="Tipo de Buque" class="form-control txtBusqueda" required />
+					<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+						<select id="tipoBuque" name="gender" class="form-control">
+		                	<option value='Regular'>Regular</option>
+		                	<option value='Super'>Super</option>
+		                	<option value='Neopanamax'>Neopanamax</option>
+		                </select>
+                	</div>
 				<div>Fecha yyyy-mm-dd</div>
 				<input id="fechaCupo" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />
 				<div>Tipo periodo</div>
 				<input id="tipoPeriodo" type="text" placeholder="Tipo de Periodo" class="form-control txtBusqueda" required />
 				<div>Estado</div>
-				<input id="estadoCupo" type="text" placeholder="Estado" class="form-control txtBusqueda" required />
+				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+					<select id="estadoCupo" name="gender" class="form-control">
+				    	<option value="BK">BK</option>
+				    	<option value="AV">AV</option>
+				  	</select>
+				</div>
 				<div>Sentido</div>
-				<select id="sentido">
-				    <option value="Norte">Norte</option>
-				    <option value="Sur">Sur</option>
-				  </select>
-				  <div>
-				  <button class="btn btn-success"  onclick="registarCupo()">Registrar Cupo</button>
-				  </div>
+				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+					<select id="sentido" name="gender" class="form-control">
+				    	<option value="Norte">Norte</option>
+				    	<option value="Sur">Sur</option>
+				  	</select>
+				</div>
+				<div>
+					<button class="btn btn-success"  onclick="registarCupo()">Registrar Cupo</button>
+				</div>
 		</div>
 	</div>
 </div>
 
-<<script type="text/javascript">
+<script type="text/javascript">
 	function buscar_visita(){
 		$("#modal_edit_user").modal("show");
 	}
 	
 	function registarCupo(){
 		console.log("registrando");
-		var tipoBuque=document.getElementById("tipoBuque").value;
+		var tipoBuque= $('select[id="tipoBuque"] option:selected').val();
+
 		var fechaCupo=document.getElementById("fechaCupo").value;
 		var tipoPeriodo=document.getElementById("tipoPeriodo").value;
 		var sentido=document.getElementById("sentido").value;
 		var kCupo=document.getElementById("kCupo").value;
-		var estadoCupo=document.getElementById("estadoCupo").value;
+		var estadoCupo=$('select[id="estadoCupo"] option:selected').val();
+
 		console.log(tipoBuque);
 		console.log(fechaCupo);
 		console.log(tipoPeriodo);
