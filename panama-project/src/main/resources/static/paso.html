@@ -1,0 +1,224 @@
+<style>
+	#txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		#txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+.modal-header .close {
+    padding: 0!important;
+    margin: 0!important;
+ }
+
+</style>
+<head>
+<meta charset="ISO-8859-1">
+</head>
+<div id="busqUsuarios" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Gestión paso</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+			<div class=''>
+				<input id="txtBusqueda" type="text" placeholder="Ingrese Id de la Reserva"
+					class="form-control" required="" />
+			</div>
+			<div class=''>
+				<button type="button" id="btn-refresh"
+					class="btn btn-outline-primary btn-rounded waves-effect fas fa-search"
+					onclick="buscar_reserva()" for="txtBusqueda"></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_edit_user" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 0;"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" style=" margin-right: 35%;">Información de paso</h3>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="form" class="form-horizontal">
+                    <input type="hidden" value="" name="id"/> 
+                    <div class="form-body">
+                       
+                       <div class="form-group">
+                            <label class="control-label col-md-12">Número de reserva</label>
+                            <div class="col-md-12">
+                                <input disabled name="username" placeholder="Numero de reserva" class="form-control" id="input_reserva" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    
+                   	 	<div class="form-group">
+                            <label class="control-label col-md-12">Costo</label>
+                            <div class="col-md-12">
+                                <input disabled name="id" placeholder="Costo" class="form-control" id="input_costo" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+              
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Fecha de Paso</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="Fecha de Paso" class="form-control" id="input_fecha" type="date">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Total de Pasajeros</label>
+                            <div class="col-md-12">
+                                <input disabled name="lastName" placeholder="Pasajeros" class="form-control" id="input_pasajeros" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>  
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary">Pagar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+
+
+<!--  MODAL TABLE EDIT USER -->
+<div class="modal fade" id="modal_confirm_add_reserva" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button style="margin: 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 style="margin-left: auto;margin-right: auto;" class="modal-title">Disponibilidad</h3>
+            </div>
+            <div style="text-align:center;" id="contentDisponibilidad">hay 3 cupos :D</div>
+            <div class="modal-footer">
+                <button type="button" onclick="" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--  END MODAL TABLE EDIT USER -->
+
+
+<script type="text/javascript">
+	function buscar_reserva(){
+		resetFormReserva();
+		var idReserva = $('#txtBusqueda').val();
+		$.ajax({
+			url: 'paso/'+idReserva,
+	        type: 'GET',
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	
+	        	if(idReserva == null || data.id == 0){
+	        		alert('no existe una Reserva con ese id...');
+	        	}else{	        	
+	        		$('#input_reserva').val(idReserva);	
+	         		$('#input_id').val(data.id);
+	        		$('#input_costo').val(data.costo);		
+	        		$('#input_fecha').val(data.fecha);
+	        		$('#input_pasajeros').val(data.pasajeros);
+		    		$("#modal_edit_user").modal("show");
+	        	}
+	        },
+	        error:function(data){
+	        	alert(data.responseText);
+	        }
+	    });
+	}
+	
+	function resetFormReserva(){
+		$('#input_reserva').val('');	
+ 		$('#input_id').val('');
+		$('#input_costo').val('');		
+		$('#input_fecha').val('');
+		$('#input_pasajeros').val('');
+	}
+	
+</script>
