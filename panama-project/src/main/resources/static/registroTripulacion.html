@@ -1,0 +1,211 @@
+<style>
+	.txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		.txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+
+</style>
+<meta charset="ISO-8859-1">
+<div id="registroTripulacion" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Registrar Tripulación</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+		        <div>Identificador Paso</div>
+				<input id=kPaso type="text" placeholder="Identificador Paso" class="form-control txtBusqueda" required />
+				<div>Identificador Tripulante</div>
+				<input id=kTripulante type="text" placeholder="Identificador Tripulante" class="form-control txtBusqueda" required />
+				<div>
+					<button class="btn btn-success"  onclick="anadirTripulante()">Añadir a Tripulacion</button>
+				</div>
+		</div>
+	</div>
+	<div class="widget-title" style="margin-top:50px;">
+		<h2 id="title_usuarios">Registrar Persona</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+		        <div>Nombre</div>
+				<input id="nombre" type="text" placeholder="Nombre" class="form-control txtBusqueda" required />
+				<div>Apellido</div>
+				<input id="apellido" type="text" placeholder="Apellido" class="form-control txtBusqueda" required />
+				<div>Identificación</div>
+				<input id="documento" type="text" placeholder="Apellido" class="form-control txtBusqueda" required />
+				<div>Fecha de Nacimiento</div>
+				<input id="fechaNac" type="text" placeholder="Fecha de Nacimiento yyyy-mm-dd" class="form-control txtBusqueda" required />
+				<div>
+					<button class="btn btn-success"  onclick="nuevaPersona()">Añadir Persona</button>
+				</div>
+				<div>Id Tripulante</div>
+				<input id="tripulante" type="text" placeholder="Identificador Tripulante" class="form-control txtBusqueda" required />
+				<div>Cargo a Desempeñar</div>
+				<input id="cargo" type="text" placeholder="Cargo de Tripulante" class="form-control txtBusqueda" required />
+				<div>
+					<button class="btn btn-success"  onclick="nuevoTripulante()">Añadir Tripulante</button>
+				</div>
+		</div>
+	</div>
+</div>
+
+
+
+<<script type="text/javascript">
+	function nuevoTripulante(){
+		var identificacionPersona =document.getElementById("documento").value;		
+		var identificacionTripulante=document.getElementById("tripulante").value;
+		var cargo=document.getElementById("cargo").value;
+		
+		$.ajax({
+	        url: 'tripulante',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	k_id: identificacionTripulante, 
+	        	k_idPersona: identificacionPersona,
+	        	n_cargo: cargo   	        	
+	            }),
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert(data);
+	        },
+	        error:function(data){
+	        	alert(data.responseText)
+	        }
+	    })  
+	    
+	}
+	
+	function nuevaPersona(){
+		var identificacionPersona =document.getElementById("documento").value;
+		var nombre=document.getElementById("nombre").value;
+		var apellido=document.getElementById("apellido").value;
+		var fechaNacimiento=document.getElementById("fechaNac").value;
+		var identificacionTripulante=document.getElementById("tripulante").value;
+		var cargo=document.getElementById("cargo").value;
+		
+		$.ajax({
+	        url: 'persona',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	k_identificacion: identificacionPersona, 
+	        	n_nombre: nombre,
+	        	n_apellido:apellido,
+	        	f_nacimiento : fechaNacimiento        	
+	            }),
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert(data);
+	        },
+	        error:function(data){
+	        	alert(data.responseText)
+	        }
+	    }) 
+	    
+	}
+	
+	
+	
+	function anadirTripulante(){
+		
+		var paso=document.getElementById("kPaso").value;
+		var tripulante=document.getElementById("kTripulante").value;		
+		$.ajax({
+	        url: 'tripulacion',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	k_paso: paso, 
+	        	k_tripulante: tripulante,	       
+	            }),
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert(data);
+	        },
+	        error:function(data){
+	        	alert(data.responseText)
+	        }
+	    })
+	   
+	}
+	
+</script>
