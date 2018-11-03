@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadDistrital.daos.CronogramaDao;
 import com.universidadDistrital.negocio.Cronograma;
-import com.universidadDistrital.negocio.Usuario;
 import com.universidadDistrital.util.ODBManager;
 
 @RestController

@@ -8,7 +8,7 @@ import java.sql.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.universidadDistrital.negocio.CuposPorDia;
+
 import com.universidadDistrital.negocio.Visita;
 import com.universidadDistrital.util.ODBManager;
 
