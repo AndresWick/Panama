@@ -5,6 +5,7 @@ public class CuposPorDia {
 	private String start;
 	/* tipoBuque-cantidadCupos*/
 	private String title;
+	
 	public String getStart() {
 		return start;
 	}
@@ -17,7 +18,5 @@ public class CuposPorDia {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
 	
 }
