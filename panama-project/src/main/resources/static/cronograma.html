@@ -1,0 +1,175 @@
+<style>
+	.txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		.txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+</style>
+<meta charset="ISO-8859-1">
+<div id="busqUsuarios" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Registrar Cronograma</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+				<div>Tipo Buque</div>
+					<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+						<select id="tipoBuque" name="gender" class="form-control">
+		                	<option value='1'>Regular</option>
+		                	<option value='2'>Super</option>
+		                	<option value='3'>Neopanamax</option>
+		                </select>
+                	</div>
+				<div>Fecha yyyy-mm-dd</div>
+				<input id="fechaCronograma" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />
+				<div>Tipo periodo</div>
+				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+					<select id="tipoPeriodo" name="gender" class="form-control">
+			                <option value='1'>Primer periodo</option>
+			                <option value='2'>Segundo periodo</option>
+			                <option value='3'>Tercer periodo</option>
+			                <option value='4'>Periodo Especial</option>
+			        </select>
+		        </div>
+				<div>Sentido</div>
+				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+					<select id="sentido" name="gender" class="form-control">
+				    	<option value="Norte">Norte</option>
+				    	<option value="Sur">Sur</option>
+				  	</select>
+				</div>
+				<div>Cantidad</div>
+				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+					<input id="qmax" name="gender" class="form-control" type="number">
+				</div>
+				<div>
+					<button class="btn btn-success"  onclick="registarCronograma()">Registrar Cronograma</button>
+				</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	function buscar_visita(){
+		$("#modal_edit_user").modal("show");
+	}
+	
+	function registarCronograma(){
+		
+		var k_tipoBuque= $('select[id="tipoBuque"] option:selected').val();
+		var f_fecha=document.getElementById("fechaCronograma").value;
+		var k_idPer=$('select[id="tipoPeriodo"] option:selected').val();
+		var n_sentido=$('select[id="sentido"] option:selected').val();
+		var q_cupos_max=document.getElementById("qmax").value;
+
+		console.log(k_tipoBuque);
+		console.log(f_fecha);
+		console.log(k_idPer);
+		console.log(n_sentido);
+		console.log(q_cupos_max);
+		
+		$.ajax({
+	        url: 'cronograma',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	k_tipoBuque: k_tipoBuque,
+	        	f_fecha:f_fecha,
+	        	k_idPer:k_idPer,
+	        	n_sentido:n_sentido,
+	        	q_cupos_max:q_cupos_max
+	            }),
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	    		console.log("registrando");
+	        	alert(data);
+	        },
+	        error:function(data){
+	        	alert(data.responseText)
+	        }
+	    })
+	}
+	
+</script>
+
+
+
+
