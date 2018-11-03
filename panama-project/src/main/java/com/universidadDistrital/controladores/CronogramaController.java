@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.universidadDistrital.daos.CupoDao;
-import com.universidadDistrital.negocio.Cupo;
+import com.universidadDistrital.daos.CronogramaDao;
+import com.universidadDistrital.negocio.Cronograma;
 import com.universidadDistrital.negocio.Usuario;
 import com.universidadDistrital.util.ODBManager;
 
 @RestController
-public class CupoController {
+public class CronogramaController {
 	
 	@Autowired
-	private CupoDao cupoDao;
+	private CronogramaDao cronogramaDao;
 	@Autowired
 	private ODBManager odbManager;
 	
-	@RequestMapping(value="/cupo",method=RequestMethod.POST)
-	public ResponseEntity<String> almacenarCupo(@RequestBody Cupo cupo)  {
+	@RequestMapping(value="/cronograma",method=RequestMethod.POST)
+	public ResponseEntity<String> almacenarCronograma(@RequestBody Cronograma cronograma)  {
 		try {
-			cupoDao.almacenarCupo(cupo);
+			cronogramaDao.almacenarCronograma(cronograma);
 		} catch (SQLException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}finally {
 			 odbManager.liberarConexion();
 		}
-		return new ResponseEntity<>("Cupo Regristrado",HttpStatus.OK);
+		return new ResponseEntity<>("Cronograma Regristrado",HttpStatus.OK);
     }
 
 }
