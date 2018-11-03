@@ -133,7 +133,7 @@
                    	 	<div class="form-group">
                             <label class="control-label col-md-12">ETA</label>
                             <div class="col-md-12">
-                                <input disabled name="id" placeholder="ETA" class="form-control" id="input_ETA" type="number">
+                                <input disabled name="id" placeholder="ETA" class="form-control" id="input_ETA" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                                 <input id="input_fecha_arribo" name="gender" class="form-control" type="date">
                                 <span class="help-block"></span>
                             </div>
-                            <button onclick="$('#modal_confirm_add_reserva').modal('show');" type="button" id="btnSave" class="btn btn-primary">Consultar Disponibilidad</button>
+                            <button onclick="confirmDisponibilidad();" type="button" id="btnSave" class="btn btn-primary">Consultar Disponibilidad</button>
                             <!-- Se despliega ventana emergente con la siguiente inormación:
                             	* Dia requerido
                             	* Tipo de barco
@@ -234,7 +234,7 @@
                 <button style="margin: 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 style="margin-left: auto;margin-right: auto;" class="modal-title">Disponibilidad</h3>
             </div>
-            <div style="text-align:center;" id="contentDisponibilidad">hay 3 cupos :D</div>
+            <div style="text-align:center;" id="contentDisponibilidad"></div>
             <div class="modal-footer">
                 <button type="button" onclick="" class="btn btn-primary">Guardar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -286,6 +286,23 @@
 		$('#input_numero_buque').val('');
 		$('#input_carga_transporte').val('');
 		$('#input_utarifa_reserva').val('');
+	}
+	
+	function confirmDisponibilidad(){
+	/*	$.ajax({
+	        url: '2018-04-08/'+'neopanamax',
+	        type: 'GET',
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert(JSON.stringify(data));
+		    		$('#contentDisponibilidad').html(data);
+		    		$('#modal_confirm_add_reserva').modal('show');
+	        },
+	        error:function(data){
+	        	alert(data.responseText);
+	        }
+	    });*/
 	}
 	
 </script>
