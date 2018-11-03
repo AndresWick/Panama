@@ -133,7 +133,7 @@ body.modal-open {
 
 </style>
 
-</head><body class="w3-light-grey"><div id="full-size" style="display: none;">
+</head><body class="w3-light-grey" onload="loadUser();"><div id="full-size" style="display: none;">
   <div id="loader"></div>
 
 </div>
@@ -148,7 +148,7 @@ body.modal-open {
     <button id="btn_notifications" class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-cog"></i></button>
     <div class="w3-animate-right w3-dropdown-content w3-card-4  w3-round w3-bar-block" style=" width:200px; position: fixed; right: 0;">
         <div class="w3-container">
-         <h4 id="firstAndLastName" class="w3-center">Carlos Andrés Aguirre Cañas</h4>
+         <h4 id="firstAndLastName" class="w3-center"></h4>
          <p class="w3-center"><img id="img_usuario" src="img/w3images/avatar3.png" class="w3-circle img_avatar" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p id="rolDinamic"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Administrador</p>
@@ -167,7 +167,7 @@ body.modal-open {
       <img id="img_empresa" src="img/w3images/avatar2.png" class="w3-circle w3-margin-right img_avatar" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>Bienvenido, <strong id="nameDInamic">Carlos Andrés</strong></span><br>
+      <span>Bienvenido, <strong id="nameDInamic"></strong></span><br>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i><span class="w3-badge w3-right w3-small w3-green">3</span></a>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-key"></i></a>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
@@ -261,6 +261,19 @@ body.modal-open {
 				<a onclick="$('#ContentContainer').load('reservasCancelar.html');"><i class="fa fa-ship"></i>Cancelar Reserva</a>
 
 				<a onclick="$('#ContentContainer').load('paso.html');"><i class="fa fa-ship"></i>Pagar Paso</a>
+				
+				<a onclick="$('#ContentContainer').load('registroTripulacion.html');"><i class="fa fa-ship"></i>Registrar Tripulación</a>
+				
+        	</div>
+   	</div>
+   	
+   	<button id="_Diagnosticos" class="accordion"><i class="fa fa-ship"></i>Paso</button>
+    <div class="panel">
+        	<div class="vertical-menu">            	
+
+				<a onclick="$('#ContentContainer').load('paso.html');"><i class="fa fa-ship"></i>Pagar Paso</a>
+				
+				<a onclick="$('#ContentContainer').load('registroTripulacion.html');"><i class="fa fa-ship"></i>Registrar Tripulación</a>
 				
         	</div>
    	</div>
@@ -875,18 +888,13 @@ function loadUser(user){
 	$.ajax({
 		  type: "POST",
 		  enctype: 'multipart/form-data',
-		  url: 'LoadOwnUser',
+		  url: 'loadUser',
 		  data: {
-		  	registro:user,
-		  	tipo:'usuario'
+		  	
 		  },
-		  success: function (data) {
-		  	var objData = JSON.parse(data);
-		 	rol = objData[0].nombre_rol ;
-		 	empresa = objData[0].nombre_empresa;
-		 	$("#rolDinamic").append('<i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>'+rol);
-		 	$("#empresaDinamic").append(empresa);
-
+		  success: function (data) {		  		
+			  $('#nameDInamic').text(data);
+			  $('#firstAndLastName').text(data);			  
 		  }
 		 });
 }

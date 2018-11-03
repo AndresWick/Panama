@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadDistrital.daos.CupoDao;
 import com.universidadDistrital.negocio.Cupo;
-import com.universidadDistrital.negocio.Usuario;
+
 import com.universidadDistrital.util.ODBManager;
 
 @RestController

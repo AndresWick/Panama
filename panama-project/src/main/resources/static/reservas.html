@@ -1,5 +1,5 @@
 <style>
-	#txtBusqueda, #optTipoBusqueda {
+	.txtBusqueda, #optTipoBusqueda {
 		width: 30%;
 		margin-left: auto;
 		margin-right: auto;
@@ -29,7 +29,7 @@
 	}
 
 	@media ( max-width : 600px) {
-		#txtBusqueda {
+		.txtBusqueda {
 			width: 50%;
 			margin-top: 2%;
 			margin-left: auto;
@@ -81,30 +81,34 @@
     overflow-y: auto!important;
 }
 
-.modal-header .close {
-    padding: 0!important;
-    margin: 0!important;
- }
 
 </style>
-<head>
 <meta charset="ISO-8859-1">
-</head>
 <div id="busqUsuarios" class="widget-box">
 	<div class="widget-title">
-		<h2 id="title_usuarios">Busqueda Visita</h2>
+		<h2 id="title_usuarios">Registrar Reserva</h2>
 	</div>
 	<div class="widget-content nopadding">
 		<div class="pnl_busqueda">
-			<div class=''>
-				<input id="txtBusqueda" type="text" placeholder=""
-					class="form-control" required="" />
-			</div>
-			<div class=''>
-				<button type="button" id="btn-refresh"
-					class="btn btn-outline-primary btn-rounded waves-effect fas fa-search"
-					onclick="buscar_visita()" for="txtBusqueda"></button>
-			</div>
+		        <div>Id Reserva</div>
+				<input id=id type="text" placeholder="Identificador Reserva" class="form-control txtBusqueda" required />
+				<div>Fecha Estimada de Arribo</div>
+				<input id="f_eta" type="text" placeholder="Fecha yyyy-mm-dd" class="form-control txtBusqueda" required />
+				<div>Puerto Salida</div>
+				<input id=puerto_salida type="text" placeholder="Tipo de Buque" class="form-control txtBusqueda" required />
+				<div>Fecha de Salida</div>
+				<input id="f_salida" type="text" placeholder="yyyy-mm-dd" class="form-control txtBusqueda" required />				
+				<div>Puerto Llegada</div>
+				<input id=puerto_llegada type="text" placeholder="Tipo de Buque" class="form-control txtBusqueda" required />
+				<div>Fecha de Llegada</div>
+				<input id="f_llegada" type="text" placeholder="yyyy-mm-dd" class="form-control txtBusqueda" required />				
+				<div>Numero de Serie de Buque</div>
+				<input id="numSerie" type="text" placeholder="Tipo de Periodo" class="form-control txtBusqueda" required />
+				<div>Valor de Carga a transportar</div>
+				<input id="carga" type="text" placeholder="Tipo de Periodo" class="form-control txtBusqueda" required />
+				<div>
+				  <button class="btn btn-success"  onclick="registarCupo()">Registrar Reserva</button>
+				</div>
 		</div>
 	</div>
 </div>
@@ -114,103 +118,78 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 0;"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" style=" margin-right: 35%;">Crear Reserva</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Editar Usuario</h3>
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal">
                     <input type="hidden" value="" name="id"/> 
                     <div class="form-body">
-                       
-                       <div class="form-group">
-                            <label class="control-label col-md-12">Numero de visita</label>
-                            <div class="col-md-12">
-                                <input disabled name="username" placeholder="Numero de visita" class="form-control" id="input_numero_visita" type="text">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                    
                    	 	<div class="form-group">
-                            <label class="control-label col-md-12">ETA</label>
-                            <div class="col-md-12">
-                                <input disabled name="id" placeholder="ETA" class="form-control" id="input_ETA" type="number">
+                            <label class="control-label col-md-3">CC</label>
+                            <div class="col-md-9">
+                                <input name="id" placeholder="CC" class="form-control" id="input_usua_identifica" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>
-              
-                        <div class="form-group">
-                            <label class="control-label col-md-12">Nombre puerto de salida</label>
-                            <div class="col-md-12">
-                                <input disabled name="firstName" placeholder="Puerto de salida" class="form-control" id="input_puerto_salida" type="text">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-12">Nombre puerto de llegada</label>
-                            <div class="col-md-12">
-                                <input disabled name="lastName" placeholder="Puerto de llegada" class="form-control" id="input_puerto_llegada" type="text">
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Nombre Usuario</label>
+                            <div class="col-md-9">
+                                <input name="username" placeholder="Username" class="form-control" id="input_usualogin" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-12">Valor tarifa de paso</label>
-                            <div class="col-md-12">
-                                <input disabled name="tarifaPaso" placeholder="" class="form-control" id="input_tarifa_paso" type="text">
+                            <label class="control-label col-md-3">Nombres</label>
+                            <div class="col-md-9">
+                                <input name="firstName" placeholder="First Name" class="form-control" id="input_usua_nombres" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-12">Numero Buque</label>
-                            <div class="col-md-12">
-                                <input disabled name="NumBuque" placeholder="Numero Buque" class="form-control" id="input_numero_buque" type="text">
+                            <label class="control-label col-md-3">Apellidos</label>
+                            <div class="col-md-9">
+                                <input name="lastName" placeholder="Last Name" class="form-control" id="input_usua_apellidos" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-12">Carga a transportar</label>
-                            <div class="col-md-12">
-                                <input disabled name="telefono" placeholder="Carga a transportar" class="form-control" id="input_carga_transporte" type="text">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input name="email" placeholder="Email" class="form-control" id="input_usua_email" type="email">
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        
-                        <hr> <!-- Parte de Reserva -->
-                        
-                       <div class="form-group">
-                            <label class="control-label col-md-12">Tipo Reserva</label>
-                            <div class="col-md-12">
-                                <select id="input_tipo_arribo" name="tipoReserva" placeholder="Tipo Reserva" class="form-control">
-                                	<option value="Solicitud">Solicitud</option>
-                                	<option value="Justo a tiempo">Justo a tiempo</option>
-                                	<option value="Mismo dia">Mismo dia</option>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Telefono</label>
+                            <div class="col-md-9">
+                                <input name="telefono" placeholder="Telefono" class="form-control" id="input_usua_telefonos" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Rol</label>
+                            <div class="col-md-9">
+                                <select id="input_usua_rol" name="gender" class="form-control">
                                 </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="control-label col-md-12">Fecha arribo</label>
-                            <div class="col-md-12">
-                                <input id="input_fecha_arribo" name="gender" class="form-control" type="date">
-                                <span class="help-block"></span>
-                            </div>
-                            <button onclick="$('#modal_confirm_add_reserva').modal('show');" type="button" id="btnSave" class="btn btn-primary">Consultar Disponibilidad</button>
-                            <!-- Se despliega ventana emergente con la siguiente inormación:
-                            	* Dia requerido
-                            	* Tipo de barco
-                            	* Periodo
-                            	* Cupos disponibles
-                            	Boton para cerrar
-                             -->
-                        </div>
                          <div class="form-group">
-                            <label class="control-label col-md-12">Valor tarifa reserva</label>
-                            <div class="col-md-12">
-                                <input id="input_utarifa_reserva" name="gender" class="form-control" disabled>
+                            <label class="control-label col-md-3">Empresa</label>
+                            <div class="col-md-9">
+                                <select id="input_usua_empresa" name="gender" class="form-control">
+                                </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>
-         
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Dirección</label>
+                            <div class="col-md-9">
+                                <textarea id="input_usua_direccion" name="address" placeholder="Address" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
            
                     </div>
                 </form>
@@ -218,74 +197,53 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnSave" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="resetColorsUser()" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!--  END MODAL TABLE EDIT USER -->
-
-
-<!--  MODAL TABLE EDIT USER -->
-<div class="modal fade" id="modal_confirm_add_reserva" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button style="margin: 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 style="margin-left: auto;margin-right: auto;" class="modal-title">Disponibilidad</h3>
-            </div>
-            <div style="text-align:center;" id="contentDisponibilidad">hay 3 cupos :D</div>
-            <div class="modal-footer">
-                <button type="button" onclick="" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--  END MODAL TABLE EDIT USER -->
-
 
 <<script type="text/javascript">
 	function buscar_visita(){
-		resetFormReserva();
-		var numVisita = $('#txtBusqueda').val();
+		$("#modal_edit_user").modal("show");
+	}
+	
+	function registarCupo(){
+		console.log("registrando");
+		var tipoBuque=document.getElementById("tipoBuque").value;
+		var fechaCupo=document.getElementById("fechaCupo").value;
+		var tipoPeriodo=document.getElementById("tipoPeriodo").value;
+		var sentido=document.getElementById("sentido").value;
+		var kCupo=document.getElementById("kCupo").value;
+		var estadoCupo=document.getElementById("estadoCupo").value;
+		console.log(tipoBuque);
+		console.log(fechaCupo);
+		console.log(tipoPeriodo);
+		console.log(sentido);
+		console.log(kCupo);
+		console.log(estadoCupo);
 		$.ajax({
-	        url: 'visita/'+numVisita,
-	        type: 'GET',
+	        url: 'cupo',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	kcupo: kCupo, 
+	        	icupobuque: tipoBuque,
+	        	fcupo:fechaCupo,
+	        	itipoperiodo:tipoPeriodo,
+	        	isentido:sentido,
+	        	iestado:estadoCupo
+	            }),
 	        processData: false,
 	        contentType: "application/json",
 	        success:function(data){
-	        
-	        	if(data.eta==null||data.puertoSalida==null||data.puertoLLegada==null||data.serialBuque==null||data.carga==null){
-	        		alert('no existe una visita con ese id...');
-	        	}else{
-	        	
-		    		$('#input_numero_visita').val(numVisita);
-		    		$('#input_ETA').val(data.eta);
-		    		$('#input_puerto_salida').val(data.puertoSalida);
-		    		$('#input_puerto_llegada').val(data.puertoLLegada);
-		    		$('#input_tarifa_paso').val('');
-		    		$('#input_numero_buque').val(data.serialBuque);
-		    		$('#input_carga_transporte').val(data.carga);
-		    		$('#input_utarifa_reserva').val('');
-		    		//$("#modal_edit_user").modal("show");
-	        	}
+	        	alert(data);
 	        },
 	        error:function(data){
-	        	alert(data.responseText);
+	        	alert(data.responseText)
 	        }
-	    });
-	}
-	
-	function resetFormReserva(){
- 		$('#input_numero_visita').val('');
-		$('#input_ETA').val('');
-		$('#input_puerto_salida').val('');
-		$('#input_puerto_llegada').val('');
-		$('#input_tarifa_paso').val('');
-		$('#input_numero_buque').val('');
-		$('#input_carga_transporte').val('');
-		$('#input_utarifa_reserva').val('');
+	    })
+	   
 	}
 	
 </script>
