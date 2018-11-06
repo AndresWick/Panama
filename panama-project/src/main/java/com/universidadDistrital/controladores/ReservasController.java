@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadDistrital.daos.ReservaDao;
+import com.universidadDistrital.negocio.CuposPorDia;
 import com.universidadDistrital.negocio.Reserva;
 import com.universidadDistrital.util.ODBManager;
 
@@ -41,8 +42,17 @@ public class ReservasController {
     }
 	
 	@RequestMapping(value="/reserva/{idAgente}",method=RequestMethod.GET)
-    public void buscarReservas(@PathVariable("idAgente") int idAgente) {
-	 
+    public List<Reserva>  buscarReservas(@PathVariable("idAgente") int idAgente) {
+		List<Reserva> reservas = null;
+		try {
+			reservas= reservaDao.buscarReservas(idAgente);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		}finally {
+			odbManager.liberarConexion();
+		}
+		return reservas;
     }
 	
 	@RequestMapping(value="/reserva/{idReserva}",method=RequestMethod.DELETE)
