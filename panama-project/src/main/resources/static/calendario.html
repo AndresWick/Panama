@@ -38,60 +38,7 @@
 	<script src="mdb/js/popper.min.js"></script>
     <!--Custom scripts-->
     <script>
-    
-     var jsonEvents= [
-         {
-             title: 'Long Event',
-             start: '2017-08-07',
-             end: '2017-08-10'
-         },
-         {
-             id: 999,
-             title: 'Repeating Event',
-             start: '2018-09-28T16:00:00'
-         },
-         {
-             title: 'Meeting',
-             start: '2018-09-26T10:30:00',
-             end: '2018-09-27T12:30:00'
-         },
-         {
-             title: 'Dinner',
-             start: '2018-09-26T20:00:00'
-         },
-         {
-             title: 'Cupo Neopanamax',
-             url: 'http://google.com/',
-             start: '2018-09-25'
-         },
-         {
-             title: 'Regular - 5',
-             //url: 'http://google.com/',
-             start: '2018-09-25'
-         },
-         {
-             title: 'Neopanamax - Sur - Periodo 1 - 3',
-           //  url: 'http://google.com/',
-             start: '2018-09-25'
-         }
-         ];
-    
-      /*  $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay,listWeek'
-                },
-                defaultDate: '2018-09-27',
-                navLinks: true, // can click day/week names to navigate views
-                editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: jsonEvents
-            })
-        });*/
-        
-        
+            
     	$.ajax({
 	        url: 'calendario',
 	        type: 'GET',
@@ -104,7 +51,7 @@
 	                    center: 'title',
 	                    right: 'month,agendaWeek,agendaDay,listWeek'
 	                },
-	                defaultDate: '2018-09-27',
+	                defaultDate: '2018-11-20',
 	                navLinks: true, // can click day/week names to navigate views
 	                editable: true,
 	                eventLimit: true, // allow "more" link when too many events
