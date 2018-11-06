@@ -86,14 +86,6 @@ public class ODBManager {
 	 * proceso la pueda utilizar
 	 */
 	public synchronized void liberarConexion() {
-		while (conexionLibre) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
 		conexionLibre = true;
 		notify();
 	}
@@ -149,6 +141,7 @@ public class ODBManager {
 		//cerrar la conexion con la base de datos
 		System.out.println("cerrando conexion a BD");
 		conexion.close();
+		conexionLibre=true;
 	}
 	
 	@PreDestroy

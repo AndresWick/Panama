@@ -31,6 +31,7 @@ public class ReservasController {
 			reservaDao.registrarReserva(reserva);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			//e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}finally {
 			odbManager.liberarConexion();
