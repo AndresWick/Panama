@@ -97,7 +97,7 @@
 	<div class="widget-content nopadding">
 		<div class="pnl_busqueda">
 			<div class=''>
-				<input id="txtBusqueda" type="text" placeholder="Ingrese Id de la Reserva"
+				<input id="txtBusqueda" type="text" placeholder="Ingrese Id del paso"
 					class="form-control" required="" />
 			</div>
 			<div class=''>
@@ -121,6 +121,14 @@
                 <form action="#" id="form" class="form-horizontal">
                     <input type="hidden" value="" name="id"/> 
                     <div class="form-body">
+                    	
+                    	<div class="form-group">
+                            <label class="control-label col-md-12">Número de paso</label>
+                            <div class="col-md-12">
+                                <input disabled name="username" placeholder="Numero de paso" class="form-control" id="input_id" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
                        
                        <div class="form-group">
                             <label class="control-label col-md-12">Número de reserva</label>
@@ -149,6 +157,13 @@
                             <label class="control-label col-md-12">Total de Pasajeros</label>
                             <div class="col-md-12">
                                 <input disabled name="lastName" placeholder="Pasajeros" class="form-control" id="input_pasajeros" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Esclusa a utilizar</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="Esclusa" class="form-control" id="input_esclusa" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>  
@@ -194,16 +209,16 @@
 	        type: 'GET',
 	        processData: false,
 	        contentType: "application/json",
-	        success:function(data){
-	        	
-	        	if(idReserva == null || data.id == 0){
-	        		alert('no existe una Reserva con ese id...');
+	        success:function(data){	        	
+	        	if(idReserva == null || data.k_id == 0){
+	        		alert('no existe un registro de paso con ese id...');
 	        	}else{	        	
-	        		$('#input_reserva').val(idReserva);	
-	         		$('#input_id').val(data.id);
-	        		$('#input_costo').val(data.costo);		
-	        		$('#input_fecha').val(data.fecha);
-	        		$('#input_pasajeros').val(data.pasajeros);
+	        		$('#input_reserva').val(data.k_reserva);	
+	         		$('#input_id').val(idReserva);
+	        		$('#input_costo').val(data.v_costo);		
+	        		$('#input_fecha').val(data.f_fecha);
+	        		$('#input_pasajeros').val(data.q_pasajeros);
+	        		$('#input_esclusa').val(data.n_esclusa);
 		    		$("#modal_edit_user").modal("show");
 	        	}
 	        },
@@ -219,6 +234,6 @@
 		$('#input_costo').val('');		
 		$('#input_fecha').val('');
 		$('#input_pasajeros').val('');
+		$('#input_esclusa').val('');
 	}
-	
 </script>

@@ -1,0 +1,148 @@
+<style>
+	.txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		.txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+
+</style>
+<meta charset="ISO-8859-1">
+<div id="busqUsuarios" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Registro paso</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+		        <div>Id Paso</div>
+				<input id=id type="text" placeholder="Identificador Paso" class="form-control txtBusqueda" required />
+				<div>Id Reserva</div>
+				<input id=reserva type="text" placeholder="Identificador Reserva" class="form-control txtBusqueda" required />				
+				<div>Fecha de Paso</div>
+				<input id="f_paso" type="text" placeholder="yyyy-mm-dd" class="form-control txtBusqueda" required />						
+				<div>Numero de Pasajeros</div>
+				<input id="pasajeros" type="text" placeholder="Numero de Pasajeros" class="form-control txtBusqueda" required />
+				<div>Esclusa a utilizar</div>
+				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
+					<select id="esclusa" name="gender" class="form-control">
+			                <option value='Neopanamax'>Neopanamax</option>
+			                <option value='Panamax'>Panamax</option>			                
+			        </select>
+		        </div>
+		        <div>
+				  <button class="btn btn-success"  onclick="registroPaso()">Registrar Paso</button>
+				</div>
+		</div>
+	</div>
+</div>
+
+<<script type="text/javascript">
+
+	function registroPaso(){		
+		var id = document.getElementById("id").value;
+		var costo = 100;
+		var idReserva = document.getElementById("reserva").value;
+		var fechaPaso = document.getElementById("f_paso").value;
+		var pasajeros = document.getElementById("pasajeros").value;
+		var esclusa = $('select[id="esclusa"] option:selected').val();
+		
+		$.ajax({
+			url: 'registroPaso',
+	        type: 'POST',
+	        data: JSON.stringify({
+	        	k_id: id,
+	        	v_costo : costo,
+	        	k_reserva: idReserva,
+	        	f_fecha: fechaPaso,
+	        	q_pasajeros: pasajeros,
+	        	n_esclusa : esclusa
+	            }),
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert(data);
+	        },
+	        error:function(data){
+	        	alert(data.responseText)
+	        }
+	    });
+	}
+	
+	
+</script>

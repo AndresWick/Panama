@@ -3,45 +3,49 @@ import java.util.Date;
 
 public class Paso {
 
-	private int id;
-	private float costo;
-	private int reserva;
-	private Date fecha;
-	private int pasajeros;	
+	private int k_id;
+	private float v_costo;
+	private int k_reserva;
+	private Date f_fecha;
+	private int q_pasajeros;
+	private String n_esclusa;
 	
-	public int getId() {
-		return id;
+	public int getK_id() {
+		return k_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setK_id(int k_id) {
+		this.k_id = k_id;
 	}
-	public float getCosto() {
-		return costo;
+	public float getV_costo() {
+		return v_costo;
 	}
-	public void setCosto(float costo) {
-		this.costo = costo;
+	public void setV_costo(float v_costo) {
+		this.v_costo = v_costo;
 	}
-
-	public int getReserva() {
-		return reserva;
+	public int getK_reserva() {
+		return k_reserva;
 	}
-
-	public void setReserva(int reserva) {
-		this.reserva = reserva;
+	public void setK_reserva(int k_reserva) {
+		this.k_reserva = k_reserva;
 	}
-
-	public Date getFecha() {
-		return fecha;
+	public Date getF_fecha() {
+		return f_fecha;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setF_fecha(Date f_fecha) {
+		this.f_fecha = f_fecha;
+	}
+	public int getQ_pasajeros() {
+		return q_pasajeros;
+	}
+	public void setQ_pasajeros(int q_pasajeros) {
+		this.q_pasajeros = q_pasajeros;
+	}
+	public String getN_esclusa() {
+		return n_esclusa;
+	}
+	public void setN_esclusa(String n_esclusa) {
+		this.n_esclusa = n_esclusa;
 	}
 	
-	public int getPasajeros() {
-		return pasajeros;
-	}
-	public void setPasajeros(int pasajeros) {
-		this.pasajeros = pasajeros;
-	}
-	
+			
 }
