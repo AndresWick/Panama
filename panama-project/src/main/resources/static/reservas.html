@@ -93,7 +93,7 @@
 				<div>Fecha Estimada de Arribo</div>
 				<input id="f_eta" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />
 				<div>Sentido</div>
-				<select id="sentido" name="sentido" class="form-control">
+				<select class="col-2" id="sentido" name="sentido" class="form-control">
 				    	<option value="Norte">Norte</option>
 				    	<option value="Sur">Sur</option>
 				</select>
@@ -131,7 +131,8 @@ function registarCupo(){
 			 f_llegada:$('#f_llegada').val(),
 			 num_serie:$('#numSerie').val(),
 			 v_cargaTransportada:$('#carga').val(),
-			 k_idAgente:$('#idAgente').val()	
+			 k_idAgente:$('#idAgente').val(),
+			 n_sentido:$('select[id="sentido"] option:selected').val()
 	}
 	 
 	
