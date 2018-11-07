@@ -394,7 +394,7 @@ ADD CONSTRAINT CK_q_cupos_max CHECK (q_cupos_max > 0)
 ;
 
 ALTER TABLE Cronograma
-ADD CONSTRAINT CK_q_cupos_disp CHECK (q_cupos_disp > 0)
+ADD CONSTRAINT CK_q_cupos_disp CHECK (q_cupos_disp >= 0)
 ;
 
 ALTER TABLE Cronograma

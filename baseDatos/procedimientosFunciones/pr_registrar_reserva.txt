@@ -7,17 +7,44 @@ create or replace PROCEDURE PR_REGISTRAR_RESERVA
  lf_llegada IN RESERVA.f_llegada%TYPE,
  lk_num_serie IN RESERVA.k_num_serie%TYPE,
  lv_cargaTransportada IN RESERVA.v_cargatransportada%TYPE,
- lk_id_agente IN RESERVA.k_idAgente%TYPE
+ lk_id_agente IN RESERVA.k_idAgente%TYPE,
+ ln_sentido IN reserva.n_sentido%TYPE
 )
 AS
  lv_beam buque.v_beam%TYPE;
  lv_loa buque.v_loa%TYPE;
  lv_costo_reserva NUMBER;
+ lk_periodo periodo.k_id%TYPE;
+ lq_numero_cupos_disponibles NUMBER;
+ lk_tipo_buque buque.k_idbuque%type;
 BEGIN
+---- Calcular que periodo aplica -----
+lk_periodo := FU_CALCULAR_PERIODO(lf_eta);
+ 
+IF lk_periodo = 0 THEN
+  RAISE_APPLICATION_ERROR (-20200, 'No hay periodo abiertos para la fecha seleccionada '||TO_CHAR(lf_eta,'yyyy/mm/dd'));
+END IF;
+
+ ----- obtener los datos del buque ----------------
+ SELECT B.k_idbuque INTO lk_tipo_buque FROM BUQUE B WHERE B.k_num_serie = lk_num_serie;
  SELECT B.v_beam INTO lv_beam FROM BUQUE B WHERE B.k_num_serie = lk_num_serie;
  SELECT B.v_loa INTO lv_loa FROM BUQUE B WHERE b.k_num_serie = lk_num_serie;
+----  Verificar que hay cupos disponibles para la fecha con el periodo calculado y para el sentido seleccionado -----
+ lq_numero_cupos_disponibles := FU_CUPOS_DISPONIBLES(lf_eta,ln_sentido,lk_periodo,lk_tipo_buque);
+ IF lq_numero_cupos_disponibles = 0 THEN
+    RAISE_APPLICATION_ERROR (-20203, 'No hay Cupos Disponibles');
+ END IF;
+ dbms_output.put_line('Cupos disponibles '||lq_numero_cupos_disponibles); 
+ ----- calcular el costo de la reserva --------------
  lv_costo_reserva := FU_PRECIO_RESERVA(lv_beam,lv_loa);
- INSERT INTO RESERVA (k_id, f_eta, n_puerto_salida, n_puerto_llegada,f_salida,f_llegada,k_num_serie,v_cargaTransportada,v_costo,i_estado,k_idAgente) VALUES 
- (reserva_seq.NEXTVAL,lf_eta,ln_puerto_salida,ln_puerto_llegada,lf_salida,lf_llegada,lk_num_serie,lv_cargaTransportada,lv_costo_reserva,'Dis',lk_id_agente);
+ INSERT INTO RESERVA (k_id, f_eta, n_puerto_salida, n_puerto_llegada,f_salida,f_llegada,k_num_serie,v_cargaTransportada,v_costo,i_estado,k_idAgente,n_sentido) VALUES 
+ (reserva_seq.NEXTVAL,lf_eta,ln_puerto_salida,ln_puerto_llegada,lf_salida,lf_llegada,lk_num_serie,lv_cargaTransportada,lv_costo_reserva,'Dis',lk_id_agente,ln_sentido);
+ ------- Actualizar los cupos disponibles -----------
+ UPDATE cronograma c SET c.q_cupos_disp = c.q_cupos_disp-1 WHERE c.k_idper=lk_periodo AND c.n_sentido=ln_sentido AND c.k_idper = lk_periodo AND c.k_tipobuque = lk_tipo_buque;
+ 
+ EXCEPTION
+  WHEN no_data_found THEN
+    dbms_output.put_line('Datos no encontrados'); 
+    RAISE_APPLICATION_ERROR (-20201, 'Datos no encontrados para el buque '||lk_num_serie);
 END PR_REGISTRAR_RESERVA;
 /

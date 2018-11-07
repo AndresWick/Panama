@@ -57,7 +57,7 @@ public class ReservaDao {
 		      while (rec.next()) {
 		    	  Reserva reserva = new Reserva();
 		    	  reserva.setK_id(rec.getInt(1));
-		    	  reserva.setF_eta(rec.getDate(2));
+		    	 // reserva.setF_eta(rec.getS(2));
 		    	  reserva.setN_puerto_salida(rec.getString(3));
 		    	  reserva.setN_puerto_llegada(rec.getString(4));
 		    	  reserva.setNum_serie(rec.getInt(5));
@@ -66,8 +66,8 @@ public class ReservaDao {
 		    	  reserva.setI_estado(rec.getString(8));
 		    	  reserva.setV_cancelacion(rec.getDouble(9));
 		    	  reserva.setF_cancelacion(rec.getDate(10));
-		    	  reserva.setF_salida(rec.getDate(11));
-		    	  reserva.setF_llegada(rec.getDate(12));
+		    	 // reserva.setF_salida(rec.getDate(11));
+		    	  //reserva.setF_llegada(rec.getDate(12));
 		    	  reservas.add(reserva);
 		      }
 		      st.close();
