@@ -136,13 +136,12 @@ CREATE TABLE ParametrosPaso
 
 CREATE TABLE ParametrosReserva
 (
-	k_id         NUMBER(3) NOT NULL,
-	q_bean_min   NUMBER(3) NOT NULL,
-	q_bean_max   NUMBER(3) NOT NULL,
-	q_loa_min    NUMBER(3) NOT NULL,
-	q_loa_max    NUMBER(3) NOT NULL,
-	v_costo      NUMBER(8,2) NOT NULL,
-	k_tipoBuque  NUMBER(4) NOT NULL
+	k_id        NUMBER(3) NOT NULL,
+	q_bean_min  NUMBER(5) NOT NULL,
+	q_bean_max  NUMBER(5) NOT NULL,
+	q_loa_min   NUMBER(5) NOT NULL,
+	q_loa_max   NUMBER(5) NOT NULL,
+	v_costo     NUMBER(8,2) NOT NULL
 )
 ;
 
@@ -449,7 +448,7 @@ ADD CONSTRAINT CK_k_idParPas CHECK (k_id > 0)
 ;
 
 ALTER TABLE ParametrosReserva
-ADD CONSTRAINT CK_q_bean_minParRes CHECK (q_bean_min > 0)
+ADD CONSTRAINT CK_q_bean_minParRes CHECK (q_bean_min >= 0)
 ;
 
 ALTER TABLE ParametrosReserva
@@ -457,7 +456,7 @@ ADD CONSTRAINT CK_q_bean_maxParRes CHECK (q_bean_max > 0)
 ;
 
 ALTER TABLE ParametrosReserva
-ADD CONSTRAINT CK_q_loa_minParRes CHECK (q_loa_min > 0)
+ADD CONSTRAINT CK_q_loa_minParRes CHECK (q_loa_min >= 0)
 ;
 
 ALTER TABLE ParametrosReserva
@@ -608,10 +607,6 @@ ALTER TABLE Pago ADD CONSTRAINT FK_Pago_TipoPago
 
 ALTER TABLE ParametrosPaso ADD CONSTRAINT FK_ParametrosPaso_TipoCarga 
 	FOREIGN KEY (k_tipoCarga) REFERENCES TipoCarga (k_id)
-;
-
-ALTER TABLE ParametrosReserva ADD CONSTRAINT FK_ParametrosReserva_TipoBuque 
-	FOREIGN KEY (k_tipoBuque) REFERENCES TipoBuque (k_id)
 ;
 
 ALTER TABLE Paso ADD CONSTRAINT FK_Paso_Reserva 

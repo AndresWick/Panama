@@ -1,0 +1,23 @@
+create or replace PROCEDURE PR_REGISTRAR_RESERVA
+(
+ lf_eta IN RESERVA.f_eta%TYPE,
+ ln_puerto_salida IN RESERVA.n_puerto_salida%TYPE,
+ ln_puerto_llegada IN RESERVA.n_puerto_llegada%TYPE,
+ lf_salida IN RESERVA.f_salida%TYPE,
+ lf_llegada IN RESERVA.f_llegada%TYPE,
+ lk_num_serie IN RESERVA.k_num_serie%TYPE,
+ lv_cargaTransportada IN RESERVA.v_cargatransportada%TYPE,
+ lk_id_agente IN RESERVA.k_idAgente%TYPE
+)
+AS
+ lv_beam buque.v_beam%TYPE;
+ lv_loa buque.v_loa%TYPE;
+ lv_costo_reserva NUMBER;
+BEGIN
+ SELECT B.v_beam INTO lv_beam FROM BUQUE B WHERE B.k_num_serie = lk_num_serie;
+ SELECT B.v_loa INTO lv_loa FROM BUQUE B WHERE b.k_num_serie = lk_num_serie;
+ lv_costo_reserva := FU_PRECIO_RESERVA(lv_beam,lv_loa);
+ INSERT INTO RESERVA (k_id, f_eta, n_puerto_salida, n_puerto_llegada,f_salida,f_llegada,k_num_serie,v_cargaTransportada,v_costo,i_estado,k_idAgente) VALUES 
+ (reserva_seq.NEXTVAL,lf_eta,ln_puerto_salida,ln_puerto_llegada,lf_salida,lf_llegada,lk_num_serie,lv_cargaTransportada,lv_costo_reserva,'Dis',lk_id_agente);
+END PR_REGISTRAR_RESERVA;
+/

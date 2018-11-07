@@ -48,7 +48,7 @@ public class ReservasController {
 			reservas= reservaDao.buscarReservas(idAgente);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();	
+			//e.printStackTrace();	
 		}finally {
 			odbManager.liberarConexion();
 		}
