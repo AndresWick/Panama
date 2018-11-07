@@ -30,7 +30,6 @@ public class ReservaDao {
 		else {
 		String strSQL = "begin PR_REGISTRAR_RESERVA(?,?,?,?,?,?,?,?); end;";		
         CallableStatement callstmt = conexion.prepareCall(strSQL);
-        //prepStmt.setInt(1,1); 
         callstmt.setDate(1,reserva.getF_eta()); 
         callstmt.setString(2,reserva.getN_puerto_salida());
         callstmt.setString(3,reserva.getN_puerto_llegada());
