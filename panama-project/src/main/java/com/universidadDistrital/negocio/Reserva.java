@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Reserva {
 	private int k_id;
-	private Date f_eta;
+	private String f_eta;
 	private String n_puerto_salida;
 	private String n_puerto_llegada;
-	private Date f_salida;
-	private Date f_llegada;
+	private String f_salida;
+	private String f_llegada;
 	private int num_serie;
 	private double v_cargaTransportada;
 	private double v_costo;
@@ -16,17 +16,24 @@ public class Reserva {
 	private double v_cancelacion;
 	private int k_idAgente;
 	private Date f_cancelacion;
+	private String n_sentido;
 	
+	public String getN_sentido() {
+		return n_sentido;
+	}
+	public void setN_sentido(String n_sentido) {
+		this.n_sentido = n_sentido;
+	}
 	public int getK_id() {
 		return k_id;
 	}
 	public void setK_id(int k_id) {
 		this.k_id = k_id;
 	}
-	public Date getF_eta() {
+	public String getF_eta() {
 		return f_eta;
 	}
-	public void setF_eta(Date f_eta) {
+	public void setF_eta(String f_eta) {
 		this.f_eta = f_eta;
 	}
 	public String getN_puerto_salida() {
@@ -41,16 +48,16 @@ public class Reserva {
 	public void setN_puerto_llegada(String n_puerto_llegada) {
 		this.n_puerto_llegada = n_puerto_llegada;
 	}
-	public Date getF_salida() {
+	public String getF_salida() {
 		return f_salida;
 	}
-	public void setF_salida(Date f_salida) {
+	public void setF_salida(String f_salida) {
 		this.f_salida = f_salida;
 	}
-	public Date getF_llegada() {
+	public String getF_llegada() {
 		return f_llegada;
 	}
-	public void setF_llegada(Date f_llegada) {
+	public void setF_llegada(String f_llegada) {
 		this.f_llegada = f_llegada;
 	}
 	public int getNum_serie() {

@@ -193,7 +193,8 @@ CREATE TABLE Reserva
 	i_estado             VARCHAR(3) NOT NULL,
 	v_cancelacion        NUMBER(8,2) NULL,
 	k_idAgente           NUMBER(8) NOT NULL,
-	f_cancelacion        DATE NULL
+	f_cancelacion        DATE NULL,
+	n_sentido            VARCHAR(6) NOT NULL
 )
 ;
 
@@ -532,6 +533,10 @@ ADD CONSTRAINT CK_v_cancelacion CHECK (v_cancelacion > 0)
 
 ALTER TABLE Reserva
 ADD CONSTRAINT CK_k_id CHECK (k_id > 0)
+;
+
+ALTER TABLE Reserva
+ADD CONSTRAINT CK_n_sentido CHECK (n_sentido in ('Norte','Sur'))
 ;
 
 ALTER TABLE Subasta
