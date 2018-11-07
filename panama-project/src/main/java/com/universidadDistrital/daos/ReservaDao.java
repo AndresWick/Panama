@@ -28,16 +28,17 @@ public class ReservaDao {
 			throw new SQLException("No logeado");
 		}
 		else {
-		String strSQL = "begin PR_REGISTRAR_RESERVA(?,?,?,?,?,?,?,?); end;";		
+		String strSQL = "begin PR_REGISTRAR_RESERVA(?,?,?,?,?,?,?,?,?); end;";		
         CallableStatement callstmt = conexion.prepareCall(strSQL);
-        callstmt.setDate(1,reserva.getF_eta()); 
+        callstmt.setDate(1,java.sql.Date.valueOf(reserva.getF_eta())); 
         callstmt.setString(2,reserva.getN_puerto_salida());
         callstmt.setString(3,reserva.getN_puerto_llegada());
-        callstmt.setDate(4, reserva.getF_salida());
-        callstmt.setDate(5, reserva.getF_llegada());
+        callstmt.setDate(4, java.sql.Date.valueOf(reserva.getF_salida()));
+        callstmt.setDate(5, java.sql.Date.valueOf(reserva.getF_llegada()));
         callstmt.setInt(6,reserva.getNum_serie()); 
         callstmt.setDouble(7, reserva.getV_cargaTransportada());
         callstmt.setInt(8, reserva.getK_idAgente());
+        callstmt.setString(9, reserva.getN_sentido());
         callstmt.execute();
         odbManager.commit();
 		}
@@ -56,7 +57,7 @@ public class ReservaDao {
 		      while (rec.next()) {
 		    	  Reserva reserva = new Reserva();
 		    	  reserva.setK_id(rec.getInt(1));
-		    	  reserva.setF_eta(rec.getDate(2));
+		    	 // reserva.setF_eta(rec.getS(2));
 		    	  reserva.setN_puerto_salida(rec.getString(3));
 		    	  reserva.setN_puerto_llegada(rec.getString(4));
 		    	  reserva.setNum_serie(rec.getInt(5));
@@ -65,8 +66,8 @@ public class ReservaDao {
 		    	  reserva.setI_estado(rec.getString(8));
 		    	  reserva.setV_cancelacion(rec.getDouble(9));
 		    	  reserva.setF_cancelacion(rec.getDate(10));
-		    	  reserva.setF_salida(rec.getDate(11));
-		    	  reserva.setF_llegada(rec.getDate(12));
+		    	 // reserva.setF_salida(rec.getDate(11));
+		    	  //reserva.setF_llegada(rec.getDate(12));
 		    	  reservas.add(reserva);
 		      }
 		      st.close();
