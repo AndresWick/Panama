@@ -451,7 +451,7 @@ ADD CONSTRAINT CK_k_idParPas CHECK (k_id > 0)
 ;
 
 ALTER TABLE ParametrosPaso
-ADD CONSTRAINT CK_n_esclusaParPaso CHECK (n_esclusa in ('Neopanamax','Panamax'))
+ADD CONSTRAINT CK_n_esclusaParPaso CHECK (n_esclusa in ('Neopanamax','Panamax','Any'))
 ;
 
 ALTER TABLE ParametrosReserva
