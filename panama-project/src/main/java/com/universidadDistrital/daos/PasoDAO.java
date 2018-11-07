@@ -1,5 +1,6 @@
 package com.universidadDistrital.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,28 +46,29 @@ public class PasoDAO {
 	}
 	
 	public void registrarPaso(Paso paso) throws SQLException {
-		String strSQL = "INSERT INTO Paso (k_id,v_costo,k_idReserva,f_fecha,q_pasajeros,n_esclusa) VALUES(?,?,?,?,?,?)";
-        Connection conexion = odbManager.tomarConexion();
-        PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-        System.out.println(paso.getK_id()+ "\t" + paso.getV_costo()+ "\t" + paso.getK_reserva()+ "\t" + paso.getF_fecha()+ "\t" + paso.getQ_pasajeros()+ "\t");
-        prepStmt.setInt(1,paso.getK_id());
-        
-        prepStmt.setFloat(2, paso.getV_costo());
-        
-        prepStmt.setInt(3,paso.getK_reserva());
-        
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(paso.getF_fecha()); 
-        calendar.add(Calendar.DAY_OF_YEAR, 1);          
-        prepStmt.setDate(4, new java.sql.Date (calendar.getTime().getTime()));
-        
-        prepStmt.setInt(5,paso.getQ_pasajeros()); 
-        
-        prepStmt.setString(6, paso.getN_esclusa());
-        
-        prepStmt.executeUpdate();
-        prepStmt.close();
-        odbManager.commit();
+		Connection conexion = odbManager.tomarConexion();
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}
+		else {
+			String strSQL = "begin pr_registrar_paso(?,?,?,?); end;";
+	       
+			CallableStatement callstmt = conexion.prepareCall(strSQL);
+	        
+			callstmt.setInt(1,paso.getK_reserva());
+	        
+			Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(paso.getF_fecha()); 
+	        calendar.add(Calendar.DAY_OF_YEAR, 1);          
+	        callstmt.setDate(2, new java.sql.Date (calendar.getTime().getTime()));
+	        
+	        callstmt.setInt(3,paso.getQ_pasajeros()); 
+	        
+	        callstmt.setString(4, paso.getN_esclusa());
+	        
+	        callstmt.execute();	        
+	        odbManager.commit();
+		}
 	}
 	
 }

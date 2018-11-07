@@ -89,9 +89,7 @@
 		<h2 id="title_usuarios">Registro paso</h2>
 	</div>
 	<div class="widget-content nopadding">
-		<div class="pnl_busqueda">
-		        <div>Id Paso</div>
-				<input id=id type="text" placeholder="Identificador Paso" class="form-control txtBusqueda" required />
+		<div class="pnl_busqueda">  
 				<div>Id Reserva</div>
 				<input id=reserva type="text" placeholder="Identificador Reserva" class="form-control txtBusqueda" required />				
 				<div>Fecha de Paso</div>
@@ -114,9 +112,7 @@
 
 <<script type="text/javascript">
 
-	function registroPaso(){		
-		var id = document.getElementById("id").value;
-		var costo = 100;
+	function registroPaso(){				
 		var idReserva = document.getElementById("reserva").value;
 		var fechaPaso = document.getElementById("f_paso").value;
 		var pasajeros = document.getElementById("pasajeros").value;
@@ -125,9 +121,7 @@
 		$.ajax({
 			url: 'registroPaso',
 	        type: 'POST',
-	        data: JSON.stringify({
-	        	k_id: id,
-	        	v_costo : costo,
+	        data: JSON.stringify({	        	        	
 	        	k_reserva: idReserva,
 	        	f_fecha: fechaPaso,
 	        	q_pasajeros: pasajeros,

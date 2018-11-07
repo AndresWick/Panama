@@ -21,12 +21,12 @@ VALUES (3,3,2,'TERCER PERIODO');
 INSERT INTO PERIODO(K_ID,Q_DIAS_MIN,Q_DIAS_MAX,N_PERIODO)
 VALUES (4,730,366,'PERIODO ESPECIAL');
 
--------- tipo carga -----
-INSERT INTO "CANALDEPANAMA"."TIPOCARGA" (K_ID, N_TIPO) VALUES ('1', 'Granelero liquido');
-INSERT INTO "CANALDEPANAMA"."TIPOCARGA" (K_ID, N_TIPO) VALUES ('2', 'Comercial');
-INSERT INTO "CANALDEPANAMA"."TIPOCARGA" (K_ID, N_TIPO) VALUES ('3', 'Portacontenedores');
-INSERT INTO "CANALDEPANAMA"."TIPOCARGA" (K_ID, N_TIPO) VALUES ('4', 'Portavehiculos');
-INSERT INTO "CANALDEPANAMA"."TIPOCARGA" (K_ID, N_TIPO) VALUES ('5', 'Granelero');
+/* --- TIPO CARGA --- */	
+	INSERT INTO tipocarga (k_id, n_tipo) VALUES (1,'Comercial');
+	INSERT INTO tipocarga (k_id, n_tipo) VALUES (2,'Portacontenedores');
+	INSERT INTO tipocarga (k_id, n_tipo) VALUES (3,'Portavehiculos');
+	INSERT INTO tipocarga (k_id, n_tipo) VALUES (4,'Granelero');
+	INSERT INTO tipocarga (k_id, n_tipo) VALUES (5,'Granelero liquido');
 
 ---- parametros reserva -----
 INSERT INTO PARAMETROSRESERVA(K_ID,Q_BEAN_MIN,Q_BEAN_MAX,Q_LOA_MIN,Q_LOA_MAX,V_COSTO) 
@@ -46,14 +46,31 @@ VALUES (7,108,2000,0,2000,35000);
 INSERT INTO PARAMETROSRESERVA(K_ID,Q_BEAN_MIN,Q_BEAN_MAX,Q_LOA_MIN,Q_LOA_MAX,V_COSTO) 
 VALUES (8,0,2000,967,2000,35000);
 
+/* --- PARAMETROS PASO --- */
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (1,1,99,138,'Panamax');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (2,1,99,148,'Neopanamax');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (3,2,40,640000,'Any');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (4,2,80,780000,'Any');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (5,3,35,238700,'Any');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (6,3,45,128750,'Any');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (7,4,60,128710,'Panamax');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (8,4,84.20,252000,'Neopanamax');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (9,5,50,238892,'Neopanamax');
+	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (10,5,99,335400,'Any');
+
 ---- buques ----
-INSERT INTO "CANALDEPANAMA"."BUQUE" (K_NUM_SERIE, K_IDCARGA, K_IDBUQUE, Q_PASAJEROS_MAX, V_BEAM, V_LOA, V_CARGA_MAX) VALUES ('123', '1', '1', '10', '20', '10', '10');
+INSERT INTO "CANALDEPANAMA"."BUQUE" (K_NUM_SERIE, K_IDCARGA, K_IDBUQUE, Q_PASAJEROS_MAX, V_BEAM, V_LOA, V_CARGA_MAX) VALUES ('123', '1', '1', '10', '20', '10', '10');
+INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_loa, v_carga_max) VALUES (123,1,1,20,80,60,300);
+INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_loa, v_carga_max) VALUES (1234,2,2,20,80,60,100);
 
 ---- companias----
 INSERT INTO COMPANIA VALUES(12,'UniversidadDistrital');
+INSERT INTO compania (k_nit, n_nombre) VALUES ('zzz', 'Avianca');
 
 -- personas ----
 INSERT INTO PERSONA (k_identificacion,n_nombre,n_apellido,f_nacimiento) VALUES(1,'Juan','Perez',to_date('1994/06/15','yyyy/mm/dd'));
+INSERT INTO persona (k_identificacion,n_nombre, n_apellido, f_nacimiento) VALUES (123,'Pepe','Gutierrez','10/10/2018');
 
 --Agentes----
 INSERT INTO AGENTE VALUES(1,12,1);
+INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES (111,'zzz',123);
