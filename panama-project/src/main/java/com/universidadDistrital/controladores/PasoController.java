@@ -32,6 +32,8 @@ public class PasoController {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			odbManager.liberarConexion();
 		}
 		return paso;
 	}

@@ -491,7 +491,7 @@ ADD CONSTRAINT CK_k_idPas CHECK (k_id > 0)
 ;
 
 ALTER TABLE Paso
-ADD CONSTRAINT CK_n_esclusa CHECK (n_esclusa in ('Neopanamax','Panamax'))
+ADD CONSTRAINT CK_n_esclusa CHECK (n_esclusa in ('Neopanamax','Panamax','Any'))
 ;
 
 ALTER TABLE Periodo
