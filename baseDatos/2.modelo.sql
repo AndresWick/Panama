@@ -536,7 +536,7 @@ ADD CONSTRAINT CK_k_id CHECK (k_id > 0)
 ;
 
 ALTER TABLE Reserva
-ADD CONSTRAINT CK_n_sentido CHECK (n_sentido in ('Norte','Sur'))
+ADD CONSTRAINT CK_n_sentido_reserva CHECK (n_sentido in ('Norte','Sur'))
 ;
 
 ALTER TABLE Subasta
