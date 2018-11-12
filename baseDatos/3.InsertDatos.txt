@@ -59,7 +59,6 @@ VALUES (8,0,2000,967,2000,35000);
 	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (10,5,99,335400,'Any');
 
 ---- buques ----
-INSERT INTO "CANALDEPANAMA"."BUQUE" (K_NUM_SERIE, K_IDCARGA, K_IDBUQUE, Q_PASAJEROS_MAX, V_BEAM, V_LOA, V_CARGA_MAX) VALUES ('123', '1', '1', '10', '20', '10', '10');
 INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_loa, v_carga_max) VALUES (123,1,1,20,80,60,300);
 INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_loa, v_carga_max) VALUES (1234,2,2,20,80,60,100);
 
