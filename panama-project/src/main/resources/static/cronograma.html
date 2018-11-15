@@ -1,5 +1,5 @@
 <style>
-	.txtBusqueda, #optTipoBusqueda {
+	.txtBusqueda {
 		width: 30%;
 		margin-left: auto;
 		margin-right: auto;
@@ -60,26 +60,10 @@
     	margin-top: -20px;
 	}
 	
-	#modal_edit_user .modal-dialog{
-    overflow-y: initial !important
+	th{
+	 	width: 130px;
+  		overflow: auto;
 	}
-	#modal_edit_user .modal-body{
-	    height: 420px;
-	    overflow-y: auto;
-	}
-	
-	@media (min-width: 1000px) {
-	#modal_edit_user .modal-body{
-		height: 420px!important;
-   	 	overflow-y: auto!important;
-	}
-}
-
-@media (min-height: 800px){
-#modal_edit_user .modal-body {
-    height: 690px!important;
-    overflow-y: auto!important;
-}
 
 </style>
 <meta charset="ISO-8859-1">
@@ -89,52 +73,75 @@
 	</div>
 	<div class="widget-content nopadding">
 		<div class="pnl_busqueda">
-				<div>Tipo Buque</div>
-					<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
-						<select id="tipoBuque" name="gender" class="form-control">
-		                	<option value='1'>Regular</option>
-		                	<option value='2'>Super</option>
-		                	<option value='3'>Neopanamax</option>
-		                </select>
-                	</div>
-				<div>Fecha yyyy-mm-dd</div>
-				<input id="fechaCronograma" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />
-				<div>Tipo periodo</div>
-				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
-					<select id="tipoPeriodo" name="gender" class="form-control">
-			                <option value='1'>Primer periodo</option>
-			                <option value='2'>Segundo periodo</option>
-			                <option value='3'>Tercer periodo</option>
-			                <option value='4'>Periodo Especial</option>
-			        </select>
-		        </div>
-				<div>Sentido</div>
-				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
-					<select id="sentido" name="gender" class="form-control">
-				    	<option value="Norte">Norte</option>
-				    	<option value="Sur">Sur</option>
-				  	</select>
-				</div>
-				<div>Cantidad</div>
-				<div class="col-md-4" style="margin-left: auto;margin-right: auto;">
-					<input id="qmax" name="gender" class="form-control" type="number">
-				</div>
-				<div>
-					<button class="btn btn-success"  onclick="registarCronograma()">Registrar Cronograma</button>
-				</div>
+			<div>Fecha</div>
+			<input id="fechaCronograma" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />
+			<br>
+		
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col"><b>Tipo Buque</b></th>
+			      <th scope="col"><b>Primer Periodo</b></th>
+			      <th scope="col"><b>Segundo Periodo</b></th>
+			      <th scope="col"><b>Tercer Periodo</b></th>
+			      <th scope="col"><b>Periodo Especial</b></th>
+			      <th scope="col"><b>Sentido</b></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			    	<th scope="row">Regular</th>
+			  		<td><input id="qmax_regular_p1" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_regular_p2" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_regular_p3" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_regular_p4" name="gender" class="form-control " type="number"></td>
+				    <td>
+			      		<select id="sentido_regular" name="gender" class="form-control">
+							<option value="Norte">Norte</option>
+							<option value="Sur">Sur</option>
+						</select>
+					</td>
+			    </tr>
+			    <tr>
+			    	<th scope="row">Super</th>
+				    <td><input id="qmax_super_p1" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_super_p2" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_super_p3" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_super_p4" name="gender" class="form-control " type="number"></td>
+				    <td>
+			      		<select id="sentido_super" name="gender" class="form-control">
+							<option value="Norte">Norte</option>
+							<option value="Sur">Sur</option>
+						</select>
+					</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Neopanamax</th>
+			     	<td><input id="qmax_neopanamax_p1" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_neopanamax_p2" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_neopanamax_p3" name="gender" class="form-control " type="number"></td>
+				    <td><input id="qmax_neopanamax_p4" name="gender" class="form-control " type="number"></td>
+				    <td>
+			      		<select id="sentido_neopanamax" name="gender" class="form-control">
+							<option value="Norte">Norte</option>
+							<option value="Sur">Sur</option>
+						</select>
+					</td>
+			    </tr>
+			</tbody>
+	      </table>
+		<div>
+			<button class="btn btn-success"  onclick="registarCronograma()">Registrar Cronograma</button>
+		</div>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
 
-	function buscar_visita(){
-		$("#modal_edit_user").modal("show");
-	}
-	
 	function registarCronograma(){
 		
-		var k_tipoBuque= $('select[id="tipoBuque"] option:selected').val();
+		/*var k_tipoBuque= $('select[id="tipoBuque"] option:selected').val();
 		var f_fecha=document.getElementById("fechaCronograma").value;
 		var k_idPer=$('select[id="tipoPeriodo"] option:selected').val();
 		var n_sentido=$('select[id="sentido"] option:selected').val();
@@ -165,7 +172,7 @@
 	        error:function(data){
 	        	alert(data.responseText)
 	        }
-	    })
+	    })*/
 	}
 	
 </script>
