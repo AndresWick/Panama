@@ -322,13 +322,7 @@
 				}else {
 					n_sentido="Sur";
 				}
-				
-				console.log('%'+k_tipoBuque,'color:green;background:yellow;');
-				console.log('%'+f_fecha,'color:green;background:yellow;');
-				console.log('%'+k_idPer,'color:green;background:yellow;');
-				console.log('%'+n_sentido,'color:green;background:yellow;');
-				console.log('%'+q_cupos_max,'color:green;background:yellow;');
-				
+				//alert("tipo buque: "+k_tipoBuque+" fecha: "+f_fecha+" periodo: "+k_idPer+" sentido: "+n_sentido+" cupos: "+q_cupos_max);
 				addCronograma(k_tipoBuque,f_fecha,k_idPer,n_sentido,q_cupos_max);
 			}
 
@@ -342,7 +336,7 @@
 			   var top=adds;
 
 			   function testPromise() {
-				document.getElementById("full-size").style.display = "block";
+				//document.getElementById("full-size").style.display = "block";
 			     var thisPromiseCount = ++promiseCount;
 
 			     var p1 = new Promise(
@@ -378,12 +372,12 @@
 			    	   if(thisPromiseCount<top){	   
 			    		   testPromise();
 			    	   }	   
-						document.getElementById("full-size").style.display = "none";
+						//document.getElementById("full-size").style.display = "none";
 			       })
 			       .catch(
 			       // Registrar la razón del rechazo
 			       function(reason) {
-					 document.getElementById("full-size").style.display = "none";
+					// document.getElementById("full-size").style.display = "none";
 			         console.log('Manejar promesa rechazada ('+reason+') aquí.');
 			       });
 			   }

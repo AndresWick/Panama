@@ -275,7 +275,7 @@ ALTER TABLE Compania ADD CONSTRAINT PK_Compania
 ;
 
 ALTER TABLE Cronograma ADD CONSTRAINT PK_Cronograma 
-	PRIMARY KEY (k_idPer, k_tipoBuque, f_fecha) 
+	PRIMARY KEY (k_idPer, k_tipoBuque, f_fecha, n_sentido) 
  USING INDEX 
 ;
 
