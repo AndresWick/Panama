@@ -6,9 +6,7 @@
 	}
 
 	.pnl_busqueda {
-		height: 20%;
 		text-align: center;
-		padding-top: 1em;
 		color: #444;
 	}
 	
@@ -21,9 +19,7 @@
 	}
 
 	.widget-title {
-		height: 20%;
 		text-align: center;
-		padding-top: 1em;
 		text-shadow: 1px 1px 2px #444;
 		color: #444;
 	}
@@ -195,15 +191,15 @@
 				    </td>
 				    <td>
 				    	<input id="qmax_super_p2_norte" name="gender" class="form-control " type="number">
-				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p2_sur" name="gender" class="form-control " type="number">
 				    </td>
 				    <td>
 				    	<input id="qmax_super_p3_norte" name="gender" class="form-control " type="number">
-				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p3_sur" name="gender" class="form-control " type="number">
 				    </td>
 				    <td>
 				    	<input id="qmax_super_p4_norte" name="gender" class="form-control " type="number">
-				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p4_sur" name="gender" class="form-control " type="number">
 				    </td>
 			    </tr>
 			    <tr>
@@ -240,51 +236,113 @@
 	</div>
 </div>
 
+	<!-- Central Modal Invalid Cant -->
+			<div class="modal fade" id="modal_invalid_cant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-notify modal-danger" role="document">
+    				<!--Content-->
+    				<div class="modal-content">
+        				<!--Header-->
+        				<div class="modal-header">
+            				<p class="heading lead">Cantidad excedida de cupos permitidos.</p>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               	 				<span aria-hidden="true" class="white-text">&times;</span>
+            				</button>
+        				</div>
+        				<!--Body-->
+        				<div class="modal-body">
+				            <div class="text-center">
+				                <i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+				                <p>Solo se pueden registrar hasta un maximo de 25 cupos diarios.</p>
+				            </div>
+				        </div>
+				        <!--Footer-->
+				        <div class="modal-footer justify-content-center">
+				            <a type="button" class="btn btn-danger" data-dismiss="modal">Aceptar <i class="fa fa-check ml-1"></i></a>
+				        </div>
+				    </div>
+   				<!--/.Content-->
+				</div>
+			</div>
+			<!-- End Central Modal Invalid Cant-->
+
 <script type="text/javascript">
 
+	var valores=["#qmax_regular_p1_norte","#qmax_regular_p1_sur","#qmax_regular_p2_norte","#qmax_regular_p2_sur","#qmax_regular_p3_norte","#qmax_regular_p3_sur","#qmax_regular_p4_norte","#qmax_regular_p4_sur","#qmax_super_p1_norte","#qmax_super_p1_sur","#qmax_super_p2_norte","#qmax_super_p2_sur","#qmax_super_p3_norte","#qmax_super_p3_sur","#qmax_super_p4_norte","#qmax_super_p4_sur","#qmax_neopanamax_p1_norte","#qmax_neopanamax_p1_sur","#qmax_neopanamax_p2_norte","#qmax_neopanamax_p2_sur","#qmax_neopanamax_p3_norte","#qmax_neopanamax_p3_sur","#qmax_neopanamax_p4_norte","#qmax_neopanamax_p4_sur"];
+	var adds=0;
+	
+	function validate(){
+		for(var i=0;i<valores.length;i++){
+			if($(valores[i]).val()=="" || $(valores[i]).val()<0){
+				$(valores[i]).val(0);
+			}
+		}
+	}
+
 	function registarCronograma(){
-		/*
-		var cronograma = {
-			cupos: []
-		};
-		  
-			var item = data.treeData[i];   
-			if(item.tipo=="Grupo"){
-				cronograma.cupos.push({ 
-					"cod_empresa": item.cod_empresa,
-					"contenedor": item.ncontenedor,
-				    "icon": item.nicon,
-					"idFeature": item.idFeature,
-					"idTreeData": item.idTreeData
-				});
+		validate();
+		var maxCant=25;
+		var cont=0;
+		for(var i=0;i<valores.length;i++){
+			cont=cont+parseInt($(valores[i]).val());
+			adds++;
+		}
+		if(cont>maxCant){
+  	      $("#modal_invalid_cant").modal("show");
+		}else{
+			var k_tipoBuque= null;
+			var f_fecha=document.getElementById("fechaCronograma").value;
+			var k_idPer=null;
+			var n_sentido=null;
+			var q_cupos_max=null;
+			
+			for(var i=0;i<valores.length;i++){
+				
+				q_cupos_max=$(valores[i]).val();
+				
+				if(i>=0 && i<=7){
+					k_tipoBuque=1;
+				}else if(i>=8 && i<=15){
+					k_tipoBuque=2;
+				}else if(i>15){
+					k_tipoBuque=3;
+				}
+				
+				if(i==0 || i==1 || i==8 || i==9 || i==16 || i==17){
+					k_idPer=1;
+				}else if(i==2 || i==3 || i==10 || i==11 || i==18 || i==19){
+					k_idPer=2;
+				}else if(i==4 || i==5 || i==12 || i==13 || i==20 || i==21){
+					k_idPer=3;
+				}else if(i==6 || i==7 || i==14 || i==15 || i==22 || i==23){
+					k_idPer=4;
+				}
+				
+				if(i % 2 == 0){
+					n_sentido="Norte";
+				}else {
+					n_sentido="Sur";
+				}
+				
+				console.log('%'+k_tipoBuque,'color:green;background:yellow;');
+				console.log('%'+f_fecha,'color:green;background:yellow;');
+				console.log('%'+k_idPer,'color:green;background:yellow;');
+				console.log('%'+n_sentido,'color:green;background:yellow;');
+				console.log('%'+q_cupos_max,'color:green;background:yellow;');
+				
+				addCronograma(k_tipoBuque,f_fecha,k_idPer,n_sentido,q_cupos_max);
 			}
-						
-			for(var i in cronograma.cupos) {    
-				var itemGroup = cronograma.cupos[i];   
-					dataOrder.treeData.push({ 
-						"cod_empresa": itemGroup.cod_empresa,
-					    "contenedor": itemGroup.ncontenedor,
-					    "icon": itemGroup.nicon,
-					    "idFeature": itemGroup.idFeature,
-					    "idTreeData": itemGroup.idTreeData
-					});
-			}
-		
-		var k_tipoBuque= $('select[id="tipoBuque"] option:selected').val();
-		var f_fecha=document.getElementById("fechaCronograma").value;
-		var k_idPer=$('select[id="tipoPeriodo"] option:selected').val();
-		var n_sentido=$('select[id="sentido"] option:selected').val();
-		var q_cupos_max=document.getElementById("qmax").value;
-		*/
+
+		}
 	}
 	
 	function addCronograma(k_tipoBuque,f_fecha,k_idPer,n_sentido,q_cupos_max){
 		   var categorias=[];
 			   
 			   var promiseCount = 0;
-			   var top=25;
+			   var top=adds;
 
 			   function testPromise() {
+				document.getElementById("full-size").style.display = "block";
 			     var thisPromiseCount = ++promiseCount;
 
 			     var p1 = new Promise(
@@ -325,6 +383,7 @@
 			       .catch(
 			       // Registrar la razón del rechazo
 			       function(reason) {
+					 document.getElementById("full-size").style.display = "none";
 			         console.log('Manejar promesa rechazada ('+reason+') aquí.');
 			       });
 			   }
