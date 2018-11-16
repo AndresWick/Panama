@@ -63,10 +63,77 @@
 	th{
 	 	width: 130px;
   		overflow: auto;
+  		vertical-align: middle!important;
+    	text-align: center;
 	}
+	
+	#full-size{
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    z-index:100;
+    background-color:#21212175!important; 
+	}
+	
+	
+	#loader {
+	      margin-top: 18rem;
+	    margin-left: auto;
+	    margin-right: auto;
+	  z-index: 1;
+	  border: 16px solid #f3f3f3;
+	  border-radius: 50%;
+	  border-top: 16px solid #3c2f2f;
+	  border-right: 16px solid #c1c1c1;
+	  border-bottom: 16px solid #372112;
+	  border-left: 16px solid #c1c1c1;
+	  width: 120px;
+	  height: 120px;
+	  -webkit-animation: spin 2s linear infinite;
+	  animation: spin 2s linear infinite;
+	}
+	
+	@-webkit-keyframes spin {
+	  0% { -webkit-transform: rotate(0deg); }
+	  100% { -webkit-transform: rotate(360deg); }
+	}
+	
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}
+	
+	/* Add animation to "page content" */
+	.animate-bottom {
+	  position: relative;
+	  -webkit-animation-name: animatebottom;
+	  -webkit-animation-duration: 1s;
+	  animation-name: animatebottom;
+	  animation-duration: 1s
+	}
+	
+	@-webkit-keyframes animatebottom {
+	  from { bottom:-100px; opacity:0 } 
+	  to { bottom:0px; opacity:1 }
+	}
+	
+	@keyframes animatebottom { 
+	  from{ bottom:-100px; opacity:0 } 
+	  to{ bottom:0; opacity:1 }
+	}
+	
 
 </style>
 <meta charset="ISO-8859-1">
+
+<div id="full-size">
+  <div id="loader"></div>
+  
+</div>
+
 <div id="busqUsuarios" class="widget-box">
 	<div class="widget-title">
 		<h2 id="title_usuarios">Registrar Cronograma</h2>
@@ -81,52 +148,88 @@
 			  <thead>
 			    <tr>
 			      <th scope="col"><b>Tipo Buque</b></th>
+			      <th scope="col"><b>Sentido</b></th>
 			      <th scope="col"><b>Primer Periodo</b></th>
 			      <th scope="col"><b>Segundo Periodo</b></th>
 			      <th scope="col"><b>Tercer Periodo</b></th>
 			      <th scope="col"><b>Periodo Especial</b></th>
-			      <th scope="col"><b>Sentido</b></th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr>
 			    	<th scope="row">Regular</th>
-			  		<td><input id="qmax_regular_p1" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_regular_p2" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_regular_p3" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_regular_p4" name="gender" class="form-control " type="number"></td>
-				    <td>
-			      		<select id="sentido_regular" name="gender" class="form-control">
-							<option value="Norte">Norte</option>
-							<option value="Sur">Sur</option>
-						</select>
+			    	 <td>
+			    	 	<br>
+			      		<div>Norte</div>
+			      		<br>
+			      		<div>Sur</div>
 					</td>
+			  		<td>
+			  			<input id="qmax_regular_p1_norte" name="gender" class="form-control " type="number">
+			  			<input id="qmax_regular_p1_sur" name="gender" class="form-control " type="number">
+			  		</td>
+				    <td>
+				    	<input id="qmax_regular_p2_norte" name="gender" class="form-control " type="number">
+			  			<input id="qmax_regular_p2_sur" name="gender" class="form-control " type="number">
+			  		</td>
+				    <td>
+				    	<input id="qmax_regular_p3_norte" name="gender" class="form-control " type="number">
+			  			<input id="qmax_regular_p3_sur" name="gender" class="form-control " type="number">
+				    </td>
+				    <td>
+				    	<input id="qmax_regular_p4_norte" name="gender" class="form-control " type="number">
+			  			<input id="qmax_regular_p4_sur" name="gender" class="form-control " type="number">
+				    </td>
 			    </tr>
 			    <tr>
 			    	<th scope="row">Super</th>
-				    <td><input id="qmax_super_p1" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_super_p2" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_super_p3" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_super_p4" name="gender" class="form-control " type="number"></td>
-				    <td>
-			      		<select id="sentido_super" name="gender" class="form-control">
-							<option value="Norte">Norte</option>
-							<option value="Sur">Sur</option>
-						</select>
+			    	 <td>
+			    	 	<br>
+			      		<div>Norte</div>
+			      		<br>
+			      		<div>Sur</div>
 					</td>
+				    <td>
+				    	<input id="qmax_super_p1_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    </td>
+				    <td>
+				    	<input id="qmax_super_p2_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    </td>
+				    <td>
+				    	<input id="qmax_super_p3_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    </td>
+				    <td>
+				    	<input id="qmax_super_p4_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_super_p1_sur" name="gender" class="form-control " type="number">
+				    </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">Neopanamax</th>
-			     	<td><input id="qmax_neopanamax_p1" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_neopanamax_p2" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_neopanamax_p3" name="gender" class="form-control " type="number"></td>
-				    <td><input id="qmax_neopanamax_p4" name="gender" class="form-control " type="number"></td>
-				    <td>
-			      		<select id="sentido_neopanamax" name="gender" class="form-control">
-							<option value="Norte">Norte</option>
-							<option value="Sur">Sur</option>
-						</select>
+			       <td>
+			       		<br>
+			      		<div>Norte</div>
+			      		<br>
+			      		<div>Sur</div>
 					</td>
+			     	<td>
+			     		<input id="qmax_neopanamax_p1_norte" name="gender" class="form-control " type="number">
+			     		<input id="qmax_neopanamax_p1_sur" name="gender" class="form-control " type="number">
+			     	</td>
+				    <td>
+				    	<input id="qmax_neopanamax_p2_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_neopanamax_p2_sur" name="gender" class="form-control " type="number">
+				    </td>
+				    <td>
+				    	<input id="qmax_neopanamax_p3_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_neopanamax_p3_sur" name="gender" class="form-control " type="number">
+				    </td>
+				    <td>
+				    	<input id="qmax_neopanamax_p4_norte" name="gender" class="form-control " type="number">
+				    	<input id="qmax_neopanamax_p4_sur" name="gender" class="form-control " type="number">
+				    </td>
 			    </tr>
 			</tbody>
 	      </table>
@@ -140,40 +243,93 @@
 <script type="text/javascript">
 
 	function registarCronograma(){
+		/*
+		var cronograma = {
+			cupos: []
+		};
+		  
+			var item = data.treeData[i];   
+			if(item.tipo=="Grupo"){
+				cronograma.cupos.push({ 
+					"cod_empresa": item.cod_empresa,
+					"contenedor": item.ncontenedor,
+				    "icon": item.nicon,
+					"idFeature": item.idFeature,
+					"idTreeData": item.idTreeData
+				});
+			}
+						
+			for(var i in cronograma.cupos) {    
+				var itemGroup = cronograma.cupos[i];   
+					dataOrder.treeData.push({ 
+						"cod_empresa": itemGroup.cod_empresa,
+					    "contenedor": itemGroup.ncontenedor,
+					    "icon": itemGroup.nicon,
+					    "idFeature": itemGroup.idFeature,
+					    "idTreeData": itemGroup.idTreeData
+					});
+			}
 		
-		/*var k_tipoBuque= $('select[id="tipoBuque"] option:selected').val();
+		var k_tipoBuque= $('select[id="tipoBuque"] option:selected').val();
 		var f_fecha=document.getElementById("fechaCronograma").value;
 		var k_idPer=$('select[id="tipoPeriodo"] option:selected').val();
 		var n_sentido=$('select[id="sentido"] option:selected').val();
 		var q_cupos_max=document.getElementById("qmax").value;
-
-		console.log(k_tipoBuque);
-		console.log(f_fecha);
-		console.log(k_idPer);
-		console.log(n_sentido);
-		console.log(q_cupos_max);
-		
-		$.ajax({
-	        url: 'cronograma',
-	        type: 'POST',
-	        data: JSON.stringify({
-	        	k_tipoBuque: k_tipoBuque,
-	        	f_fecha:f_fecha,
-	        	k_idPer:k_idPer,
-	        	n_sentido:n_sentido,
-	        	q_cupos_max:q_cupos_max
-	            }),
-	        processData: false,
-	        contentType: "application/json",
-	        success:function(data){
-	    		console.log("registrando");
-	        	alert(data);
-	        },
-	        error:function(data){
-	        	alert(data.responseText)
-	        }
-	    })*/
+		*/
 	}
+	
+	function addCronograma(k_tipoBuque,f_fecha,k_idPer,n_sentido,q_cupos_max){
+		   var categorias=[];
+			   
+			   var promiseCount = 0;
+			   var top=25;
+
+			   function testPromise() {
+			     var thisPromiseCount = ++promiseCount;
+
+			     var p1 = new Promise(
+			       // La función resolvedora es llamada con la
+			       // habilidad de resolver o rechazar la promesa
+			       function(resolve, reject) {
+			    	   
+			    		$.ajax({
+			    	        url: 'cronograma',
+			    	        type: 'POST',
+			    	        data: JSON.stringify({
+			    	        	k_tipoBuque: k_tipoBuque,
+			    	        	f_fecha:f_fecha,
+			    	        	k_idPer:k_idPer,
+			    	        	n_sentido:n_sentido,
+			    	        	q_cupos_max:q_cupos_max
+			    	            }),
+			    	        processData: false,
+			    	        contentType: "application/json",
+			    	        success:function(data){
+			    	    		console.log("registrando");
+			    	        	alert(data);
+			    	        },
+			    	        error:function(data){
+			    	        	alert(data.responseText)
+			    	        }
+			    	    })
+			       }
+			     );
+
+			     p1.then(
+			       function(cat) {
+			    	   if(thisPromiseCount<top){	   
+			    		   testPromise();
+			    	   }	   
+						document.getElementById("full-size").style.display = "none";
+			       })
+			       .catch(
+			       // Registrar la razón del rechazo
+			       function(reason) {
+			         console.log('Manejar promesa rechazada ('+reason+') aquí.');
+			       });
+			   }
+			   testPromise();	    		  
+		}
 	
 </script>
 
