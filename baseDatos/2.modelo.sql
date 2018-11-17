@@ -75,10 +75,10 @@ CREATE TABLE Cronograma
 (
 	k_idPer       NUMBER(3) NOT NULL,
 	k_tipoBuque   NUMBER(4) NOT NULL,
-	f_fecha       DATE NOT NULL,
+	k_fecha       DATE NOT NULL,
 	q_cupos_max   NUMBER(3) NOT NULL,
 	q_cupos_disp  NUMBER(3) NOT NULL,
-	n_sentido     VARCHAR(5) NOT NULL
+	k_sentido     VARCHAR(5) NOT NULL
 )
 ;
 
@@ -275,7 +275,7 @@ ALTER TABLE Compania ADD CONSTRAINT PK_Compania
 ;
 
 ALTER TABLE Cronograma ADD CONSTRAINT PK_Cronograma 
-	PRIMARY KEY (k_idPer, k_tipoBuque, f_fecha, n_sentido) 
+	PRIMARY KEY (k_idPer, k_tipoBuque, k_fecha, k_sentido) 
  USING INDEX 
 ;
 
@@ -390,7 +390,7 @@ ADD CONSTRAINT CK_k_num_serieBuq CHECK (k_num_serie > 0)
 ;
 
 ALTER TABLE Cronograma
-ADD CONSTRAINT CK_q_cupos_max CHECK (q_cupos_max > 0)
+ADD CONSTRAINT CK_q_cupos_max CHECK (q_cupos_max >= 0)
 ;
 
 ALTER TABLE Cronograma
@@ -398,7 +398,7 @@ ADD CONSTRAINT CK_q_cupos_disp CHECK (q_cupos_disp >= 0)
 ;
 
 ALTER TABLE Cronograma
-ADD CONSTRAINT CK_n_sentido CHECK (n_sentido in ('Norte','Sur'))
+ADD CONSTRAINT CK_k_sentido CHECK (k_sentido in ('Norte','Sur'))
 ;
 
 ALTER TABLE Documento

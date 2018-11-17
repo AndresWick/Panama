@@ -16,16 +16,16 @@ public class CronogramaDao {
 		private ODBManager odbManager;
 	
 	public void almacenarCronograma(Cronograma cronograma) throws SQLException {
-			String strSQL = "INSERT INTO cronograma (k_idPer, k_tipoBuque, f_fecha, q_cupos_max, q_cupos_disp, n_sentido) VALUES(?,?,?,?,?,?)";
+			String strSQL = "INSERT INTO cronograma (k_idPer, k_tipoBuque, k_fecha, q_cupos_max, q_cupos_disp, k_sentido) VALUES(?,?,?,?,?,?)";
 	        Connection conexion = odbManager.tomarConexion();
 	        PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
 	       
 	        prepStmt.setString(1,cronograma.getK_idPer()); 
 	        prepStmt.setString(2,cronograma.getK_tipoBuque()); 
-	        prepStmt.setDate(3, java.sql.Date.valueOf(cronograma.getF_fecha()));
+	        prepStmt.setDate(3, java.sql.Date.valueOf(cronograma.getK_fecha()));
 	        prepStmt.setString(4,cronograma.getQ_cupos_max()); 
 	        prepStmt.setString(5,cronograma.getQ_cupos_max()); 
-	        prepStmt.setString(6,cronograma.getN_sentido()); 
+	        prepStmt.setString(6,cronograma.getK_sentido()); 
 	        prepStmt.executeUpdate();
 	        prepStmt.close();
 	        odbManager.commit();

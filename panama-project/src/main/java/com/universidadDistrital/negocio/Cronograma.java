@@ -4,10 +4,10 @@ public class Cronograma {
 
 	private String k_idPer;
 	private String k_tipoBuque;
-	private String f_fecha;
+	private String k_fecha;
 	private String q_cupos_max;
 	private String q_cupos_disp;
-	private String n_sentido;
+	private String k_sentido;
 	
 	public String getK_idPer() {
 		return k_idPer;
@@ -21,11 +21,11 @@ public class Cronograma {
 	public void setK_tipoBuque(String k_tipoBuque) {
 		this.k_tipoBuque = k_tipoBuque;
 	}
-	public String getF_fecha() {
-		return f_fecha;
+	public String getK_fecha() {
+		return k_fecha;
 	}
-	public void setF_fecha(String f_fecha) {
-		this.f_fecha = f_fecha;
+	public void setK_fecha(String k_fecha) {
+		this.k_fecha = k_fecha;
 	}
 	public String getQ_cupos_max() {
 		return q_cupos_max;
@@ -39,11 +39,11 @@ public class Cronograma {
 	public void setQ_cupos_disp(String q_cupos_disp) {
 		this.q_cupos_disp = q_cupos_disp;
 	}
-	public String getN_sentido() {
-		return n_sentido;
+	public String getK_sentido() {
+		return k_sentido;
 	}
-	public void setN_sentido(String n_sentido) {
-		this.n_sentido = n_sentido;
+	public void setK_sentido(String k_sentido) {
+		this.k_sentido = k_sentido;
 	}
 	
 }
