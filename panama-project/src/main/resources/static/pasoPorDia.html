@@ -1,0 +1,239 @@
+<style>
+	.txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	table{
+		text-align:center;
+		border:2px solid black;
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	th{
+		border:2px solid black;
+	}
+	
+	td{
+		border:1px solid black;
+		border-bottom:2px solid black;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		.txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+
+</style>
+
+<div id="busqUsuarios" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Registro paso</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+			<div class=''>
+				<div>Fecha a Consultar</div>
+								
+				<input id="fechaCronograma" type="date" placeholder="dd-mm-yyyy" class="form-control txtBusqueda" required />
+			</div>
+			<div class=''>
+				<button type="button" id="btn-refresh"
+					class="btn btn-outline-primary btn-rounded waves-effect fas fa-search"
+					onclick="generar_contenido()" for="txtBusqueda"></button>
+			</div>
+			<div>
+				<input id="myInput" type="text" placeholder="Search..">
+				<table>
+					<thead>
+						<tr>
+							<th ROWSPAN="2">Buque</th>
+							<th COLSPAN="3">SALIDA</th>
+							<th COLSPAN="3">LLEGADA</th>
+							<th ROWSPAN="2">Esclusa</th>
+						</tr>
+						<tr>
+							<th>Fecha</th>
+							<th>Hora</th>
+							<th>Puerto</th>
+							<th>Fecha</th>
+							<th>Hora</th>
+							<th>Puerto</th>
+						</tr>
+					</thead>
+					<tbody id="contenido">
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	function generar_contenido() {
+		var buques = [];
+		var date = $('#fechaCronograma').val();
+		var tblBody = document.getElementById("contenido");
+		$("#contenido").empty()
+		$.ajax({
+			url: 'consultaPaso/'+date,
+			type: 'GET',
+			processData: false,
+			contentType: "application/json",
+			success:function(data){
+	        	if(data[0] == null){
+	        		alert('No se registran pasos para el dia de hoy');
+	        	}else{	        	
+	        		buques = data;
+	        		
+	        		
+	        		var i;
+	        		for (i = 0; i < 2; i++) {
+	        			var hilera = document.createElement("tr");
+	        			
+	        			var celda = document.createElement("td");
+	        			var textoCelda = document.createTextNode(buques[i].k_num_serie);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(buques[i].f_salida);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			var fechita = new Date(buques[i].f_salida);
+	        			textoCelda = document.createTextNode(fechita.getHours() + ':' + fechita.getMinutes());
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(buques[i].n_puerto_salida);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(buques[i].f_llegada);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			fechita = new Date(buques[i].f_llegada);
+	        			textoCelda = document.createTextNode(fechita.getHours() + ':' + fechita.getMinutes());
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(buques[i].n_puerto_llegada);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(buques[i].n_esclusa);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        		}
+	        		
+	        	}
+	        },
+	        error:function(data){
+	        	alert(data.responseText);
+	        }	        
+	    });
+		
+	}
+</script>
+<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#contenido tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+</script>
