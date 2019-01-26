@@ -19,7 +19,7 @@ import com.universidadDistrital.negocio.Reserva;
 import com.universidadDistrital.util.ODBManager;
 
 @RestController
-public class ReservasController {
+public class Pago Controller {
 	
 	@Autowired
 	private ReservaDao reservaDao;
@@ -27,7 +27,7 @@ public class ReservasController {
 	private ODBManager odbManager;
 	
 	@RequestMapping(value="/pago",method=RequestMethod.POST)
-    public ResponseEntity<String> registrarPago(@RequestBody Movimiento movimiento)  {
+    public ResponseEntity<String> registrarPago(@PathVariable("idAgente") String idTitular, @PathVariable("descripcion") String descripcion, @PathVariable("valor") String valor, @PathVariable("fecha") String fecha, @PathVariable("cuenta") String cuenta, @PathVariable("banco") String banco)  {
 		try {
 			reservaDao.registrarReserva(reserva);
 		} catch (SQLException e) {
@@ -38,21 +38,6 @@ public class ReservasController {
 			odbManager.liberarConexion();
 		}
 		return new ResponseEntity<>("Pago Registrado",HttpStatus.OK);
-		
-    }
-	
-	@RequestMapping(value="/pago/{idAgente}",method=RequestMethod.GET)
-    public List<Reserva>  buscarCuentas(@PathVariable("idAgente") int idAgente) {
-		List<Reserva> reservas = null;
-		try {
-			reservas= reservaDao.buscarReservas(idAgente);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();	
-		}finally {
-			odbManager.liberarConexion();
-		}
-		return reservas;
     }
 
 }
