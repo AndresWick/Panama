@@ -11,7 +11,7 @@ import com.universidadDistrital.negocio.Cronograma;
 import com.universidadDistrital.util.ODBManager;
 
 @Repository
-public class CronogramaDao {
+public class TitularDAO {
 		@Autowired
 		private ODBManager odbManager;
 	
