@@ -13,45 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.universidadDistrital.daos.PasoDAO;
-import com.universidadDistrital.negocio.InfoPasos;
+import com.universidadDistrital.daos.PasosAgenteDAO;
+import com.universidadDistrital.negocio.PasosAgente;
 import com.universidadDistrital.negocio.Paso;
 
 import com.universidadDistrital.util.ODBManager;
 
 @RestController
-public class PasoController {
+public class PasosAgenteController {
 	
 	@Autowired
-	private PasoDAO pasoDao;
+	private PasosAgenteDAO pasosAgenteDao;
 	@Autowired
 	private ODBManager odbManager;
-	
-	@RequestMapping(value="/paso/{k_id}",method=RequestMethod.GET)
-	public Paso consultarPaso(@PathVariable("k_id") int k_id) {
-		Paso paso = null;
+		
+	@RequestMapping(value="/pasos/{k_idAgente}",method=RequestMethod.GET)
+	public ArrayList<PasosAgente> obtenerPasos(@PathVariable("k_idAgente") int k_idAgente) {
+		
+		ArrayList<PasosAgente> pasos = new ArrayList<PasosAgente>();
 		try {
-			paso = pasoDao.consultarPaso(k_id);
+			pasos = pasosAgenteDao.PasosAgente(k_idAgente);			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			odbManager.liberarConexion();
 		}
-		return paso;
+		System.out.println(pasos);
+		return pasos;
 	}
-	
-	@RequestMapping(value="/registroPaso",method=RequestMethod.POST)
-	public ResponseEntity<String> registrarPaso(@RequestBody Paso paso)  {
-		try {			
-			pasoDao.registrarPaso(paso);
-		} catch (SQLException e) {
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
-		}finally {
-			 odbManager.liberarConexion();
-		}
-		return new ResponseEntity<>("Registro de paso exitoso",HttpStatus.OK);
-    }
-	
-	
+
 }

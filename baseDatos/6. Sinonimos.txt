@@ -1,0 +1,3 @@
+CREATE PUBLIC SYNONYM paso FOR paso;
+CREATE PUBLIC SYNONYM pasosAgente FOR pasosAgente;
+CREATE PUBLIC SYNONYM agente FOR agente;

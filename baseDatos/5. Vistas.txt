@@ -1,1 +1,3 @@
 CREATE VIEW infoPasos AS (SELECT R.k_num_serie, R.f_salida, R.n_puerto_salida, R.f_llegada, R.n_puerto_llegada, P.n_esclusa, R.f_eta FROM reserva R, paso P WHERE R.k_id = P.k_idReserva);
+
+CREATE VIEW pasosAgente AS (SELECT P.f_fecha, R.k_num_serie, R.n_sentido, P.v_costo, R.k_idAgente, P.k_id FROM paso P, reserva R WHERE P.k_idreserva = R.k_id);
