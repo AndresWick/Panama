@@ -130,19 +130,7 @@
 				</tbody>
 			</table>
 	</div>
-	<div class="widget-content nopadding">
-		<div class="pnl_busqueda">
-			<div class=''>
-				<input id="txtBusqueda" type="text" placeholder="Ingrese Id del paso"
-					class="form-control" required="" />
-			</div>
-			<div class=''>
-				<button type="button" id="btn-refresh"
-					class="btn btn-outline-primary btn-rounded waves-effect fas fa-search"
-					onclick="buscar_reserva()" for="txtBusqueda"></button>
-			</div>
-		</div>
-	</div>
+	
 </div>
 
 <!--  MODAL TABLE EDIT USER -->
@@ -267,7 +255,7 @@
 	        			tblBody.appendChild(hilera);	        			
 	        			     			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(pasos[i].n_sent);
+	        			textoCelda = document.createTextNode(pasos[i].n_sentido);	        			
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);

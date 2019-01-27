@@ -9,32 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.universidadDistrital.daos.PasosAgenteDAO;
-import com.universidadDistrital.negocio.PasosAgente;
+import com.universidadDistrital.daos.ReservasAgenteDAO;
+import com.universidadDistrital.negocio.ReservasAgente;
 
 import com.universidadDistrital.util.ODBManager;
 
 @RestController
-public class PasosAgenteController {
+public class ReservasAgenteController {
 	
 	@Autowired
-	private PasosAgenteDAO pasosAgenteDao;
+	private ReservasAgenteDAO reservasAgenteDao;
 	@Autowired
 	private ODBManager odbManager;
 		
-	@RequestMapping(value="/pasos/{k_idAgente}",method=RequestMethod.GET)
-	public ArrayList<PasosAgente> obtenerPasos(@PathVariable("k_idAgente") int k_idAgente) {
+	@RequestMapping(value="/reservas/{k_idAgente}",method=RequestMethod.GET)
+	public ArrayList<ReservasAgente> obtenerReservas(@PathVariable("k_idAgente") int k_idAgente) {
 		
-		ArrayList<PasosAgente> pasos = new ArrayList<PasosAgente>();
+		ArrayList<ReservasAgente> reservas = new ArrayList<ReservasAgente>();
 		try {
-			pasos = pasosAgenteDao.pasosAgente(k_idAgente);			
+			reservas = reservasAgenteDao.reservasAgente(k_idAgente);			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			odbManager.liberarConexion();
-		}		
-		return pasos;
+		}	
+		return reservas;
 	}
 
 }

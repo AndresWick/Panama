@@ -18,7 +18,7 @@ public class PasosAgenteDAO {
 	@Autowired
 	private ODBManager odbManager;
 	
-	public ArrayList<PasosAgente> PasosAgente(int agente) throws SQLException {
+	public ArrayList<PasosAgente> pasosAgente(int agente) throws SQLException {
 		ArrayList<PasosAgente> pasos = new ArrayList<PasosAgente>();
 		Connection conexion = odbManager.tomarConexion();
 		if(conexion == null) {
@@ -30,7 +30,7 @@ public class PasosAgenteDAO {
 		    	  PasosAgente paso = new PasosAgente();
 		    	  paso.setF_fecha(rec.getDate(1));		    	 
 		    	  paso.setK_num_serie(rec.getInt(2));
-		    	  paso.setN_sentido(rec.getString(3));
+		    	  paso.setN_sentido(rec.getString(3));		    	  
 		    	  paso.setV_costo(rec.getFloat(4));
 		    	  paso.setK_id(rec.getInt(6));
 		    	  pasos.add(paso);

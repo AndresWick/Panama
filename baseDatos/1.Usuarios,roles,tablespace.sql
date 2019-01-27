@@ -19,5 +19,7 @@ GRANT connect TO Agente;
 GRANT SELECT ON Agente TO Agente;
 GRANT SELECT ON pasosAgente TO Agente;
 GRANT SELECT ON paso TO  Agente;
+GRANT SELECT ON reserva TO Agente;
+GRANT SELECT ON reservasagente TO Agente;
 
 GRANT Agente TO PepeAgente;

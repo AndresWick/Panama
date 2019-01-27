@@ -1,4 +1,4 @@
-----------  tipos de buque --------
+﻿----------  tipos de buque --------
 INSERT INTO TIPOBUQUE (K_ID,N_TIPO) 
 VALUES (1,'Regular');
 
@@ -70,9 +70,19 @@ INSERT INTO compania (k_nit, n_nombre) VALUES ('zzz', 'Avianca');
 INSERT INTO PERSONA (k_identificacion,n_nombre,n_apellido,f_nacimiento) VALUES(1,'Juan','Perez',to_date('1994/06/15','yyyy/mm/dd'));
 INSERT INTO persona (k_identificacion,n_nombre, n_apellido, f_nacimiento) VALUES (123,'Pepe','Gutierrez','10/10/2018');
 
---Agentes----
+--- Agentes ----
 INSERT INTO AGENTE VALUES(1,12,1);
 INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES (111,'zzz',123);
+
+--- Tipo Pago ---
+INSERT INTO tipoPago (k_id, n_descripcion) VALUES (1,'Efectivo');
+INSERT INTO tipoPago (k_id, n_descripcion) VALUES (2,'Tarjeta Credito');
+INSERT INTO tipoPago (k_id, n_descripcion) VALUES (3,'Tarjeta Debito');
+
+--- Pago ---
+INSERT INTO pagoReserva (k_id,k_idReferencia,v_valor,f_fecha,k_idTipoPago) VALUES (1,1,10,'10/10/2018',1);
+INSERT INTO pagoReserva (k_id,k_idReferencia,v_valor,f_fecha,k_idTipoPago) VALUES (2,1,20,'12/10/2018',1);
+INSERT INTO pagoReserva (k_id,k_idReferencia,v_valor,f_fecha,k_idTipoPago) VALUES (1,2,40,'16/10/2018',2);
 
 --***************************************************************************
 --*****              INSERCIÓN DE DATOS DE CRONOGRAMA                 *******
