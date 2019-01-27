@@ -72,4 +72,67 @@ public class CuentaDAO {
 		return bandera;
 	}
 	
+	public boolean validarCuentaPorTitular(String iTitular) throws SQLException {
+		boolean bandera = false;
+		Connection conexion = odbManager.tomarConexion();
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}else {
+			Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("select * from cuenta"
+		     		+ " WHERE k_idTitular = '"+iTitular+"'");
+		      while (rec.next()) {
+		    	  bandera = true;
+		      }
+		      st.close();
+		}
+		return bandera;
+	}
+	
+	public boolean validarCuentaPorClave(String claveCuenta) throws SQLException {
+		boolean bandera = false;
+		Connection conexion = odbManager.tomarConexion();
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}else {
+			Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("select * from cuenta"
+		     		+ " WHERE v_clave = '"+claveCuenta+"'");
+		      while (rec.next()) {
+		    	  bandera = true;
+		      }
+		      st.close();
+		}
+		return bandera;
+	}
+	
+	public void modificarSaldo(String idCuenta, String nuevoSaldo) throws SQLException {
+		Connection conexion = odbManager.tomarConexion();
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}else {
+			Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("update cuenta set v_saldo='"+nuevoSaldo+"'"
+		     		+ " WHERE k_id = '"+idCuenta+"'");
+		      st.close();
+		}
+	}
+	
+	public float retornarSaldo(String idCuenta) throws SQLException {
+		Connection conexion = odbManager.tomarConexion();
+		float saldo = 0;
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}else {
+			Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("select v_saldo from cuenta"
+		     		+ " WHERE k_id = '"+idCuenta+"'");
+		     while (rec.next()) {
+		    	 saldo= Float.parseFloat(rec.getString(1));
+		      }
+		      st.close();
+		}
+		return saldo;
+	}
+	
 }

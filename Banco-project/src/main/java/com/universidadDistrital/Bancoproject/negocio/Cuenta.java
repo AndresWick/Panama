@@ -6,6 +6,7 @@ public class Cuenta {
 	private String k_idTitular;
 	private String v_saldo;
 	private String k_idMovimiento;
+	private String v_clave;
 	
 	public String getK_id() {
 		return k_id;
@@ -30,6 +31,12 @@ public class Cuenta {
 	}
 	public void setK_idMovimiento(String k_idMovimiento) {
 		this.k_idMovimiento = k_idMovimiento;
+	}
+	public String getV_clave() {
+		return v_clave;
+	}
+	public void setV_clave(String v_clave) {
+		this.v_clave = v_clave;
 	}
 	
 }

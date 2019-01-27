@@ -71,4 +71,21 @@ public class BancoDAO {
 		return bandera;
 	}
 	
+	public boolean validarBancoPorNombreYCuenta(String nombreBanco, String idCuenta) throws SQLException {
+		boolean bandera = false;
+		Connection conexion = odbManager.tomarConexion();
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}else {
+			Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("select * from banco"
+		     		+ " WHERE n_nombre = '"+nombreBanco+"' and k_idCuenta= '"+idCuenta+"'");
+		      while (rec.next()) {
+		    	  bandera = true;
+		      }
+		      st.close();
+		}
+		return bandera;
+	}
+	
 }

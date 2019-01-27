@@ -38,21 +38,33 @@ public class PagoController {
 	private ODBManager odbManager;
 	
 	@RequestMapping(value="/pago",method=RequestMethod.POST)
-    public ResponseEntity<String> registrarPago(@PathVariable("idAgente") String idTitular, @PathVariable("descripcion") String descripcion, @PathVariable("valor") String valor, @PathVariable("fecha") String fecha, @PathVariable("cuenta") String cuenta, @PathVariable("banco") String banco)  {
+    public ResponseEntity<String> registrarPago(@PathVariable("idAgente") String idTitular, @PathVariable("descripcion") String descripcion, @PathVariable("valor") String valor, @PathVariable("fecha") String fecha, @PathVariable("cuenta") String cuenta, @PathVariable("banco") String banco, @PathVariable("clave") String clave)  {
 		try {
 
 			bancoDAO = new BancoDAO();
 			cuentaDAO = new CuentaDAO();
 			titularDAO = new TitularDAO();
 			movimientoDAO = new MovimientoDAO();
+			Movimiento movimiento = new Movimiento();
 			
-			boolean bandera = false;
-			Cuenta cuent = new Cuenta();
-			if(bancoDAO.validarBancoPorNombre(banco)) {
-				if(cuentaDAO.validarCuentaPorId(cuenta)) {
-					
+			if(bancoDAO.validarBancoPorNombreYCuenta(banco,cuenta)&&cuentaDAO.validarCuentaPorTitular(idTitular)&&cuentaDAO.validarCuentaPorClave(clave)) {
+				if(cuentaDAO.retornarSaldo(cuenta)>=Float.parseFloat(valor)) {
+					float nuevoSaldo = cuentaDAO.retornarSaldo(cuenta)-Float.parseFloat(valor);
+					cuentaDAO.modificarSaldo(cuenta, Float.toString(nuevoSaldo));
+					movimiento.setF_fecha(fecha);
+					movimiento.setI_estado("Exitoso");
+					//movimiento.setK_id(k_id);
+					movimiento.setN_descripcion(descripcion);
+					movimiento.setV_valor(valor);
+					movimientoDAO.registrarMovimiento(movimiento);
 				}else {
-					return new ResponseEntity<>("Pago Rechazado, no se encontró la cuenta para el banco seleccionado.",HttpStatus.BAD_REQUEST);
+					movimiento.setF_fecha(fecha);
+					movimiento.setI_estado("Rechazado");
+					//movimiento.setK_id(k_id);
+					movimiento.setN_descripcion(descripcion);
+					movimiento.setV_valor(valor);
+					movimientoDAO.registrarMovimiento(movimiento);
+					return new ResponseEntity<>("Pago Rechazado, la cuenta NO posee saldo suficiente para la transacción.",HttpStatus.BAD_REQUEST);
 				}
 			}else {
 				return new ResponseEntity<>("Pago Rechazado, por favor verifique los datos ingresados.",HttpStatus.BAD_REQUEST);
