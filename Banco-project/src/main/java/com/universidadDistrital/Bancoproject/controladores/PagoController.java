@@ -1,9 +1,9 @@
-package com.universidadDistrital.controladores;
+package com.universidadDistrital.Bancoproject.controladores;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,23 +13,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.universidadDistrital.daos.ReservaDao;
-import com.universidadDistrital.negocio.CuposPorDia;
-import com.universidadDistrital.negocio.Reserva;
-import com.universidadDistrital.util.ODBManager;
+import com.universidadDistrital.Bancoproject.daos.TitularDAO;
+import com.universidadDistrital.Bancoproject.daos.CuentaDAO;
+import com.universidadDistrital.Bancoproject.daos.BancoDAO;
+import com.universidadDistrital.Bancoproject.daos.MovimientoDAO;
+import com.universidadDistrital.Bancoproject.negocio.Titular;
+import com.universidadDistrital.Bancoproject.negocio.Cuenta;
+import com.universidadDistrital.Bancoproject.negocio.Banco;
+import com.universidadDistrital.Bancoproject.negocio.Movimiento;
+import com.universidadDistrital.Bancoproject.util.ODBManager;
 
 @RestController
-public class Pago Controller {
+public class PagoController {
 	
 	@Autowired
-	private ReservaDao reservaDao;
+	private TitularDAO titularDAO;
+	@Autowired
+	private CuentaDAO cuentaDAO;
+	@Autowired
+	private BancoDAO bancoDAO;
+	@Autowired
+	private MovimientoDAO movimientoDAO;
 	@Autowired
 	private ODBManager odbManager;
 	
 	@RequestMapping(value="/pago",method=RequestMethod.POST)
     public ResponseEntity<String> registrarPago(@PathVariable("idAgente") String idTitular, @PathVariable("descripcion") String descripcion, @PathVariable("valor") String valor, @PathVariable("fecha") String fecha, @PathVariable("cuenta") String cuenta, @PathVariable("banco") String banco)  {
 		try {
-			reservaDao.registrarReserva(reserva);
+
+			bancoDAO = new BancoDAO();
+			cuentaDAO = new CuentaDAO();
+			titularDAO = new TitularDAO();
+			movimientoDAO = new MovimientoDAO();
+			
+			boolean bandera = false;
+			Cuenta cuent = new Cuenta();
+			if(bancoDAO.validarBancoPorNombre(banco)) {
+				if(cuentaDAO.validarCuentaPorId(cuenta)) {
+					
+				}else {
+					return new ResponseEntity<>("Pago Rechazado, no se encontró la cuenta para el banco seleccionado.",HttpStatus.BAD_REQUEST);
+				}
+			}else {
+				return new ResponseEntity<>("Pago Rechazado, por favor verifique los datos ingresados.",HttpStatus.BAD_REQUEST);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
@@ -37,7 +65,7 @@ public class Pago Controller {
 		}finally {
 			odbManager.liberarConexion();
 		}
-		return new ResponseEntity<>("Pago Registrado",HttpStatus.OK);
+		return new ResponseEntity<>("Pago Exitoso",HttpStatus.OK);
     }
 
 }

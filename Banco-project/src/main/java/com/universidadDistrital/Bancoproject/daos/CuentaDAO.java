@@ -2,7 +2,10 @@ package com.universidadDistrital.Bancoproject.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +30,46 @@ public class CuentaDAO {
 	        prepStmt.executeUpdate();
 	        prepStmt.close();
 	        odbManager.commit();
+	}
+	
+	public ArrayList<Cuenta> listarCuentas() throws SQLException{
+		 ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
+		 Connection conexion = odbManager.tomarConexion();
+		 System.out.println("Listando bancos");
+		 System.out.println(conexion);
+		 if(conexion != null) {
+		 Statement st = conexion.createStatement();
+	     ResultSet rec = st.executeQuery("select k_id, k_idTitular, n_nombre, v_saldo, k_idMovimiento from cuenta");
+	     System.out.println(rec);
+	      while (rec.next()) {
+	        Cuenta cuenta = new Cuenta();
+	        cuenta.setK_id(rec.getString(1));
+	        cuenta.setK_idTitular(rec.getString(2));
+	        cuenta.setV_saldo(rec.getString(3));
+	        cuenta.setK_idMovimiento(rec.getString(4));
+	        cuentas.add(cuenta);
+	      }
+	      st.close();
+	      odbManager.liberarConexion();
+		 }
+		return cuentas;
+	}
+	
+	public boolean validarCuentaPorId(String idCuenta) throws SQLException {
+		boolean bandera = false;
+		Connection conexion = odbManager.tomarConexion();
+		if(conexion == null) {
+			throw new SQLException("No logeado");
+		}else {
+			Statement st = conexion.createStatement();
+		     ResultSet rec = st.executeQuery("select * from cuenta"
+		     		+ " WHERE k_id = '"+idCuenta+"'");
+		      while (rec.next()) {
+		    	  bandera = true;
+		      }
+		      st.close();
+		}
+		return bandera;
 	}
 	
 }
