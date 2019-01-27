@@ -1,4 +1,4 @@
-package com.universidadDistrital.negocio;
+package com.universidadDistrital.Bancoproject.negocio;
 
 public class Banco {
 
@@ -13,13 +13,13 @@ public class Banco {
 		this.k_id = k_id;
 	}
 	public String getK_idCuenta() {
-		return k_tipoBuque;
+		return k_idCuenta;
 	}
 	public void setK_idCuenta(String k_idCuenta) {
 		this.k_idCuenta = k_idCuenta;
 	}
 	public String getN_nombre() {
-		return k_fecha;
+		return n_nombre;
 	}
 	public void setN_nombre(String n_nombre) {
 		this.n_nombre = n_nombre;

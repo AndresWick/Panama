@@ -1,4 +1,4 @@
-package com.universidadDistrital.negocio;
+package com.universidadDistrital.Bancoproject.negocio;
 
 public class Movimiento {
 

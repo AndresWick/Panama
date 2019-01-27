@@ -1,4 +1,4 @@
-package com.universidadDistrital.daos;
+package com.universidadDistrital.Bancoproject.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,25 +7,22 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.universidadDistrital.negocio.Cronograma;
-import com.universidadDistrital.util.ODBManager;
+import com.universidadDistrital.Bancoproject.negocio.Banco;
+import com.universidadDistrital.Bancoproject.util.ODBManager;
 
 @Repository
 public class BancoDAO {
-		@Autowired
-		private ODBManager odbManager;
+	@Autowired
+	private ODBManager odbManager;
 	
-	public void almacenarCronograma(Cronograma cronograma) throws SQLException {
-			String strSQL = "INSERT INTO cronograma (k_idPer, k_tipoBuque, k_fecha, q_cupos_max, q_cupos_disp, k_sentido) VALUES(?,?,?,?,?,?)";
+	public void registrarBanco(Banco banco) throws SQLException {
+			String strSQL = "INSERT INTO banco (k_id, k_idCuenta, n_nombre) VALUES(?,?,?)";
 	        Connection conexion = odbManager.tomarConexion();
 	        PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
 	       
-	        prepStmt.setString(1,cronograma.getK_idPer()); 
-	        prepStmt.setString(2,cronograma.getK_tipoBuque()); 
-	        prepStmt.setDate(3, java.sql.Date.valueOf(cronograma.getK_fecha()));
-	        prepStmt.setString(4,cronograma.getQ_cupos_max()); 
-	        prepStmt.setString(5,cronograma.getQ_cupos_max()); 
-	        prepStmt.setString(6,cronograma.getK_sentido()); 
+	        prepStmt.setString(1,banco.getK_id()); 
+	        prepStmt.setString(2,banco.getK_idCuenta()); 
+	        prepStmt.setString(3,banco.getN_nombre()); 
 	        prepStmt.executeUpdate();
 	        prepStmt.close();
 	        odbManager.commit();
