@@ -240,7 +240,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnSave" class="btn btn-primary">Pagar</button>
+                <button type="button" id="btnToPay" class="btn btn-primary">Pagar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div><!-- /.modal-content -->
@@ -315,13 +315,15 @@
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
-	        			     			
-	        			var id = reservas[i].k_id;	
+	        				        			     			
+	        			var id = reservas[i].k_id;
+	        			var deuda = reservas[i].v_deuda;
 		        		var buttonnode= document.createElement('input');
 		        		buttonnode.setAttribute('type','button');
+		        		buttonnode.setAttribute('id','infobutton');
 		        		buttonnode.setAttribute('name','sal');
-		        		buttonnode.setAttribute('value','Pagar');
-		        		buttonnode.setAttribute('onClick', 'buscar_reserva('+id+')');
+		        		buttonnode.setAttribute('value','Info');
+		        		buttonnode.setAttribute('onClick', 'buscar_reserva('+id+','+ deuda +')');
 		        		hilera.appendChild(buttonnode);			
 		        		tblBody.appendChild(hilera);
 	        			
@@ -337,7 +339,7 @@
 		
 	}
 	
-	function buscar_reserva(idReserva){
+	function buscar_reserva(idReserva, deuda){
 		resetFormReserva();
 		
 		$.ajax({
@@ -349,6 +351,11 @@
 	        	if(idReserva == null || data.k_id == 0){
 	        		alert('no existe un registro de reserva con ese id...');
 	        	}else{
+	        		if(deuda == 0){
+        				$('#btnToPay').css('visibility', 'hidden');
+        			}else{
+        				$('#btnToPay').css('visibility', 'visible');
+        			}
 	        		$('#idReserva').val(data.k_id);
 	        		$('#eta').val(data.f_eta);
 	        		$('#puertoSalida').val(data.n_puerto_salida);

@@ -33,6 +33,8 @@ public class PasosAgenteDAO {
 		    	  paso.setN_sentido(rec.getString(3));		    	  
 		    	  paso.setV_costo(rec.getFloat(4));
 		    	  paso.setK_id(rec.getInt(6));
+		    	  paso.setV_abono(rec.getFloat(7));
+		    	  paso.setV_deuda(rec.getFloat(8));
 		    	  pasos.add(paso);
 		      }
 		      st.close();

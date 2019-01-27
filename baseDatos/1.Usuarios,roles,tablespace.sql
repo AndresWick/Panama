@@ -17,9 +17,11 @@ CREATE ROLE Agente;
 GRANT connect TO Agente;
 
 GRANT SELECT ON Agente TO Agente;
-GRANT SELECT ON pasosAgente TO Agente;
 GRANT SELECT ON paso TO  Agente;
+GRANT SELECT ON pasosAgente TO Agente;
+GRANT SELECT ON abonosPaso TO  Agente;
 GRANT SELECT ON reserva TO Agente;
 GRANT SELECT ON reservasagente TO Agente;
+GRANT SELECT ON abonosReserva TO  Agente;
 
 GRANT Agente TO PepeAgente;

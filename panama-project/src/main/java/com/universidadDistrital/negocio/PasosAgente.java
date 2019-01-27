@@ -9,6 +9,9 @@ public class PasosAgente {
 	float v_costo;
 	int k_idAgente;
 	int k_id;
+	float v_abono;
+	float v_deuda;
+	
 	
 	public Date getF_fecha() {
 		return f_fecha;
@@ -45,6 +48,18 @@ public class PasosAgente {
 	}
 	public void setK_id(int k_id) {
 		this.k_id = k_id;
+	}
+	public float getV_abono() {
+		return v_abono;
+	}
+	public void setV_abono(float v_abono) {
+		this.v_abono = v_abono;
+	}
+	public float getV_deuda() {
+		return v_deuda;
+	}
+	public void setV_deuda(float v_deuda) {
+		this.v_deuda = v_deuda;
 	}
 	
 	

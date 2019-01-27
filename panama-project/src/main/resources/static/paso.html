@@ -123,6 +123,8 @@
 						<th>BUQUE</th>
 						<th>SENTIDO</th>
 						<th>COSTO</th>
+						<th>ABONO</th>
+						<th>DEUDA</th>
 						<th>+ INFO </th>
 					</tr>					
 				</thead>
@@ -196,7 +198,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnSave" class="btn btn-primary">Pagar</button>
+                <button type="button" id="btnToPay" class="btn btn-primary">Pagar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div><!-- /.modal-content -->
@@ -264,14 +266,27 @@
 	        			textoCelda = document.createTextNode(pasos[i].v_costo);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
-	        			tblBody.appendChild(hilera);	        			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].v_abono);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);	
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].v_deuda);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);	
 	        			     			
-	        			var id = pasos[i].k_id;	
+	        			var id = pasos[i].k_id;
+	        			var deuda = pasos[i].v_deuda;	
 	        			var buttonnode= document.createElement('input');
 	        			buttonnode.setAttribute('type','button');
 	        			buttonnode.setAttribute('name','sal');
-	        			buttonnode.setAttribute('value','Pagar');
-	        			buttonnode.setAttribute('onClick', 'buscar_reserva('+id+')');
+	        			buttonnode.setAttribute('value','Info');
+	        			buttonnode.setAttribute('onClick', 'buscar_paso('+id+','+ deuda +')');
 	        			hilera.appendChild(buttonnode);			
 	        			tblBody.appendChild(hilera);
 	        		
@@ -286,7 +301,7 @@
 		
 	}
 	
-	function buscar_reserva(idReserva){
+	function buscar_paso(idReserva,deuda){
 		resetFormReserva();
 		
 		$.ajax({
@@ -297,7 +312,12 @@
 	        success:function(data){	        	
 	        	if(idReserva == null || data.k_id == 0){
 	        		alert('no existe un registro de paso con ese id...');
-	        	}else{	        	
+	        	}else{
+	        		if(deuda == 0){
+        				$('#btnToPay').css('visibility', 'hidden');
+        			}else{
+        				$('#btnToPay').css('visibility', 'visible');
+        			}	        	
 	        		$('#input_reserva').val(data.k_reserva);	
 	         		$('#input_id').val(idReserva);
 	        		$('#input_costo').val(data.v_costo);		
