@@ -1,17 +1,17 @@
-CREATE OR REPLACE FUNCTION FU_CUPOS_DISPONIBLES(
-lf_fecha date,
-ln_sentido cronograma.n_sentido%type,
+create or replace FUNCTION FU_CUPOS_DISPONIBLES(
+lk_fecha date,
+lk_sentido cronograma.k_sentido%type,
 lk_periodo periodo.k_id%type,
 lk_tipo_buque cronograma.k_tipobuque%type
-) RETURN NUMBER AS 
+) RETURN NUMBER AS
 lq_numero_cupos_disponibles NUMBER;
 ln_periodo periodo.n_periodo%type;
 BEGIN
-  SELECT Q_CUPOS_DISP INTO lq_numero_cupos_disponibles FROM CRONOGRAMA C WHERE C.F_FECHA = lf_fecha AND C.N_SENTIDO = ln_sentido AND C.K_IDPER = lk_periodo AND c.k_tipobuque = lk_tipo_buque;
+  SELECT Q_CUPOS_DISP INTO lq_numero_cupos_disponibles FROM CRONOGRAMA C WHERE C.k_FECHA = lk_fecha AND C.k_SENTIDO = lk_sentido AND C.K_IDPER = lk_periodo AND c.k_tipobuque = lk_tipo_buque;
   RETURN lq_numero_cupos_disponibles;
    EXCEPTION
   WHEN no_data_found THEN
     SELECT n_periodo INTO ln_periodo FROM periodo WHERE k_ID =lk_periodo;
-    RAISE_APPLICATION_ERROR (-20202, 'No hay cupos disponibles para la fecha: '||lf_fecha||' sentido: '||ln_sentido||' y periodo: '|| ln_periodo );
+    RAISE_APPLICATION_ERROR (-20202, 'No hay cupos disponibles para la fecha: '||lk_fecha||' sentido: '||lk_sentido||' y periodo: '|| ln_periodo );
 END FU_CUPOS_DISPONIBLES;
 /

@@ -43,7 +43,7 @@ DROP TABLE Tripulante CASCADE CONSTRAINTS
 
 CREATE TABLE Agente
 (
-	k_id         NUMBER(8) NOT NULL,
+	k_id         VARCHAR(20) NOT NULL,
 	k_nit        VARCHAR(25) NOT NULL,
 	k_idPersona  NUMBER(8) NOT NULL
 )
@@ -95,10 +95,10 @@ CREATE TABLE Documento
 CREATE TABLE Oferta
 (
 	k_oferta    NUMBER(5) NOT NULL,
-	k_subasta   VARCHAR(6) NOT NULL,
+	k_subasta   NUMBER(8,2) NOT NULL,
 	v_oferta    NUMBER(6,2) NOT NULL,
 	f_oferta    DATE NOT NULL,
-	k_idAgente  NUMBER(8) NOT NULL
+	k_idAgente  VARCHAR(20) NOT NULL
 )
 ;
 
@@ -192,7 +192,7 @@ CREATE TABLE Reserva
 	v_costo              NUMBER(8,2) NOT NULL,
 	i_estado             VARCHAR(3) NOT NULL,
 	v_cancelacion        NUMBER(8,2) NULL,
-	k_idAgente           NUMBER(8) NOT NULL,
+	k_idAgente           VARCHAR(20) NOT NULL,
 	f_cancelacion        DATE NULL,
 	n_sentido            VARCHAR(6) NOT NULL
 )
@@ -201,10 +201,13 @@ CREATE TABLE Reserva
 
 CREATE TABLE Subasta
 (
-	k_subasta      VARCHAR(6) NOT NULL,
+	k_subasta      NUMBER(8,2) NOT NULL,
 	f_fecha        DATE NOT NULL,
 	v_tope_minimo  NUMBER(8,2) NOT NULL,
-	k_reserva      NUMBER(8) NOT NULL
+	k_idPer        NUMBER(3) NOT NULL,
+	k_tipoBuque    NUMBER(4) NOT NULL,
+	k_fecha        DATE NOT NULL,
+	k_sentido      VARCHAR(5) NOT NULL
 )
 ;
 
@@ -390,7 +393,7 @@ ADD CONSTRAINT CK_k_num_serieBuq CHECK (k_num_serie > 0)
 ;
 
 ALTER TABLE Cronograma
-ADD CONSTRAINT CK_q_cupos_max CHECK (q_cupos_max >= 0)
+ADD CONSTRAINT CK_q_cupos_max CHECK (q_cupos_max > 0)
 ;
 
 ALTER TABLE Cronograma
@@ -398,7 +401,7 @@ ADD CONSTRAINT CK_q_cupos_disp CHECK (q_cupos_disp >= 0)
 ;
 
 ALTER TABLE Cronograma
-ADD CONSTRAINT CK_k_sentido CHECK (k_sentido in ('Norte','Sur'))
+ADD CONSTRAINT CK_n_sentido CHECK (k_sentido in ('Norte','Sur'))
 ;
 
 ALTER TABLE Documento
@@ -636,8 +639,8 @@ ALTER TABLE Reserva ADD CONSTRAINT FK_Reserva_Buque
 	FOREIGN KEY (k_num_serie) REFERENCES Buque (k_num_serie)
 ;
 
-ALTER TABLE Subasta ADD CONSTRAINT FK_Subasta_Reserva 
-	FOREIGN KEY (k_reserva) REFERENCES Reserva (k_id)
+ALTER TABLE Subasta ADD CONSTRAINT FK_Subasta_Cronograma 
+	FOREIGN KEY (k_idPer, k_tipoBuque, k_fecha, k_sentido) REFERENCES Cronograma (k_idPer, k_tipoBuque, k_fecha, k_sentido)
 ;
 
 ALTER TABLE Tripulacion ADD CONSTRAINT FK_Tripulacion_Paso 

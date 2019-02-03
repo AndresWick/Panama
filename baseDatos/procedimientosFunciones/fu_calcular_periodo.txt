@@ -1,7 +1,7 @@
-CREATE OR REPLACE FUNCTION FU_CALCULAR_PERIODO(
+create or replace FUNCTION FU_CALCULAR_PERIODO(
 lf_fecha_reserva DATE
-) 
-RETURN VARCHAR2 AS 
+)
+RETURN VARCHAR2 AS
 lq_dias_min periodo.q_dias_min%TYPE;
 lq_dias_max periodo.q_dias_max%TYPE;
 CURSOR c_periodos IS SELECT K_ID ,Q_DIAS_MIN ,Q_DIAS_MAX ,N_PERIODO  FROM periodo;
@@ -9,19 +9,19 @@ l_periodo periodo%ROWTYPE;
 lq_dias_restantes NUMBER(6,0);
 ln_return_periodo periodo.k_id%TYPE;
 BEGIN
-  lq_dias_restantes = lf_fecha_reserva-sysdate;
-  ln_return_periodo =0;
-  dbms_output.put_line(lq_dias_restantes); 
+  lq_dias_restantes := lf_fecha_reserva-sysdate;
+  ln_return_periodo :=0;
+  dbms_output.put_line(lq_dias_restantes);
   OPEN c_periodos;
   LOOP
     FETCH c_periodos INTO l_periodo;
     EXIT WHEN c_periodos%NOTFOUND;
-    IF lq_dias_restantes = l_periodo.Q_DIAS_MIN AND lq_dias_restantes = l_periodo.Q_DIAS_MAX THEN
-      ln_return_periodo = l_periodo.k_id;
+    IF lq_dias_restantes >= l_periodo.Q_DIAS_MIN AND lq_dias_restantes <= l_periodo.Q_DIAS_MAX THEN
+      ln_return_periodo := l_periodo.k_id;
     END IF;
   END LOOP;
   CLOSE c_periodos;
-  dbms_output.put_line(ln_return_periodo); 
+  dbms_output.put_line(ln_return_periodo);
   RETURN ln_return_periodo;
 END FU_CALCULAR_PERIODO;
 /
