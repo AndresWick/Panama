@@ -6,19 +6,18 @@ DECLARE
   LF_LLEGADA DATE;
   LK_NUM_SERIE NUMBER;
   LV_CARGATRANSPORTADA NUMBER;
-  LK_ID_AGENTE NUMBER;
-  LN_SENTIDO reserva.n_sentido%type;
+  LK_ID_AGENTE VARCHAR2(20);
+  LN_SENTIDO VARCHAR2(6);
 BEGIN
-  LF_ETA := TO_DATE('2018/11/10','yyyy/mm/dd');
-  LN_PUERTO_SALIDA := 'Puerto Colombia';
-  LN_PUERTO_LLEGADA := 'Puerto Venecia';
-  LF_SALIDA := TO_DATE('2018/11/08','yyyy/mm/dd');
-  LF_LLEGADA := TO_DATE('2018/11/10','yyyy/mm/dd');
+  LF_ETA := to_date('2019/02/10','yyyy/mm/dd');
+  LN_PUERTO_SALIDA := 'Puerto wilches';
+  LN_PUERTO_LLEGADA := 'Puerto Colombia';
+  LF_SALIDA := to_date('2019/02/10','yyyy/mm/dd');
+  LF_LLEGADA := to_date('2019/02/10','yyyy/mm/dd');
   LK_NUM_SERIE := 123;
-  LV_CARGATRANSPORTADA := 1000;
+  LV_CARGATRANSPORTADA := 10;
   LK_ID_AGENTE := 1;
   LN_SENTIDO := 'Norte';
-  
 
   PR_REGISTRAR_RESERVA(
     LF_ETA => LF_ETA,
@@ -29,7 +28,7 @@ BEGIN
     LK_NUM_SERIE => LK_NUM_SERIE,
     LV_CARGATRANSPORTADA => LV_CARGATRANSPORTADA,
     LK_ID_AGENTE => LK_ID_AGENTE,
-    LN_SENTIDO =>LN_SENTIDO
+    LN_SENTIDO => LN_SENTIDO
   );
 --rollback; 
 END;

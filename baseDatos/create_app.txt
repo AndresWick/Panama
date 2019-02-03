@@ -15,3 +15,4 @@ connect CanalDePanama/panamaUD
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\pr_registrar_paso.sql
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\pr_registrar_reserva.txt
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\pr_programacion_diaria.txt
+@C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\pr_registrar_oferta_en_subasta.txt
