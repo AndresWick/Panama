@@ -18,7 +18,7 @@ public class PasosAgenteDAO {
 	@Autowired
 	private ODBManager odbManager;
 	
-	public ArrayList<PasosAgente> pasosAgente(int agente) throws SQLException {
+	public ArrayList<PasosAgente> pasosAgente(String agente) throws SQLException {
 		ArrayList<PasosAgente> pasos = new ArrayList<PasosAgente>();
 		Connection conexion = odbManager.tomarConexion();
 		if(conexion == null) {

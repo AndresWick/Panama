@@ -237,7 +237,7 @@
 	        contentType: "application/json",
 	        success:function(data){	        	
 	        	if(data[0] == null){
-	        		alert('No se registran pasos para el dia de hoy');
+	        		alert('No se registran pasos');
 	        	}else{	        	
 	        		pasos = data;
 	        		var i;
@@ -357,7 +357,7 @@
 			  },
 			  success: function (data) {		  		
 				  $('#user').text(data);
-				  loadId(data);
+				  obtener_pasos(data);
 			  }
 			 });
 	}

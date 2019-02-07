@@ -1,14 +1,14 @@
 package com.universidadDistrital.negocio;
 
 public class Agente {
-	int k_id;
+	String k_id;
 	int k_nit;
 	int k_idPersona;
-	String n_user;
-	public int getK_id() {
+
+	public String getK_id() {
 		return k_id;
 	}
-	public void setK_id(int k_id) {
+	public void setK_id(String k_id) {
 		this.k_id = k_id;
 	}
 	public int getK_nit() {
@@ -22,12 +22,6 @@ public class Agente {
 	}
 	public void setK_idPersona(int k_idPersona) {
 		this.k_idPersona = k_idPersona;
-	}
-	public String getN_user() {
-		return n_user;
-	}
-	public void setN_user(String n_user) {
-		this.n_user = n_user;
 	}
 	
 	

@@ -23,7 +23,7 @@ public class PasosAgenteController {
 	private ODBManager odbManager;
 		
 	@RequestMapping(value="/pasos/{k_idAgente}",method=RequestMethod.GET)
-	public ArrayList<PasosAgente> obtenerPasos(@PathVariable("k_idAgente") int k_idAgente) {
+	public ArrayList<PasosAgente> obtenerPasos(@PathVariable("k_idAgente") String k_idAgente) {
 		
 		ArrayList<PasosAgente> pasos = new ArrayList<PasosAgente>();
 		try {

@@ -17,7 +17,7 @@ public class ReservasAgenteDAO {
 	@Autowired
 	private ODBManager odbManager;
 	
-	public ArrayList<ReservasAgente> reservasAgente(int agente) throws SQLException {
+	public ArrayList<ReservasAgente> reservasAgente(String agente) throws SQLException {
 		ArrayList<ReservasAgente> reservas = new ArrayList<ReservasAgente>();
 		Connection conexion = odbManager.tomarConexion();
 		if(conexion == null) {

@@ -23,7 +23,7 @@ public class ReservasAgenteController {
 	private ODBManager odbManager;
 		
 	@RequestMapping(value="/reservas/{k_idAgente}",method=RequestMethod.GET)
-	public ArrayList<ReservasAgente> obtenerReservas(@PathVariable("k_idAgente") int k_idAgente) {
+	public ArrayList<ReservasAgente> obtenerReservas(@PathVariable("k_idAgente") String k_idAgente) {
 		
 		ArrayList<ReservasAgente> reservas = new ArrayList<ReservasAgente>();
 		try {

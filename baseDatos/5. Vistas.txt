@@ -1,3 +1,9 @@
+DROP VIEW infoPasos;
+DROP VIEW abonosPaso;
+DROP VIEW pasosAgente;
+DROP VIEW abonosReserva;
+DROP VIEW reservasAgente;
+
 CREATE VIEW infoPasos AS (SELECT R.k_num_serie, R.f_salida, R.n_puerto_salida, R.f_llegada, R.n_puerto_llegada, P.n_esclusa, R.f_eta FROM reserva R, paso P WHERE R.k_id = P.k_idReserva);
 
 CREATE VIEW abonosPaso AS (SELECT SUM(v_valor) v_abono, k_idreferencia FROM pagoPaso GROUP BY k_idreferencia);

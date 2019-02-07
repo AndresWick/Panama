@@ -402,28 +402,10 @@
 			  },
 			  success: function (data) {		  		
 				  $('#user').text(data);
-				  loadId(data);
+				  obtener_reservas(data);
 			  }
 			 });
 	}
-	
-	function loadId(user){				
-		$.ajax({
-			url: 'agente/'+user,
-			type: 'GET',
-			processData: false,
-			contentType: "application/json",
-			success:function(data){			  			  
-				if(data == 0){
-	        		alert('Error al recuperar id de usuario');
-	        	}else{
-	        		obtener_reservas(data);
-	        	}
-			},
-	    	error:function(data){
-	    		alert(data.responseText);
-	    	}	        
-	 });
 		
 }
 	
