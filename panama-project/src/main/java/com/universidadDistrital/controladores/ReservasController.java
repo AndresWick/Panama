@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadDistrital.daos.ReservaDao;
 import com.universidadDistrital.negocio.CuposPorDia;
+
 import com.universidadDistrital.negocio.Reserva;
 import com.universidadDistrital.util.ODBManager;
 
@@ -59,5 +60,19 @@ public class ReservasController {
     public void cancelarReserva(@PathVariable("idReserva") int idReserva) {
 	 
     }
+	
+	@RequestMapping(value="/reservasId/{k_id}",method=RequestMethod.GET)
+	public Reserva consultarReserva(@PathVariable("k_id") int k_id) {
+		Reserva reserva = null;
+		try {
+			reserva = reservaDao.consultarReserva(k_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			odbManager.liberarConexion();
+		}
+		return reserva;
+	}
 
 }

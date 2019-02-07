@@ -1,1 +1,15 @@
+DROP VIEW infoPasos;
+DROP VIEW abonosPaso;
+DROP VIEW pasosAgente;
+DROP VIEW abonosReserva;
+DROP VIEW reservasAgente;
+
 CREATE VIEW infoPasos AS (SELECT R.k_num_serie, R.f_salida, R.n_puerto_salida, R.f_llegada, R.n_puerto_llegada, P.n_esclusa, R.f_eta FROM reserva R, paso P WHERE R.k_id = P.k_idReserva);
+
+CREATE VIEW abonosPaso AS (SELECT SUM(v_valor) v_abono, k_idreferencia FROM pagoPaso GROUP BY k_idreferencia);
+
+CREATE VIEW pasosAgente AS (SELECT P.f_fecha, R.k_num_serie, R.n_sentido, P.v_costo, R.k_idAgente, P.k_id, NVL(A.v_abono,0) v_abono, NVL((P.v_costo - A.v_abono),P.v_costo) v_deuda FROM reserva R, paso P LEFT JOIN abonosPaso A ON P.k_id = A.k_idreferencia WHERE P.k_idreserva = R.k_id);
+
+CREATE VIEW abonosReserva AS (SELECT SUM(v_valor) v_abono, k_idreferencia FROM pagoReserva GROUP BY k_idreferencia);
+
+CREATE VIEW reservasAgente AS (SELECT R.k_id, R.f_eta, R.k_num_serie, R.v_costo, NVL(A.v_abono,0) v_abono, NVL((R.v_costo - A.v_abono),R.v_costo) v_deuda, R.k_idAgente FROM reserva R LEFT JOIN abonosReserva A ON R.k_id = A.k_idreferencia);

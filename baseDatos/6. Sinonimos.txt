@@ -1,0 +1,16 @@
+DROP PUBLIC SYNONYM paso;
+DROP PUBLIC SYNONYM pasosAgente;
+DROP PUBLIC SYNONYM abonosPaso;
+DROP PUBLIC SYNONYM reserva;
+DROP PUBLIC SYNONYM reservasagente;
+DROP PUBLIC SYNONYM abonosReserva;
+DROP PUBLIC SYNONYM agente;
+
+CREATE PUBLIC SYNONYM paso FOR paso;
+CREATE PUBLIC SYNONYM pasosAgente FOR pasosAgente;
+CREATE PUBLIC SYNONYM abonosPaso FOR abonosPaso;
+CREATE PUBLIC SYNONYM reserva FOR reserva;
+CREATE PUBLIC SYNONYM reservasagente FOR reservasagente;
+CREATE PUBLIC SYNONYM abonosReserva FOR abonosReserva;
+CREATE PUBLIC SYNONYM agente FOR agente;
+

@@ -111,7 +111,7 @@
 
 <div id="busqUsuarios" class="widget-box">
 	<div class="widget-title">
-		<h2 id="title_usuarios">Pasos Registrados</h2>
+		<h2 id="title_usuarios">Reservas Registradas</h2>
 		<strong id="user" style="visibility: hidden"></strong>
 	</div>
 	<div style="text-align:center;">
@@ -119,9 +119,8 @@
 			<table>
 				<thead>
 					<tr>
-						<th>FECHA PASO</th>
+						<th>ETA</th>
 						<th>BUQUE</th>
-						<th>SENTIDO</th>
 						<th>COSTO</th>
 						<th>ABONO</th>
 						<th>DEUDA</th>
@@ -141,7 +140,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 0;"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" style=" margin-right: 35%;">Información de paso</h3>
+                <h3 class="modal-title" style=" margin-right: 35%;">Información de Reserva</h3>
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal">
@@ -149,50 +148,93 @@
                     <div class="form-body">
                     	
                     	<div class="form-group">
-                            <label class="control-label col-md-12">Número de paso</label>
+                            <label class="control-label col-md-12">Número de reserva</label>
                             <div class="col-md-12">
-                                <input disabled name="username" placeholder="Numero de paso" class="form-control" id="input_id" type="number">
+                                <input disabled name="username" placeholder="Numero de reserva" class="form-control" id="idReserva" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                        
                        <div class="form-group">
-                            <label class="control-label col-md-12">Número de reserva</label>
+                            <label class="control-label col-md-12">ETA</label>
                             <div class="col-md-12">
-                                <input disabled name="username" placeholder="Numero de reserva" class="form-control" id="input_reserva" type="number">
+                                <input disabled name="username" placeholder="eta" class="form-control" id="eta" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                     
                    	 	<div class="form-group">
-                            <label class="control-label col-md-12">Costo</label>
+                            <label class="control-label col-md-12">Buque</label>
                             <div class="col-md-12">
-                                <input disabled name="id" placeholder="Costo" class="form-control" id="input_costo" type="number">
+                                <input disabled name="barco" placeholder="buque" class="form-control" id="buque" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>
               
                         <div class="form-group">
-                            <label class="control-label col-md-12">Fecha de Paso</label>
+                            <label class="control-label col-md-12">Carga Transportada</label>
                             <div class="col-md-12">
-                                <input disabled name="firstName" placeholder="Fecha de Paso" class="form-control" id="input_fecha" type="date">
+                                <input disabled name="firstName" placeholder="carga" class="form-control" id="carga" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-12">Total de Pasajeros</label>
+                            <label class="control-label col-md-12">Fecha Salida</label>
                             <div class="col-md-12">
-                                <input disabled name="lastName" placeholder="Pasajeros" class="form-control" id="input_pasajeros" type="text">
+                                <input disabled name="lastName" placeholder="fecha Salida" class="form-control" id="fechaSalida" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-12">Esclusa a utilizar</label>
+                            <label class="control-label col-md-12">Puerto Salida</label>
                             <div class="col-md-12">
-                                <input disabled name="firstName" placeholder="Esclusa" class="form-control" id="input_esclusa" type="text">
+                                <input disabled name="firstName" placeholder="puerto Salida" class="form-control" id="puertoSalida" type="text">
                                 <span class="help-block"></span>
                             </div>
-                        </div>  
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Sentido</label>
+                            <div class="col-md-12">
+                                <input disabled name="sentid" placeholder="Sentido" class="form-control" id="sentido" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Fecha Llegada</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="fecha Llegada" class="form-control" id="fechaLlegada" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Puerto Llegada</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="puerto Llegada" class="form-control" id="puertoLlegada" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Estado Reserva</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="estado" class="form-control" id="estado" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Fecha Cancelación</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="fecha Cancelacion" class="form-control" id="fechaCancelacion" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Valor Cancelación</label>
+                            <div class="col-md-12">
+                                <input disabled name="firstName" placeholder="calor Cancelacion" class="form-control" id="valorCancelacion" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          
                     </div>
                 </form>
 
@@ -227,68 +269,64 @@
 
 
 <script type="text/javascript">
-	function obtener_pasos(idAgente){
-		var pasos = [];
+	function obtener_reservas(idAgente){
+		var reservas = [];
 		var tblBody = document.getElementById("contenido");
 		$.ajax({
-			url: 'pasos/'+idAgente,
+			url: 'reservas/'+idAgente,
 	        type: 'GET',
 	        processData: false,
 	        contentType: "application/json",
 	        success:function(data){	        	
 	        	if(data[0] == null){
-	        		alert('No se registran pasos');
+	        		alert('No se registran reservas para el dia de hoy');
 	        	}else{	        	
-	        		pasos = data;
+	        		reservas = data;
 	        		var i;
-	        		for (i = 0; i < pasos.length; i++) {
+	        		for (i = 0; i < reservas.length; i++) {
 	        			var hilera = document.createElement("tr");
 	        			
 	        			var celda = document.createElement("td");
-	        			var textoCelda = document.createTextNode(pasos[i].f_fecha);
+	        			var textoCelda = document.createTextNode(reservas[i].f_eta);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(pasos[i].k_num_serie);
+	        			textoCelda = document.createTextNode(reservas[i].k_num_serie);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);	        			
 	        			     			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(pasos[i].n_sentido);	        			
+	        			textoCelda = document.createTextNode(reservas[i].v_costo);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(pasos[i].v_costo);
+	        			textoCelda = document.createTextNode(reservas[i].v_abono);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(pasos[i].v_abono);
+	        			textoCelda = document.createTextNode(reservas[i].v_deuda);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
-	        			tblBody.appendChild(hilera);	
-	        			
-	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(pasos[i].v_deuda);
-	        			celda.appendChild(textoCelda);
-	        			hilera.appendChild(celda);			
-	        			tblBody.appendChild(hilera);	
-	        			     			
-	        			var id = pasos[i].k_id;
-	        			var deuda = pasos[i].v_deuda;	
-	        			var buttonnode= document.createElement('input');
-	        			buttonnode.setAttribute('type','button');
-	        			buttonnode.setAttribute('name','sal');
-	        			buttonnode.setAttribute('value','Info');
-	        			buttonnode.setAttribute('onClick', 'buscar_paso('+id+','+ deuda +')');
-	        			hilera.appendChild(buttonnode);			
 	        			tblBody.appendChild(hilera);
+	        				        			     			
+	        			var id = reservas[i].k_id;
+	        			var deuda = reservas[i].v_deuda;
+		        		var buttonnode= document.createElement('input');
+		        		buttonnode.setAttribute('type','button');
+		        		buttonnode.setAttribute('id','infobutton');
+		        		buttonnode.setAttribute('name','sal');
+		        		buttonnode.setAttribute('value','Info');
+		        		buttonnode.setAttribute('onClick', 'buscar_reserva('+id+','+ deuda +')');
+		        		hilera.appendChild(buttonnode);			
+		        		tblBody.appendChild(hilera);
+	        			
 	        		
 	        		}
 	        	}     			
@@ -301,29 +339,36 @@
 		
 	}
 	
-	function buscar_paso(idReserva,deuda){
+	function buscar_reserva(idReserva, deuda){
 		resetFormReserva();
 		
 		$.ajax({
-			url: 'paso/'+idReserva,
+			url: 'reservasId/'+idReserva,
 	        type: 'GET',
 	        processData: false,
 	        contentType: "application/json",
 	        success:function(data){	        	
 	        	if(idReserva == null || data.k_id == 0){
-	        		alert('no existe un registro de paso con ese id...');
+	        		alert('no existe un registro de reserva con ese id...');
 	        	}else{
 	        		if(deuda == 0){
         				$('#btnToPay').css('visibility', 'hidden');
         			}else{
         				$('#btnToPay').css('visibility', 'visible');
-        			}	        	
-	        		$('#input_reserva').val(data.k_reserva);	
-	         		$('#input_id').val(idReserva);
-	        		$('#input_costo').val(data.v_costo);		
-	        		$('#input_fecha').val(data.f_fecha);
-	        		$('#input_pasajeros').val(data.q_pasajeros);
-	        		$('#input_esclusa').val(data.n_esclusa);
+        			}
+	        		$('#idReserva').val(data.k_id);
+	        		$('#eta').val(data.f_eta);
+	        		$('#puertoSalida').val(data.n_puerto_salida);
+	        		$('#puertoLlegada').val(data.n_puerto_llegada);
+	        		$('#fechaSalida').val(data.f_salida);
+	        		$('#fechaLlegada').val(data.f_llegada);	        		
+	        		$('#buque').val(data.num_serie);
+	        		$('#carga').val(data.v_cargaTransportada);	        		
+	        		$('#estado').val(data.i_estado);
+	        		$('#valorCancelacion').val(data.v_cancelacion);	        		
+	        		$('#fechaCancelacion').val(data.f_cancelacion);	        		
+	        		$('#sentido').val(data.n_sentido);
+	        		
 		    		$("#modal_edit_user").modal("show");
 	        	}
 	        },
@@ -357,28 +402,10 @@
 			  },
 			  success: function (data) {		  		
 				  $('#user').text(data);
-				  obtener_pasos(data);
+				  obtener_reservas(data);
 			  }
 			 });
 	}
-	
-	function loadId(user){				
-		$.ajax({
-			url: 'agente/'+user,
-			type: 'GET',
-			processData: false,
-			contentType: "application/json",
-			success:function(data){			  			  
-				if(data == 0){
-	        		alert('Error al recuperar id de usuario');
-	        	}else{
-	        		obtener_pasos(data);
-	        	}
-			},
-	    	error:function(data){
-	    		alert(data.responseText);
-	    	}	        
-	 });
 		
 }
 	

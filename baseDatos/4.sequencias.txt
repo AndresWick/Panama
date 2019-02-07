@@ -1,3 +1,7 @@
+DROP SEQUENCE reserva_seq;
+DROP SEQUENCE paso_seq;
+DROP SEQUENCE subasta_seq;
+
 CREATE SEQUENCE reserva_seq
   MINVALUE 1
   START WITH 1

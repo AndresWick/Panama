@@ -147,7 +147,7 @@
 <script type="text/javascript">
 
 	function generar_contenido() {
-		var buques = [];
+		var pasos = [];
 		var date = $('#fechaCronograma').val();
 		var tblBody = document.getElementById("contenido");
 		$("#contenido").empty()
@@ -160,59 +160,59 @@
 	        	if(data[0] == null){
 	        		alert('No se registran pasos para el dia de hoy');
 	        	}else{	        	
-	        		buques = data;
+	        		pasos = data;
 	        		
 	        		
 	        		var i;
-	        		for (i = 0; i < 2; i++) {
+	        		for (i = 0; i < pasos.length; i++) {
 	        			var hilera = document.createElement("tr");
 	        			
 	        			var celda = document.createElement("td");
-	        			var textoCelda = document.createTextNode(buques[i].k_num_serie);
+	        			var textoCelda = document.createTextNode(pasos[i].k_num_serie);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(buques[i].f_salida);
+	        			textoCelda = document.createTextNode(pasos[i].f_salida);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			var fechita = new Date(buques[i].f_salida);
+	        			var fechita = new Date(pasos[i].f_salida);
 	        			textoCelda = document.createTextNode(fechita.getHours() + ':' + fechita.getMinutes());
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(buques[i].n_puerto_salida);
+	        			textoCelda = document.createTextNode(pasos[i].n_puerto_salida);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(buques[i].f_llegada);
+	        			textoCelda = document.createTextNode(pasos[i].f_llegada);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			fechita = new Date(buques[i].f_llegada);
+	        			fechita = new Date(pasos[i].f_llegada);
 	        			textoCelda = document.createTextNode(fechita.getHours() + ':' + fechita.getMinutes());
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(buques[i].n_puerto_llegada);
+	        			textoCelda = document.createTextNode(pasos[i].n_puerto_llegada);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
 	        			
 	        			celda = document.createElement("td");
-	        			textoCelda = document.createTextNode(buques[i].n_esclusa);
+	        			textoCelda = document.createTextNode(pasos[i].n_esclusa);
 	        			celda.appendChild(textoCelda);
 	        			hilera.appendChild(celda);			
 	        			tblBody.appendChild(hilera);
