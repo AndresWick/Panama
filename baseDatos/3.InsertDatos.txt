@@ -93,10 +93,14 @@ INSERT INTO tipoPago (k_id, n_descripcion) VALUES (1,'Efectivo');
 INSERT INTO tipoPago (k_id, n_descripcion) VALUES (2,'Tarjeta Credito');
 INSERT INTO tipoPago (k_id, n_descripcion) VALUES (3,'Tarjeta Debito');
 
+--- ResumenPagoResreva ---
+INSERT INTO resumenpagoreserva (k_reserva, v_saldo_pendiente, f_ultimo_pago) VALUES (1,970,'16/10/2018');
+INSERT INTO resumenpagoreserva (k_reserva, v_saldo_pendiente, f_ultimo_pago) VALUES (2,960,'12/10/2018');
+
 --- Pago ---
-INSERT INTO pagoReserva (k_id,k_idReferencia,v_valor,f_fecha,k_idTipoPago) VALUES (1,1,10,'10/10/2018',1);
-INSERT INTO pagoReserva (k_id,k_idReferencia,v_valor,f_fecha,k_idTipoPago) VALUES (2,1,20,'12/10/2018',1);
-INSERT INTO pagoReserva (k_id,k_idReferencia,v_valor,f_fecha,k_idTipoPago) VALUES (1,2,40,'16/10/2018',2);
+INSERT INTO pagoReserva (k_id,k_idreserva,v_valor,f_fecha,k_idTipoPago) VALUES (1,1,10,'10/10/2018',1);
+INSERT INTO pagoReserva (k_id,k_idreserva,v_valor,f_fecha,k_idTipoPago) VALUES (2,1,20,'12/10/2018',1);
+INSERT INTO pagoReserva (k_id,k_idreserva,v_valor,f_fecha,k_idTipoPago) VALUES (1,2,40,'16/10/2018',2);
 
 --***************************************************************************
 --*****              INSERCIÓN DE DATOS DE CRONOGRAMA                 *******

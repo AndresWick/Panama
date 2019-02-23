@@ -1,3 +1,7 @@
+DROP TABLE ResumenPagoReserva CASCADE CONSTRAINTS
+;
+DROP TABLE ResumenPagoPaso CASCADE CONSTRAINTS
+;
 DROP TABLE PagoPaso CASCADE CONSTRAINTS
 ;
 DROP TABLE Tripulacion CASCADE CONSTRAINTS
@@ -39,13 +43,31 @@ DROP TABLE Agente CASCADE CONSTRAINTS
 DROP TABLE Buque CASCADE CONSTRAINTS
 ;
 
+CREATE TABLE ResumenPagoReserva
+(
+	k_reserva          NUMBER(8) NOT NULL,
+	v_saldo_pendiente  NUMBER(8,2) NOT NULL,
+	f_ultimo_pago      DATE NOT NULL
+)
+;
+
+
+CREATE TABLE ResumenPagoPaso
+(
+	k_paso             NUMBER(8) NOT NULL,
+	v_saldo_pendiente  NUMBER(8,2) NOT NULL,
+	f_ultimo_pago      DATE NOT NULL
+)
+;
+
+
 CREATE TABLE PagoPaso
 (
-	k_id            NUMBER(2) NOT NULL,
-	k_idReferencia  NUMBER(8) NOT NULL,
-	v_valor         NUMBER(8,2) NOT NULL,
-	f_fecha         DATE NOT NULL,
-	k_idTipoPago    NUMBER(3) NOT NULL
+	k_id          NUMBER(2) NOT NULL,
+	k_paso        NUMBER(8) NOT NULL,
+	v_valor       NUMBER(8,2) NOT NULL,
+	f_fecha       DATE NOT NULL,
+	k_idTipoPago  NUMBER(3) NOT NULL
 )
 ;
 
@@ -113,11 +135,11 @@ CREATE TABLE TipoPago
 
 CREATE TABLE PagoReserva
 (
-	k_id            NUMBER(2) NOT NULL,
-	k_idReferencia  NUMBER(8) NOT NULL,
-	v_valor         NUMBER(8,2) NOT NULL,
-	f_fecha         DATE NOT NULL,
-	k_idTipoPago    NUMBER(3) NOT NULL
+	k_id          NUMBER(2) NOT NULL,
+	k_idReserva   NUMBER(8) NOT NULL,
+	v_valor       NUMBER(8,2) NOT NULL,
+	f_fecha       DATE NOT NULL,
+	k_idTipoPago  NUMBER(3) NOT NULL
 )
 ;
 
@@ -254,8 +276,16 @@ CREATE TABLE Buque
 
 
 
+ALTER TABLE ResumenPagoReserva ADD CONSTRAINT PK_ResumenPagoReserva 
+	PRIMARY KEY (k_reserva)
+;
+
+ALTER TABLE ResumenPagoPaso ADD CONSTRAINT PK_ResumenPagoPaso 
+	PRIMARY KEY (k_paso)
+;
+
 ALTER TABLE PagoPaso ADD CONSTRAINT PK_PagoPaso 
-	PRIMARY KEY (k_id, k_idReferencia)
+	PRIMARY KEY (k_id, k_paso)
 ;
 
 ALTER TABLE Tripulacion ADD CONSTRAINT PK_Tripulacion 
@@ -283,7 +313,7 @@ ALTER TABLE TipoPago ADD CONSTRAINT PK_TipoPago
 ;
 
 ALTER TABLE PagoReserva ADD CONSTRAINT PK_Pago 
-	PRIMARY KEY (k_id, k_idReferencia)
+	PRIMARY KEY (k_id, k_idReserva)
 ;
 
 ALTER TABLE Subasta ADD CONSTRAINT PK_Subasta 
@@ -536,8 +566,16 @@ ADD CONSTRAINT CK_k_num_serieBuq CHECK (k_num_serie > 0)
 ;
 
 
-ALTER TABLE PagoPaso ADD CONSTRAINT FK_PagoPaso_Paso 
-	FOREIGN KEY (k_idReferencia) REFERENCES Paso (k_id)
+ALTER TABLE ResumenPagoReserva ADD CONSTRAINT FK_ResumenPagoReserva_Reserva 
+	FOREIGN KEY (k_reserva) REFERENCES Reserva (k_id)
+;
+
+ALTER TABLE ResumenPagoPaso ADD CONSTRAINT FK_ResumenPagoPaso_Paso 
+	FOREIGN KEY (k_paso) REFERENCES Paso (k_id)
+;
+
+ALTER TABLE PagoPaso ADD CONSTRAINT FK_PagoPaso_ResumenPagoPaso 
+	FOREIGN KEY (k_paso) REFERENCES ResumenPagoPaso (k_paso)
 ;
 
 ALTER TABLE PagoPaso ADD CONSTRAINT FK_PagoPaso_TipoPago 
@@ -568,8 +606,8 @@ ALTER TABLE ParametrosPaso ADD CONSTRAINT FK_ParametrosPaso_TipoCarga
 	FOREIGN KEY (k_tipoCarga) REFERENCES TipoCarga (k_id)
 ;
 
-ALTER TABLE PagoReserva ADD CONSTRAINT FK_PagoReserva_Reserva 
-	FOREIGN KEY (k_idReferencia) REFERENCES Reserva (k_id)
+ALTER TABLE PagoReserva ADD CONSTRAINT FK_PReserva_ResumenPReserva 
+	FOREIGN KEY (k_idReserva) REFERENCES ResumenPagoReserva (k_reserva)
 ;
 
 ALTER TABLE Subasta ADD CONSTRAINT FK_Subasta_Cronograma 
