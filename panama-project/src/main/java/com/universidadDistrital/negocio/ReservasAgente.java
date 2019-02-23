@@ -9,7 +9,7 @@ public class ReservasAgente {
 	float v_costo;
 	float v_abono;
 	float v_deuda;
-	int k_idAgente;
+	String k_idAgente;
 	
 	public int getK_id() {
 		return k_id;
@@ -47,10 +47,10 @@ public class ReservasAgente {
 	public void setV_deuda(float v_deuda) {
 		this.v_deuda = v_deuda;
 	}
-	public int getK_idAgente() {
+	public String getK_idAgente() {
 		return k_idAgente;
 	}
-	public void setK_idAgente(int k_idAgente) {
+	public void setK_idAgente(String k_idAgente) {
 		this.k_idAgente = k_idAgente;
 	}
 	
