@@ -7,7 +7,7 @@ public class PasosAgente {
 	int k_num_serie;
 	String n_sentido;
 	float v_costo;
-	int k_idAgente;
+	String k_idAgente;
 	int k_id;
 	float v_abono;
 	float v_deuda;
@@ -37,10 +37,10 @@ public class PasosAgente {
 	public void setV_costo(float v_costo) {
 		this.v_costo = v_costo;
 	}
-	public int getK_idAgente() {
+	public String getK_idAgente() {
 		return k_idAgente;
 	}
-	public void setK_idAgente(int k_idAgente) {
+	public void setK_idAgente(String k_idAgente) {
 		this.k_idAgente = k_idAgente;
 	}
 	public int getK_id() {

@@ -198,7 +198,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnToPay" class="btn btn-primary">Pagar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="seleccionarBanco()">Pagar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div><!-- /.modal-content -->
@@ -379,9 +379,23 @@
 	    		alert(data.responseText);
 	    	}	        
 	 });
-		
-}
-	
+	}	
+	function seleccioncarBanco(){				
+		v_costo: $('#input_costo').val()
+		$.ajax({
+			
+			url: 'banco/'+user,
+			type: 'POST',
+			processData: false,
+			contentType: "application/json",
+			success:function(data){			  			  
+				
+			},
+	    	error:function(data){
+	    		alert(data.responseText);
+	    	}	        
+	 	});
+	}
 </script>
 <script>
 	$(document).ready(function(){
