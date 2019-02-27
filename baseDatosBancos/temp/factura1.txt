@@ -1,0 +1,11 @@
+=================================================
+========== FACTURA MOVIMIENTO BANARIO ===========
+==== FECHA: 24/02/19
+==== BANCO: BBVA
+==== TITULAR: Arturo Perez
+==== ID TITULAR: 1
+==== MOVIMIENTO: 1
+==== CONCEPTO: PAGO RESERVA
+==== ESTADO MOVIMIENTO: R
+==== VALOR: $9800,8
+=================================================

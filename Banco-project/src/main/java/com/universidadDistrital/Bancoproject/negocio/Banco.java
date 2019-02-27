@@ -3,7 +3,6 @@ package com.universidadDistrital.Bancoproject.negocio;
 public class Banco {
 
 	private String k_id;
-	private String k_idCuenta;
 	private String n_nombre;
 	
 	public String getK_id() {
@@ -11,12 +10,6 @@ public class Banco {
 	}
 	public void setK_id(String k_id) {
 		this.k_id = k_id;
-	}
-	public String getK_idCuenta() {
-		return k_idCuenta;
-	}
-	public void setK_idCuenta(String k_idCuenta) {
-		this.k_idCuenta = k_idCuenta;
 	}
 	public String getN_nombre() {
 		return n_nombre;

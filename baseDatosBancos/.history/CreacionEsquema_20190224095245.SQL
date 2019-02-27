@@ -1,0 +1,10 @@
+CREATE USER BANCO IDENTIFIED BY banco;
+GRANT CONNECT, RESOURCE TO BANCO;
+CONN BANCO/banco;
+START C:\Users\Public\Pictures\EsquemaBancos.sql
+
+
+SELECT table_name,owner FROM all_tables WHERE owner='BANCO';
+
+
+SET ServerOutput ON;
