@@ -1,0 +1,4 @@
+CREATE USER BANCO IDENTIFIED BY banco;
+GRANT CONNECT, RESOURCE TO BANCO;
+CONN BANCO/banco;
+START C:\Users\Public\Pictures\EsquemaBancos.sql
