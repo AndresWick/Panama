@@ -45,8 +45,8 @@
 					</div> <!-- scrollable -->	
 				</div>
 			<form>
-				<div style="margin-left: 20px;"> Cuenta: <input type="number" name="cuenta"/></div>
-				<div style="margin-left: 20px;"> Clave: <input type="password" name="clave"/></div>
+				<div style="margin-left: 20px;"> Cuenta: <input type="number" id="cuenta"/></div>
+				<div style="margin-left: 20px;"> Clave: <input type="password" id="clave"/></div>
 				<div id="box1"><h2><input type="radio" name="banco" value="popular">Banco Popular</h2></div>
 				<div id="box2"><h2><input type="radio" name="banco" value="davivienda">Davivienda</h2></div>
 				<div id="box3"><h2><input type="radio" name="banco" value="bbva">BBVA</h2></div>
@@ -59,30 +59,58 @@
 				
 			</form>	
 		</div>
-<script type="text/javascript">
-	function pagar(){
-		console.log("hola");
-		
-		$.ajax({
-	        url: 'tripulante',
-	        type: 'POST',
-	        data: JSON.stringify({
-	        	k_id: identificacionTripulante, 
-	        	k_idPersona: identificacionPersona,
-	        	n_cargo: cargo   	        	
-	            }),
-	        processData: false,
-	        contentType: "application/json",
-	        success:function(data){
-	        	alert(data);
-	        },
-	        error:function(data){
-	        	alert(data.responseText)
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    var params = window.location.search;
+
+	    var getURLParams = function(params) {
+	        var hash;
+	        var json = {};
+	        var hashes = params.slice(params.indexOf('?') + 1).split('&');
+	        for (var i = 0; i < hashes.length; i++) {
+	            hash = hashes[i].split('=');
+	            json[hash[0]] = hash[1];
 	        }
-	    })  
+	        return json;
+	    }
+
+	    params = getURLParams(params);
+
+	    var agente = params.agente;
+	    var costo = params.costo;
+	    var concepto = params.concepto;
 	    
-	}
-		
-</script>	
+	    $('#agente').text(agente);
+	    $('#valor').text(costo);
+	    $('#concepto').text(concepto);
+	});	
+	function pagar(){
+			var datos = {
+				k_banco : $('input[name=banco]:checked').val(),
+				k_titular : $('#agente').text(),
+				k_cuenta : $('#cuenta').val(),
+				v_clave : $('#clave').val(),
+				v_valor : $('#valor').text(),
+				k_concepto : $('#concepto').text()	
+			}		 
+				
+			$.ajax({
+		        url: '/pago',
+		        type: 'POST',
+		        data: JSON.stringify(datos),
+		        processData: false,
+		        contentType: "application/json",
+		        success:function(data){
+		        	alert(data);
+		        },
+		        error:function(data){
+		        	alert(data.responseText)
+		        }
+		    })  
+		    
+		}
+			
+	</script>	
 </body>
 </html>

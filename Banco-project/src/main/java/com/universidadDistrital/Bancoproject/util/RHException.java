@@ -1,4 +1,4 @@
-package com.universidadDistrital.util;
+package com.universidadDistrital.Bancoproject.util;
 
 public class RHException extends Exception {
       private String detalle;

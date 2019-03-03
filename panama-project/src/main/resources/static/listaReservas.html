@@ -221,6 +221,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-md-12">Costo</label>
+                            <div class="col-md-12">
+                                <input disabled name="id" placeholder="Costo" class="form-control" id="input_costo" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-md-12">Fecha Cancelación</label>
                             <div class="col-md-12">
                                 <input disabled name="firstName" placeholder="fecha Cancelacion" class="form-control" id="fechaCancelacion" type="text">
@@ -240,7 +247,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnToPay" class="btn btn-primary">Pagar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="seleccionarBanco()">Pagar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div><!-- /.modal-content -->
@@ -365,10 +372,10 @@
 	        		$('#buque').val(data.num_serie);
 	        		$('#carga').val(data.v_cargaTransportada);	        		
 	        		$('#estado').val(data.i_estado);
+	        		$('#input_costo').val(data.v_costo);
 	        		$('#valorCancelacion').val(data.v_cancelacion);	        		
 	        		$('#fechaCancelacion').val(data.f_cancelacion);	        		
-	        		$('#sentido').val(data.n_sentido);
-	        		
+	        		$('#sentido').val(data.n_sentido);	        		
 		    		$("#modal_edit_user").modal("show");
 	        	}
 	        },
@@ -401,11 +408,25 @@
 			  	
 			  },
 			  success: function (data) {		  		
-				  $('#user').text(data);
+				  $('#user').val(data);
 				  obtener_reservas(data);
 			  }
 			 });
-	}		
+	}	
+	function seleccionarBanco(){	
+		
+		var k_agente = $('#user').val();	
+		var v_costo = $('#input_costo').val();
+		var i_tipo = "reserva";		
+		var datos = {
+			agente: k_agente,
+			costo : v_costo,
+			concepto: i_tipo
+		};	
+		  			  
+		window.location.href = "banco.html?"+ $.param(datos);
+		
+	}
 
 </script>
 <script>
