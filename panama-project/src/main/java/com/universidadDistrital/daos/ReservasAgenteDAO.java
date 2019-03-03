@@ -25,6 +25,7 @@ public class ReservasAgenteDAO {
 		}else {			
 			Statement st = conexion.createStatement();			
 		    ResultSet rec = st.executeQuery("SELECT * FROM reservasAgente WHERE k_idAgente = '"+agente+"'");
+		    
 		    while (rec.next()) {		    	
 		    	ReservasAgente reserva = new ReservasAgente();
 		    	reserva.setK_id(rec.getInt(1));		    	
@@ -33,8 +34,7 @@ public class ReservasAgenteDAO {
 		    	reserva.setV_costo(rec.getFloat(4));		    	
 		    	reserva.setV_abono(rec.getFloat(5));		    	
 		    	reserva.setV_deuda(rec.getFloat(6));		    	
-		    	reserva.setK_idAgente(rec.getString(7));
-		    	
+		    	reserva.setK_idAgente(rec.getString(7));		    	
 		    	reservas.add(reserva);
 		      }
 		      st.close();

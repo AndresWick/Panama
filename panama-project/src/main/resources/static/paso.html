@@ -356,7 +356,7 @@
 			  	
 			  },
 			  success: function (data) {		  		
-				  $('#user').text(data);
+				  $('#user').val(data);				  
 				  obtener_pasos(data);
 			  }
 			 });
@@ -380,21 +380,19 @@
 	    	}	        
 	 });
 	}	
-	function seleccioncarBanco(){				
-		v_costo: $('#input_costo').val()
-		$.ajax({
-			
-			url: 'banco/'+user,
-			type: 'POST',
-			processData: false,
-			contentType: "application/json",
-			success:function(data){			  			  
-				
-			},
-	    	error:function(data){
-	    		alert(data.responseText);
-	    	}	        
-	 	});
+	function seleccionarBanco(){	
+		
+		var k_agente = $('#user').val();	
+		var v_costo = $('#input_costo').val();
+		var i_tipo = "paso";		
+		var datos = {
+			agente: k_agente,
+			costo : v_costo,
+			concepto: i_tipo
+		};	
+		  			  
+		window.location.href = "banco.html?"+ $.param(datos);
+		
 	}
 </script>
 <script>

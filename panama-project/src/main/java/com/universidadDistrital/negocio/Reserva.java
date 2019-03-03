@@ -14,7 +14,7 @@ public class Reserva {
 	private double v_costo;
 	private String i_estado;
 	private double v_cancelacion;
-	private int k_idAgente;
+	private String k_idAgente;
 	private Date f_cancelacion;
 	private String n_sentido;
 	
@@ -90,10 +90,10 @@ public class Reserva {
 	public void setV_cancelacion(double v_cancelacion) {
 		this.v_cancelacion = v_cancelacion;
 	}
-	public int getK_idAgente() {
+	public String getK_idAgente() {
 		return k_idAgente;
 	}
-	public void setK_idAgente(int k_idAgente) {
+	public void setK_idAgente(String k_idAgente) {
 		this.k_idAgente = k_idAgente;
 	}
 	public Date getF_cancelacion() {

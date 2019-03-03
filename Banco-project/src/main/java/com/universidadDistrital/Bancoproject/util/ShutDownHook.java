@@ -1,4 +1,4 @@
-package com.universidadDistrital.util;
+package com.universidadDistrital.Bancoproject.util;
 
 public class ShutDownHook extends Thread{
 	public void run()

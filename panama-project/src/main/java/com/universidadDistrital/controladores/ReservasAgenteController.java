@@ -27,14 +27,16 @@ public class ReservasAgenteController {
 		
 		ArrayList<ReservasAgente> reservas = new ArrayList<ReservasAgente>();
 		try {
-			reservas = reservasAgenteDao.reservasAgente(k_idAgente);			
+			reservas = reservasAgenteDao.reservasAgente(k_idAgente);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			odbManager.liberarConexion();
-		}	
+		}		
 		return reservas;
+		
 	}
 
 }

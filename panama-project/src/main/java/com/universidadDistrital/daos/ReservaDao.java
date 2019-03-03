@@ -36,7 +36,7 @@ public class ReservaDao {
         callstmt.setDate(5, java.sql.Date.valueOf(reserva.getF_llegada()));
         callstmt.setInt(6,reserva.getNum_serie()); 
         callstmt.setDouble(7, reserva.getV_cargaTransportada());
-        callstmt.setInt(8, reserva.getK_idAgente());
+        callstmt.setString(8, reserva.getK_idAgente());
         callstmt.setString(9, reserva.getN_sentido());
         callstmt.execute();
         odbManager.commit();
@@ -100,7 +100,7 @@ public class ReservaDao {
 		    	  reserva.setV_costo(rs.getFloat(9));
 		    	  reserva.setI_estado(rs.getString(10));
 		    	  reserva.setV_cancelacion(rs.getFloat(11));
-		    	  reserva.setK_idAgente(rs.getInt(12));
+		    	  reserva.setK_idAgente(rs.getString(12));
 		    	  reserva.setF_cancelacion(rs.getDate(13));
 		    	  reserva.setN_sentido(rs.getString(14));
 		      }

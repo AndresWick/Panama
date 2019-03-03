@@ -1,4 +1,4 @@
-package com.universidadDistrital.util;
+package com.universidadDistrital.Bancoproject.util;
 
 import java.sql.Connection;
 import java.sql.*;
@@ -8,7 +8,7 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.stereotype.Repository;
 
-import com.universidadDistrital.negocio.Usuario;
+import com.universidadDistrital.Bancoproject.negocio.Usuario;
 
 
 /**
