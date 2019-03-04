@@ -1,8 +1,8 @@
 DROP FUNCTION fu_programacion_diaria;
-DROP TYPE NESTED_DATOSTABLE;
-DROP TYPE DATOSTABLE;
+DROP TYPE gtt_tablapaso;
+DROP TYPE gto_paso;
 
-create or replace type DATOSTABLE as object (
+create or replace type gto_paso as object (
   k_num_serie  number(8),
   f_salida date,
   n_puerto_salida varchar2 (20),
@@ -14,21 +14,21 @@ create or replace type DATOSTABLE as object (
 /
 
 
-create or replace type NESTED_DATOSTABLE as table of DATOSTABLE;
+create or replace type gtt_tablapaso as table of gto_paso;
 /
 
 
-CREATE OR REPLACE FUNCTION fu_programacion_diaria(lf_eta date)
-	RETURN NESTED_DATOSTABLE 
+CREATE OR REPLACE FUNCTION fu_programacion_diaria(pf_eta date)
+	RETURN gtt_tablapaso 
 	IS
-		tmpVar NESTED_DATOSTABLE;
+		ltmptabla gtt_tablapaso;
 	BEGIN
 		select 
 		cast( multiset( 
-		SELECT * FROM infopasos WHERE f_eta = lf_eta    
-			) as NESTED_DATOSTABLE)
-		into tmpVar
+		SELECT * FROM infopasos WHERE f_eta = pf_eta    
+			) as gtt_tablapaso)
+		into ltmptabla
 		from dual;        
-RETURN tmpVar;
+RETURN ltmptabla;
 END;
 /
