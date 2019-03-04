@@ -1,8 +1,8 @@
 DROP FUNCTION FU_PRECIO_PASO;
 CREATE OR REPLACE FUNCTION FU_PRECIO_PASO
     (        
-        lk_idReserva IN PASO.k_idReserva%TYPE,
-        ln_esclusa IN PASO.n_esclusa%TYPE       
+        pk_idReserva IN PASO.k_idReserva%TYPE,
+        pn_esclusa IN PASO.n_esclusa%TYPE       
     )
     RETURN PASO.v_costo%TYPE 
     AS
@@ -13,9 +13,9 @@ CREATE OR REPLACE FUNCTION FU_PRECIO_PASO
         lv_porcentajeCarga NUMBER(4,2) := 0;
         lv_costo PARAMETROSPASO.v_costo%TYPE;
     BEGIN
-        SELECT R.k_num_serie INTO lk_num_serie FROM Reserva R WHERE R.k_id = lk_idReserva;
+        SELECT R.k_num_serie INTO lk_num_serie FROM Reserva R WHERE R.k_id = pk_idReserva;
         SELECT TP.k_id INTO lk_idCarga FROM tipocarga TP, buque B WHERE TP.k_id = B.k_idCarga AND B.k_num_serie = lk_num_serie;
-        SELECT R.v_cargaTransportada INTO lv_cargaTransportada FROM Reserva R WHERE R.k_id = lk_idReserva;
+        SELECT R.v_cargaTransportada INTO lv_cargaTransportada FROM Reserva R WHERE R.k_id = pk_idReserva;
         SELECT B.v_carga_max INTO lv_carga_max FROM buque B WHERE B.k_num_serie = lk_num_serie;
         
         lv_porcentajeCarga := (lv_cargaTransportada * 100) / lv_carga_max;
@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION FU_PRECIO_PASO
         
         ELSIF (lk_idCarga = 1) THEN
         
-            IF (ln_esclusa = 'Neopanamax') THEN
+            IF (pn_esclusa = 'Neopanamax') THEN
             
                 SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa = 'Neopanamax';                
             
