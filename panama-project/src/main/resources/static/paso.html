@@ -4,6 +4,23 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	
+	table{
+		text-align:center;
+		border:2px solid black;
+		border-collapse: collapse;
+		width: 50%;
+		margin:auto;
+	}
+	
+	th{
+		border:2px solid black;
+	}
+	
+	td{
+		border:1px solid black;
+		border-bottom:2px solid black;
+	}
 
 	.pnl_busqueda {
 		height: 20%;
@@ -88,25 +105,34 @@
 
 </style>
 <head>
-<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
+
+
 <div id="busqUsuarios" class="widget-box">
 	<div class="widget-title">
-		<h2 id="title_usuarios">Gestión paso</h2>
+		<h2 id="title_usuarios">Pasos Registrados</h2>
+		<strong id="user" style="visibility: hidden"></strong>
 	</div>
-	<div class="widget-content nopadding">
-		<div class="pnl_busqueda">
-			<div class=''>
-				<input id="txtBusqueda" type="text" placeholder="Ingrese Id del paso"
-					class="form-control" required="" />
-			</div>
-			<div class=''>
-				<button type="button" id="btn-refresh"
-					class="btn btn-outline-primary btn-rounded waves-effect fas fa-search"
-					onclick="buscar_reserva()" for="txtBusqueda"></button>
-			</div>
-		</div>
+	<div style="text-align:center;">
+		<input id="myInput" type="text" placeholder="Search.." style="align:center">
+			<table>
+				<thead>
+					<tr>
+						<th>FECHA PASO</th>
+						<th>BUQUE</th>
+						<th>SENTIDO</th>
+						<th>COSTO</th>
+						<th>ABONO</th>
+						<th>DEUDA</th>
+						<th>+ INFO </th>
+					</tr>					
+				</thead>
+				<tbody id="contenido">
+				</tbody>
+			</table>
 	</div>
+	
 </div>
 
 <!--  MODAL TABLE EDIT USER -->
@@ -115,7 +141,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 0;"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" style=" margin-right: 35%;">Información de paso</h3>
+                <h3 class="modal-title" style=" margin-right: 35%;">InformaciÃ³n de paso</h3>
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal">
@@ -123,7 +149,7 @@
                     <div class="form-body">
                     	
                     	<div class="form-group">
-                            <label class="control-label col-md-12">Número de paso</label>
+                            <label class="control-label col-md-12">NÃºmero de paso</label>
                             <div class="col-md-12">
                                 <input disabled name="username" placeholder="Numero de paso" class="form-control" id="input_id" type="number">
                                 <span class="help-block"></span>
@@ -131,7 +157,7 @@
                         </div>
                        
                        <div class="form-group">
-                            <label class="control-label col-md-12">Número de reserva</label>
+                            <label class="control-label col-md-12">NÃºmero de reserva</label>
                             <div class="col-md-12">
                                 <input disabled name="username" placeholder="Numero de reserva" class="form-control" id="input_reserva" type="number">
                                 <span class="help-block"></span>
@@ -172,7 +198,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnSave" class="btn btn-primary">Pagar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="seleccionarBanco()">Pagar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div><!-- /.modal-content -->
@@ -201,9 +227,83 @@
 
 
 <script type="text/javascript">
-	function buscar_reserva(){
+	function obtener_pasos(idAgente){
+		var pasos = [];
+		var tblBody = document.getElementById("contenido");
+		$.ajax({
+			url: 'pasos/'+idAgente,
+	        type: 'GET',
+	        processData: false,
+	        contentType: "application/json",
+	        success:function(data){	        	
+	        	if(data[0] == null){
+	        		alert('No se registran pasos');
+	        	}else{	        	
+	        		pasos = data;
+	        		var i;
+	        		for (i = 0; i < pasos.length; i++) {
+	        			var hilera = document.createElement("tr");
+	        			
+	        			var celda = document.createElement("td");
+	        			var textoCelda = document.createTextNode(pasos[i].f_fecha);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].k_num_serie);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);	        			
+	        			     			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].n_sentido);	        			
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].v_costo);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].v_abono);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);	
+	        			
+	        			celda = document.createElement("td");
+	        			textoCelda = document.createTextNode(pasos[i].v_deuda);
+	        			celda.appendChild(textoCelda);
+	        			hilera.appendChild(celda);			
+	        			tblBody.appendChild(hilera);	
+	        			     			
+	        			var id = pasos[i].k_id;
+	        			var deuda = pasos[i].v_deuda;	
+	        			var buttonnode= document.createElement('input');
+	        			buttonnode.setAttribute('type','button');
+	        			buttonnode.setAttribute('name','sal');
+	        			buttonnode.setAttribute('value','Info');
+	        			buttonnode.setAttribute('onClick', 'buscar_paso('+id+','+ deuda +')');
+	        			hilera.appendChild(buttonnode);			
+	        			tblBody.appendChild(hilera);
+	        		
+	        		}
+	        	}     			
+	        	
+	        },
+	        error:function(data){
+	        	alert(data.responseText);
+	        }
+	    });
+		
+	}
+	
+	function buscar_paso(idReserva,deuda){
 		resetFormReserva();
-		var idReserva = $('#txtBusqueda').val();
+		
 		$.ajax({
 			url: 'paso/'+idReserva,
 	        type: 'GET',
@@ -212,7 +312,12 @@
 	        success:function(data){	        	
 	        	if(idReserva == null || data.k_id == 0){
 	        		alert('no existe un registro de paso con ese id...');
-	        	}else{	        	
+	        	}else{
+	        		if(deuda == 0){
+        				$('#btnToPay').css('visibility', 'hidden');
+        			}else{
+        				$('#btnToPay').css('visibility', 'visible');
+        			}	        	
 	        		$('#input_reserva').val(data.k_reserva);	
 	         		$('#input_id').val(idReserva);
 	        		$('#input_costo').val(data.v_costo);		
@@ -235,5 +340,68 @@
 		$('#input_fecha').val('');
 		$('#input_pasajeros').val('');
 		$('#input_esclusa').val('');
+	}	
+	
+	$(document).ready(function() {
+		loadUser();		
+    });
+
+		
+	function loadUser(){				
+		$.ajax({
+			  type: "POST",
+			  enctype: 'multipart/form-data',
+			  url: 'loadUser',
+			  data: {
+			  	
+			  },
+			  success: function (data) {		  		
+				  $('#user').val(data);				  
+				  obtener_pasos(data);
+			  }
+			 });
 	}
+	
+	function loadId(user){				
+		$.ajax({
+			url: 'agente/'+user,
+			type: 'GET',
+			processData: false,
+			contentType: "application/json",
+			success:function(data){			  			  
+				if(data == 0){
+	        		alert('Error al recuperar id de usuario');
+	        	}else{
+	        		obtener_pasos(data);
+	        	}
+			},
+	    	error:function(data){
+	    		alert(data.responseText);
+	    	}	        
+	 });
+	}	
+	function seleccionarBanco(){	
+		
+		var k_agente = $('#user').val();	
+		var v_costo = $('#input_costo').val();
+		var i_tipo = "paso";		
+		var datos = {
+			agente: k_agente,
+			costo : v_costo,
+			concepto: i_tipo
+		};	
+		  			  
+		window.location.href = "banco.html?"+ $.param(datos);
+		
+	}
+</script>
+<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#contenido tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
 </script>

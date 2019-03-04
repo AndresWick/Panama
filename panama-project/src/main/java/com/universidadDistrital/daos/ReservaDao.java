@@ -13,7 +13,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.universidadDistrital.negocio.CuposPorDia;
 import com.universidadDistrital.negocio.Reserva;
 import com.universidadDistrital.util.ODBManager;
 
@@ -37,7 +36,7 @@ public class ReservaDao {
         callstmt.setDate(5, java.sql.Date.valueOf(reserva.getF_llegada()));
         callstmt.setInt(6,reserva.getNum_serie()); 
         callstmt.setDouble(7, reserva.getV_cargaTransportada());
-        callstmt.setInt(8, reserva.getK_idAgente());
+        callstmt.setString(8, reserva.getK_idAgente());
         callstmt.setString(9, reserva.getN_sentido());
         callstmt.execute();
         odbManager.commit();
@@ -77,5 +76,38 @@ public class ReservaDao {
 	
 	public void cancelarReserva(int idReserva) {
 		
+	}
+	
+	public Reserva consultarReserva(int idReserva) throws SQLException {
+		Connection conexion = odbManager.tomarConexion();
+		 if(conexion != null) {
+			 Statement st = conexion.createStatement();
+		     ResultSet rs = st.executeQuery("SELECT k_id,f_eta,n_puerto_salida , n_puerto_llegada, f_salida, f_llegada, "
+		     									+ " k_num_serie, v_cargaTransportada, v_costo, i_estado, v_cancelacion, "
+		     									+ " k_idAgente, f_cancelacion, n_sentido "
+		     									+ " FROM reserva WHERE k_id="+idReserva);
+		     Reserva reserva = new Reserva();
+		     
+		      while (rs.next()) {
+		    	  reserva.setK_id(rs.getInt(1));
+		    	  reserva.setF_eta((rs.getDate(2)).toString());
+		    	  reserva.setN_puerto_salida(rs.getString(3));
+		    	  reserva.setN_puerto_llegada(rs.getString(4));
+		    	  reserva.setF_salida(rs.getDate(5).toString());
+		    	  reserva.setF_llegada(rs.getDate(6).toString());
+		    	  reserva.setNum_serie(rs.getInt(7));
+		    	  reserva.setV_cargaTransportada(rs.getFloat(8));
+		    	  reserva.setV_costo(rs.getFloat(9));
+		    	  reserva.setI_estado(rs.getString(10));
+		    	  reserva.setV_cancelacion(rs.getFloat(11));
+		    	  reserva.setK_idAgente(rs.getString(12));
+		    	  reserva.setF_cancelacion(rs.getDate(13));
+		    	  reserva.setN_sentido(rs.getString(14));
+		      }
+		      st.close();
+		      odbManager.liberarConexion();
+		      return reserva;
+			 }
+		return null;
 	}
 }

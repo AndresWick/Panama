@@ -1,0 +1,11 @@
+=================================================
+========== FACTURA MOVIMIENTO BANARIO ===========
+==== FECHA: 27/02/19
+==== BANCO: BBVA
+==== TITULAR: Arturo Perez
+==== ID TITULAR: 1
+==== MOVIMIENTO: 10
+==== CONCEPTO: PAGO PASO
+==== ESTADO MOVIMIENTO: E
+==== VALOR: $9800,8
+=================================================

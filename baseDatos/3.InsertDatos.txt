@@ -1,4 +1,4 @@
-﻿/* --- tipos de buque --- */
+﻿/* ----------  tipos de buque --------*/
 INSERT INTO TIPOBUQUE (K_ID,N_TIPO) 
 VALUES (1,'Regular');
 
@@ -63,7 +63,7 @@ INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_
 INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_loa, v_carga_max) VALUES (1234,2,2,20,80,60,100);
 
 ---- companias----
-INSERT INTO COMPANIA VALUES(12,'UniversidadDistrital');
+INSERT INTO COMPANIA (k_nit, n_nombre) VALUES('xxx','UniversidadDistrital');
 INSERT INTO compania (k_nit, n_nombre) VALUES ('zzz', 'Avianca');
 
 -- personas ----
@@ -73,6 +73,37 @@ INSERT INTO persona (k_identificacion,n_nombre, n_apellido, f_nacimiento) VALUES
 --Agentes----
 INSERT INTO AGENTE (k_id, k_nit,k_idpersona) VALUES('Anthony',12,1);
 INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('Pepe','zzz',123);
+INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('CAMILOAGENTE','xxx',1);
+INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('PEPEAGENTE','zzz',123);
+
+--- Reserva ---
+INSERT INTO reserva (k_id, f_eta, n_puerto_salida, n_puerto_llegada, f_salida, f_llegada, k_num_serie, v_cargaTransportada, v_costo, i_estado, k_idAgente, n_sentido)
+VALUES (1,'10/10/2018','Puerto Lopez', 'San Cristobal', '12/10/2018', '12/11/2018', 123, 1000, 1000, 'Dis', 'PEPEAGENTE', 'Norte');
+INSERT INTO reserva (k_id, f_eta, n_puerto_salida, n_puerto_llegada, f_salida, f_llegada, k_num_serie, v_cargaTransportada, v_costo, i_estado, k_idAgente, n_sentido)
+VALUES (2,'08/10/2018','Puerto Caiman', 'Puerto Lopez', '10/10/2018', '11/11/2018', 1234, 1000, 1000, 'Dis', 'PEPEAGENTE', 'Norte');
+INSERT INTO reserva (k_id, f_eta, n_puerto_salida, n_puerto_llegada, f_salida, f_llegada, k_num_serie, v_cargaTransportada, v_costo, i_estado, k_idAgente, n_sentido)
+VALUES (3,'08/10/2018','Puerto Salsa', 'Puerto Aida', '10/10/2018', '11/11/2018', 1234, 1000, 1000, 'Dis', 'CAMILOAGENTE', 'Sur');
+
+--- Paso ---
+INSERT INTO paso (k_id, v_costo, k_idreserva, f_fecha, q_pasajeros, n_esclusa) VALUES
+(1,200,1,'10/10/2018',50,'Panamax');
+INSERT INTO paso (k_id, v_costo, k_idreserva, f_fecha, q_pasajeros, n_esclusa) VALUES
+(2,100,3,'08/10/2018',20,'Neopanamax');
+
+--- Tipo Pago ---
+INSERT INTO tipoPago (k_id, n_descripcion) VALUES (1,'Efectivo');
+INSERT INTO tipoPago (k_id, n_descripcion) VALUES (2,'Tarjeta Credito');
+INSERT INTO tipoPago (k_id, n_descripcion) VALUES (3,'Tarjeta Debito');
+
+--- ResumenPagoResreva ---
+INSERT INTO resumenpagoreserva (k_reserva, v_saldo_pendiente, f_ultimo_pago) VALUES (1,970,'16/10/2018');
+INSERT INTO resumenpagoreserva (k_reserva, v_saldo_pendiente, f_ultimo_pago) VALUES (2,960,'12/10/2018');
+
+--- Pago ---
+INSERT INTO pagoReserva (k_id,k_idreserva,v_valor,f_fecha,k_idTipoPago) VALUES (1,1,10,'10/10/2018',1);
+INSERT INTO pagoReserva (k_id,k_idreserva,v_valor,f_fecha,k_idTipoPago) VALUES (2,1,20,'12/10/2018',1);
+INSERT INTO pagoReserva (k_id,k_idreserva,v_valor,f_fecha,k_idTipoPago) VALUES (1,2,40,'16/10/2018',2);
+>>>>>>> develop
 
 --***************************************************************************
 --*****              INSERCIÓN DE DATOS DE CRONOGRAMA                 *******
@@ -111,11 +142,4 @@ INTO CRONOGRAMA
   (K_IDPER, K_TIPOBUQUE, K_FECHA, Q_CUPOS_MAX, Q_CUPOS_DISP, K_SENTIDO)
 VALUES
   (1, 1, TO_DATE('01/01/2019','DD/MM/YYYY'), 7, 7, 'Sur' )
-;
-
-INSERT
-INTO CRONOGRAMA
-  (K_IDPER, K_TIPOBUQUE, K_FECHA, Q_CUPOS_MAX, Q_CUPOS_DISP, K_SENTIDO)
-VALUES
-  (2, 1, TO_DATE('10/02/2019','DD/MM/YYYY'), 5, 5, 'Norte' )
 ;

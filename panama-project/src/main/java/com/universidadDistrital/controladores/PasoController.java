@@ -1,5 +1,6 @@
 package com.universidadDistrital.controladores;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadDistrital.daos.PasoDAO;
+import com.universidadDistrital.negocio.InfoPasos;
 import com.universidadDistrital.negocio.Paso;
 
 import com.universidadDistrital.util.ODBManager;
@@ -50,5 +52,6 @@ public class PasoController {
 		}
 		return new ResponseEntity<>("Registro de paso exitoso",HttpStatus.OK);
     }
-
+	
+	
 }
