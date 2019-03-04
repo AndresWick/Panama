@@ -17,6 +17,7 @@ CREATE PUBLIC SYNONYM Cronograma FOR canalDePanama.Cronograma;
 CREATE PUBLIC SYNONYM Periodo FOR canalDePanama.Periodo;
 CREATE PUBLIC SYNONYM TipoBuque FOR canalDePanama.TipoBuque;
 CREATE PUBLIC SYNONYM Reserva FOR canalDePanama.Reserva;
+CREATE PUBLIC SYNONYM PR_REGISTRAR_RESERVA FOR canalDePanama.PR_REGISTRAR_RESERVA;
 
 -- ROL AGENTE --
 CREATE ROLE Agente;
@@ -49,7 +50,7 @@ GRANT EXECUTE ON canalDePanama.fu_cupos_disponibles TO Agente;
 GRANT EXECUTE ON canalDePanama.fu_precio_paso TO Agente;
 GRANT EXECUTE ON canalDePanama.pr_registrar_paso TO Agente;
 GRANT EXECUTE ON canalDePanama.pr_registrar_reserva TO Agente;
-GRANT SELECT ON Agente TO Agente;
+GRANT SELECT ON canalDePanama.Agente TO Agente;
 GRANT SELECT ON paso TO  Agente;
 GRANT SELECT ON pasosAgente TO Agente;
 GRANT SELECT ON abonosPaso TO  Agente;
@@ -76,6 +77,12 @@ GRANT SELECT ON oferta TO Agente;
 GRANT SELECT ON subasta TO Agente;
 GRANT SELECT ON cronograma TO Agente;
 GRANT SELECT ON periodo TO Agente;
+GRANT INSERT ON buque TO Agente;
+GRANT INSERT ON reserva TO Agente;
+GRANT INSERT ON tripulacion TO Agente;
+GRANT INSERT ON tripulante TO Agente;
+GRANT INSERT ON oferta TO Agente;
+GRANT SELECT ON canaldepanama.reserva_seq TO agente;
 
 
 GRANT SELECT ON Agente TO GerentePersonal;
@@ -97,11 +104,6 @@ GRANT SELECT ON pagoReserva TO Auditor;
 GRANT SELECT ON pagoPaso TO Auditor;
 GRANT SELECT ON tipopago TO Auditor;
 
-GRANT INSERT ON buque TO Agente;
-GRANT INSERT ON reserva TO Agente;
-GRANT INSERT ON tripulacion TO Agente;
-GRANT INSERT ON tripulante TO Agente;
-GRANT INSERT ON oferta TO Agente;
 GRANT INSERT ON Agente TO GerentePersonal;
 GRANT INSERT ON compania TO GerentePersonal;
 GRANT INSERT ON cronograma TO Organizador;
