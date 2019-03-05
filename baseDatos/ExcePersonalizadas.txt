@@ -1,0 +1,7 @@
+(-1012, 'No se encuentra conectado a la base de datos')
+(-6500,'PLSQL se quedo sin memoria o hay problema con el disco')
+(-20501,'El valor del saldo pendiente es menor al valor que se desea pagar')
+(-20600,'Ya se registra un pago para esa reserva')
+(-20601,'No se pudo identificar el numero de pagos realizados')
+(-20700,'Ya se registra un pago para ese paso');
+(-20300,'Error al recuperar la deuda actual');
