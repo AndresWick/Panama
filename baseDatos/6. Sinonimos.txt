@@ -1,16 +1,59 @@
+DROP PUBLIC SYNONYM agente;
+DROP PUBLIC SYNONYM buque;
+DROP PUBLIC SYNONYM compania;
+DROP PUBLIC SYNONYM cronograma;
+DROP PUBLIC SYNONYM oferta;
+DROP PUBLIC SYNONYM pagopaso;
+DROP PUBLIC SYNONYM pagoreserva;
+DROP PUBLIC SYNONYM parametroscancelacion;
+DROP PUBLIC SYNONYM parametrospaso;
+DROP PUBLIC SYNONYM parametrosReserva;
 DROP PUBLIC SYNONYM paso;
+DROP PUBLIC SYNONYM periodo;
+DROP PUBLIC SYNONYM persona;
+DROP PUBLIC SYNONYM reserva;
+DROP PUBLIC SYNONYM resumenpagopaso;
+DROP PUBLIC SYNONYM resumenpagoreserva;
+DROP PUBLIC SYNONYM subasta;
+DROP PUBLIC SYNONYM tipobuque;
+DROP PUBLIC SYNONYM tipocarga;
+DROP PUBLIC SYNONYM tipopago;
+DROP PUBLIC SYNONYM tripulacion; 
+DROP PUBLIC SYNONYM tripulante;
+
 DROP PUBLIC SYNONYM pasosAgente;
 DROP PUBLIC SYNONYM abonosPaso;
-DROP PUBLIC SYNONYM reserva;
 DROP PUBLIC SYNONYM reservasagente;
 DROP PUBLIC SYNONYM abonosReserva;
-DROP PUBLIC SYNONYM agente;
 
+CREATE PUBLIC SYNONYM agente FOR agente;
+CREATE PUBLIC SYNONYM buque FOR buque;
+CREATE PUBLIC SYNONYM compania FOR compania;
+CREATE PUBLIC SYNONYM cronograma FOR cronograma;
+CREATE PUBLIC SYNONYM oferta FOR oferta;
+CREATE PUBLIC SYNONYM pagopaso FOR pagopaso;
+CREATE PUBLIC SYNONYM pagoreserva FOR pagoreserva;
+CREATE PUBLIC SYNONYM parametroscancelacion FOR parametroscancelacion;
+CREATE PUBLIC SYNONYM parametrospaso FOR parametrospaso;
+CREATE PUBLIC SYNONYM parametrosReserva FOR parametrosReserva;
 CREATE PUBLIC SYNONYM paso FOR paso;
+CREATE PUBLIC SYNONYM periodo FOR periodo;
+CREATE PUBLIC SYNONYM persona FOR persona;
+CREATE PUBLIC SYNONYM reserva FOR reserva;
+CREATE PUBLIC SYNONYM resumenpagopaso FOR resumenpagopaso;
+CREATE PUBLIC SYNONYM resumenpagoreserva FOR resumenpagoreserva;
+CREATE PUBLIC SYNONYM subasta FOR subasta;
+CREATE PUBLIC SYNONYM tipobuque FOR tipobuque;
+CREATE PUBLIC SYNONYM tipocarga FOR tipocarga;
+CREATE PUBLIC SYNONYM tipopago FOR tipopago;
+CREATE PUBLIC SYNONYM tripulacion FOR tripulacion;
+CREATE PUBLIC SYNONYM tripulante FOR tripulante;
+
 CREATE PUBLIC SYNONYM pasosAgente FOR pasosAgente;
 CREATE PUBLIC SYNONYM abonosPaso FOR abonosPaso;
-CREATE PUBLIC SYNONYM reserva FOR reserva;
 CREATE PUBLIC SYNONYM reservasagente FOR reservasagente;
 CREATE PUBLIC SYNONYM abonosReserva FOR abonosReserva;
-CREATE PUBLIC SYNONYM agente FOR agente;
+
+
+
 

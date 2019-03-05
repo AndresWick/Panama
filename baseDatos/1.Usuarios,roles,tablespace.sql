@@ -114,6 +114,8 @@ GRANT DELETE ON parametrosReserva TO Organizador;
 GRANT DELETE ON parametrosPaso TO Organizador;
 GRANT DELETE ON tipopago TO Organizador;
 
+GRANT EXECUTE ON pk_gestionPaso TO Agente;
+
 
 GRANT Agente TO PepeAgente;
 GRANT Agente TO CamiloAgente;

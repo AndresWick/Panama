@@ -51,7 +51,7 @@ public class PasoDAO {
 			throw new SQLException("No logeado");
 		}
 		else {
-			String strSQL = "begin pr_registrar_paso(?,?,?,?); end;";
+			String strSQL = "begin canaldepanama.pk_gestionPaso.PR_REGISTRAR_PASO(?,?,?,?); end;";
 	       
 			CallableStatement callstmt = conexion.prepareCall(strSQL);
 	        

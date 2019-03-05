@@ -93,7 +93,7 @@
 				<div>Id Reserva</div>
 				<input id=reserva type="text" placeholder="Identificador Reserva" class="form-control txtBusqueda" required />				
 				<div>Fecha de Paso</div>
-				<input id="f_paso" type="text" placeholder="yyyy-mm-dd" class="form-control txtBusqueda" required />						
+				<input id="f_paso" type="date" placeholder="yyyy-mm-dd" class="form-control txtBusqueda" required />						
 				<div>Numero de Pasajeros</div>
 				<input id="pasajeros" type="text" placeholder="Numero de Pasajeros" class="form-control txtBusqueda" required />
 				<div>Esclusa a utilizar</div>
@@ -110,7 +110,7 @@
 	</div>
 </div>
 
-<<script type="text/javascript">
+<script type="text/javascript">
 
 	function registroPaso(){				
 		var idReserva = document.getElementById("reserva").value;
