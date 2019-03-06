@@ -65,8 +65,9 @@ dbms_output.put_line('Reserva Registrada');
   WHEN no_data_found THEN
     IF lk_idAgente IS NULL THEN
         RAISE_APPLICATION_ERROR (-20201, 'No esta logeado como un Agente');
-    ELSE 
+    ELSE
         RAISE_APPLICATION_ERROR (-20201, 'Datos no encontrados para el buque '||pk_num_serie);
     END IF;
-   
+
 END PR_REGISTRAR_RESERVA;
+/
