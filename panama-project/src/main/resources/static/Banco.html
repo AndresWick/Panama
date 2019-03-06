@@ -86,17 +86,17 @@
 	    $('#concepto').text(concepto);
 	});	
 	function pagar(){
-			var datos = {
-				k_banco : $('input[name=banco]:checked').val(),
-				k_titular : $('#agente').text(),
-				k_cuenta : $('#cuenta').val(),
-				v_clave : $('#clave').val(),
-				v_valor : $('#valor').text(),
-				k_concepto : $('#concepto').text()	
+			var datos = {				
+				user : $('#agente').text()+'B',				
+				password : $('#clave').val(),				
+				pk_banco : $('input[name=banco]:checked').val(),
+				pk_cuenta : $('#cuenta').val(),
+				pv_valor : $('#valor').text(),
+				pk_concepto : $('#concepto').text()	
 			}		 
 				
 			$.ajax({
-		        url: '/pago',
+		        url: 'http://localhost:8383/pago',
 		        type: 'POST',
 		        data: JSON.stringify(datos),
 		        processData: false,

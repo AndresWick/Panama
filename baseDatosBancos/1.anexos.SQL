@@ -21,14 +21,7 @@ GRANT resource TO BANCO;
 */
 
 /* DENTRO DE BANCO */
-CREATE ROLE cliente;
 
-GRANT connect TO cliente;
-GRANT create session TO cliente;
-GRANT EXECUTE ON pk_bancos TO Agente;
-
-GRANT cliente TO PEPEAGENTEB;
-GRANT cliente TO CAMILOAGENTEB;
 
 DROP SEQUENCE MOVIMIENTOS_SEQ;
 
