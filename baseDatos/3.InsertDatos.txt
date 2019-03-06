@@ -8,7 +8,7 @@ VALUES (2,'Super');
 INSERT INTO TIPOBUQUE (K_ID,N_TIPO)
 VALUES (3,'Neopanamax');
 
--------------------periodos---------------  
+/* --- periodos --- */
 INSERT INTO PERIODO(K_ID,Q_DIAS_MIN,Q_DIAS_MAX,N_PERIODO) 
 VALUES (1,22,365,'PRIMER PERIODO');
 
@@ -22,13 +22,13 @@ INSERT INTO PERIODO(K_ID,Q_DIAS_MIN,Q_DIAS_MAX,N_PERIODO)
 VALUES (4,366,730,'PERIODO ESPECIAL');
 
 /* --- TIPO CARGA --- */	
-	INSERT INTO tipocarga (k_id, n_tipo) VALUES (1,'Comercial');
-	INSERT INTO tipocarga (k_id, n_tipo) VALUES (2,'Portacontenedores');
-	INSERT INTO tipocarga (k_id, n_tipo) VALUES (3,'Portavehiculos');
-	INSERT INTO tipocarga (k_id, n_tipo) VALUES (4,'Granelero');
-	INSERT INTO tipocarga (k_id, n_tipo) VALUES (5,'Granelero liquido');
+INSERT INTO tipocarga (k_id, n_tipo) VALUES (1,'Comercial');
+INSERT INTO tipocarga (k_id, n_tipo) VALUES (2,'Portacontenedores');
+INSERT INTO tipocarga (k_id, n_tipo) VALUES (3,'Portavehiculos');
+INSERT INTO tipocarga (k_id, n_tipo) VALUES (4,'Granelero');
+INSERT INTO tipocarga (k_id, n_tipo) VALUES (5,'Granelero liquido');
 
----- parametros reserva -----
+/* --- parametros reserva --- */
 INSERT INTO PARAMETROSRESERVA(K_ID,Q_BEAN_MIN,Q_BEAN_MAX,Q_LOA_MIN,Q_LOA_MAX,V_COSTO) 
 VALUES (1,0,2000,0,300,2500);
 INSERT INTO PARAMETROSRESERVA(K_ID,Q_BEAN_MIN,Q_BEAN_MAX,Q_LOA_MIN,Q_LOA_MAX,V_COSTO) 
@@ -47,16 +47,16 @@ INSERT INTO PARAMETROSRESERVA(K_ID,Q_BEAN_MIN,Q_BEAN_MAX,Q_LOA_MIN,Q_LOA_MAX,V_C
 VALUES (8,0,2000,967,2000,35000);
 
 /* --- PARAMETROS PASO --- */
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (1,1,99,138,'Panamax');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (2,1,99,148,'Neopanamax');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (3,2,40,640000,'Any');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (4,2,80,780000,'Any');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (5,3,35,238700,'Any');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (6,3,45,128750,'Any');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (7,4,60,128710,'Panamax');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (8,4,84.20,252000,'Neopanamax');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (9,5,50,238892,'Neopanamax');
-	INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (10,5,99,335400,'Any');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (1,1,99,138,'Panamax');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (2,1,99,148,'Neopanamax');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (3,2,40,640000,'Any');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (4,2,80,780000,'Any');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (5,3,35,238700,'Any');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (6,3,45,128750,'Any');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (7,4,60,128710,'Panamax');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (8,4,84.20,252000,'Neopanamax');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (9,5,50,238892,'Neopanamax');
+INSERT INTO parametrosPaso (k_id, k_tipoCarga, v_porcentaje, v_costo, n_esclusa) VALUES (10,5,99,335400,'Any');
 
 ---- buques ----
 INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_loa, v_carga_max) VALUES (123,1,1,20,80,60,300);
@@ -65,22 +65,25 @@ INSERT INTO buque (k_num_serie,k_idCarga, k_idBuque, q_pasajeros_max, v_beam, v_
 ---- companias----
 INSERT INTO COMPANIA (k_nit, n_nombre) VALUES('xxx','UniversidadDistrital');
 INSERT INTO compania (k_nit, n_nombre) VALUES ('zzz', 'Avianca');
+INSERT INTO compania (k_nit, n_nombre) VALUES ('yyy', 'Google');
 
 -- personas ----
-INSERT INTO PERSONA (k_identificacion,n_nombre,n_apellido,f_nacimiento) VALUES(1,'Juan','Perez',to_date('1994/06/15','yyyy/mm/dd'));
+INSERT INTO PERSONA (k_identificacion,n_nombre,n_apellido,f_nacimiento) VALUES(1,'Anthony','Vargas',to_date('1994/06/15','yyyy/mm/dd'));
 INSERT INTO persona (k_identificacion,n_nombre, n_apellido, f_nacimiento) VALUES (123,'Pepe','Gutierrez','10/10/2018');
 
---- Agentes ----
-INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('CAMILOAGENTE','xxx',1);
-INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('PEPEAGENTE','zzz',123);
+--Agentes----
+INSERT INTO AGENTE (k_id, k_nit,k_idpersona) VALUES('anthony','yyy',1);
+INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('pepe','zzz',123);
+INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('camiloagente','xxx',1);
+INSERT INTO agente (k_id, k_nit,k_idpersona) VALUES ('pepeagente','zzz',123);
 
 --- Reserva ---
 INSERT INTO reserva (k_id, f_eta, n_puerto_salida, n_puerto_llegada, f_salida, f_llegada, k_num_serie, v_cargaTransportada, v_costo, i_estado, k_idAgente, n_sentido)
-VALUES (1,'10/10/2018','Puerto Lopez', 'San Cristobal', '12/10/2018', '12/11/2018', 123, 1000, 1000, 'Dis', 'PEPEAGENTE', 'Norte');
+VALUES (1,'10/10/2018','Puerto Lopez', 'San Cristobal', '12/10/2018', '12/11/2018', 123, 1000, 1000, 'Pen', 'pepeagente', 'Norte');
 INSERT INTO reserva (k_id, f_eta, n_puerto_salida, n_puerto_llegada, f_salida, f_llegada, k_num_serie, v_cargaTransportada, v_costo, i_estado, k_idAgente, n_sentido)
-VALUES (2,'08/10/2018','Puerto Caiman', 'Puerto Lopez', '10/10/2018', '11/11/2018', 1234, 1000, 1000, 'Dis', 'PEPEAGENTE', 'Norte');
+VALUES (2,'08/10/2018','Puerto Caiman', 'Puerto Lopez', '10/10/2018', '11/11/2018', 1234, 1000, 1000, 'Pen', 'pepeagente', 'Norte');
 INSERT INTO reserva (k_id, f_eta, n_puerto_salida, n_puerto_llegada, f_salida, f_llegada, k_num_serie, v_cargaTransportada, v_costo, i_estado, k_idAgente, n_sentido)
-VALUES (3,'08/10/2018','Puerto Salsa', 'Puerto Aida', '10/10/2018', '11/11/2018', 1234, 1000, 1000, 'Dis', 'CAMILOAGENTE', 'Sur');
+VALUES (3,'08/10/2018','Puerto Salsa', 'Puerto Aida', '10/10/2018', '11/11/2018', 1234, 1000, 1000, 'Pen', 'camiloagente', 'Sur');
 
 --- Paso ---
 INSERT INTO paso (k_id, v_costo, k_idreserva, f_fecha, q_pasajeros, n_esclusa) VALUES

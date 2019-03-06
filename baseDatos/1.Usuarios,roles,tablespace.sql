@@ -11,8 +11,22 @@ CREATE TEMPORARY TABLESPACE CamAgDatosTemp TEMPFILE 'C:\temporal\CamAgDatosTemp.
 
 CREATE USER CanalDePanama IDENTIFIED BY panamaUD DEFAULT TABLESPACE canalPanDatos TEMPORARY TABLESPACE canalPanTemp;
 
-CREATE USER PepeAgente IDENTIFIED BY pepe111 DEFAULT TABLESPACE PepAgDatos TEMPORARY TABLESPACE PepAgDatosTemp;
+GRANT dba, connect, resource TO CanalDePanama;
 
+--- PUBLIC SYNONYMS ---
+CREATE PUBLIC SYNONYM BUQUE FOR canalDePanama.Buque;
+CREATE PUBLIC SYNONYM Cronograma FOR canalDePanama.Cronograma;
+CREATE PUBLIC SYNONYM Periodo FOR canalDePanama.Periodo;
+CREATE PUBLIC SYNONYM TipoBuque FOR canalDePanama.TipoBuque;
+CREATE PUBLIC SYNONYM Reserva FOR canalDePanama.Reserva;
+CREATE PUBLIC SYNONYM PR_REGISTRAR_RESERVA FOR canalDePanama.PR_REGISTRAR_RESERVA;
+
+-- ROL AGENTE --
+CREATE ROLE Agente;
+
+--- Usuarios del sistema con rol Agente ---
+CREATE USER ANTHONY IDENTIFIED BY anthony;
+CREATE USER PepeAgente IDENTIFIED BY pepe111 DEFAULT TABLESPACE PepAgDatos TEMPORARY TABLESPACE PepAgDatosTemp;
 CREATE USER CamiloAgente IDENTIFIED BY camilo111 DEFAULT TABLESPACE CamAgDatos TEMPORARY TABLESPACE CamAgDatosTemp;
 
 GRANT dba TO CanalDePanama;
@@ -59,6 +73,21 @@ GRANT ANY PRIVILEGE TO GerenteTecnico;
 GRANT ANY ROLE TO GerenteTecnico; 
 
 GRANT SELECT ON Agente TO Agente;
+---Permisos del Role Agente ---
+GRANT CONNECT TO Agente;
+GRANT SELECT ON canalDePanama.Buque TO Agente;
+GRANT SELECT ON canalDePanama.Cronograma TO Agente;
+GRANT SELECT ON canalDePanama.Periodo TO Agente;
+GRANT SELECT ON canalDePanama.TipoBuque TO Agente;
+GRANT SELECT ON canalDePanama.cronograma TO Agente;
+GRANT SELECT ON canalDePanama.Reserva TO Agente;
+GRANT INSERT ON canalDePanama.Reserva TO Agente;
+GRANT EXECUTE ON canalDePanama.fu_calcular_periodo TO Agente;
+GRANT EXECUTE ON canalDePanama.fu_cupos_disponibles TO Agente;
+GRANT EXECUTE ON canalDePanama.fu_precio_paso TO Agente;
+GRANT EXECUTE ON canalDePanama.pr_registrar_paso TO Agente;
+GRANT EXECUTE ON canalDePanama.pr_registrar_reserva TO Agente;
+GRANT SELECT ON canalDePanama.Agente TO Agente;
 GRANT SELECT ON paso TO  Agente;
 GRANT SELECT ON pasosAgente TO Agente;
 GRANT SELECT ON abonosPaso TO  Agente;
@@ -85,6 +114,14 @@ GRANT SELECT ON oferta TO Agente;
 GRANT SELECT ON subasta TO Agente;
 GRANT SELECT ON cronograma TO Agente;
 GRANT SELECT ON periodo TO Agente;
+GRANT INSERT ON buque TO Agente;
+GRANT INSERT ON reserva TO Agente;
+GRANT INSERT ON tripulacion TO Agente;
+GRANT INSERT ON tripulante TO Agente;
+GRANT INSERT ON oferta TO Agente;
+GRANT SELECT ON canaldepanama.reserva_seq TO agente;
+
+
 GRANT SELECT ON Agente TO GerentePersonal;
 GRANT SELECT ON compania TO GerentePersonal;
 GRANT SELECT ON cronograma TO Organizador;
@@ -122,11 +159,6 @@ GRANT SELECT ON tipopago TO GerenteTecnico;
 GRANT SELECT ON tripulacion TO GerenteTecnico;
 GRANT SELECT ON tripulante TO GerenteTecnico;
 
-GRANT INSERT ON buque TO Agente;
-GRANT INSERT ON reserva TO Agente;
-GRANT INSERT ON tripulacion TO Agente;
-GRANT INSERT ON tripulante TO Agente;
-GRANT INSERT ON oferta TO Agente;
 GRANT INSERT ON Agente TO GerentePersonal;
 GRANT INSERT ON compania TO GerentePersonal;
 GRANT INSERT ON cronograma TO Organizador;
@@ -226,3 +258,4 @@ GRANT EXECUTE ON pk_gestionPaso TO GerenteTecnico;
 
 GRANT Agente TO PepeAgente;
 GRANT Agente TO CamiloAgente;
+GRANT AGENTE TO ANTHONY;
