@@ -1,0 +1,33 @@
+CREATE OR REPLACE PROCEDURE PR_REGISTRAR_OFERTA_EN_SUBASTA (
+lk_idPer IN subasta.k_idper%TYPE,
+lk_tipoBuque IN subasta.k_tipobuque%TYPE,
+lk_fecha IN subasta.k_fecha%TYPE,
+lk_sentido IN subasta.k_sentido%TYPE,
+ln_id_agente IN agente.k_id%TYPE,
+lv_oferta IN oferta.v_oferta%TYPE
+)
+AS 
+l_subasta subasta%ROWTYPE;
+BEGIN
+-- Verificar que ya existe un registro en la tabla subasta
+--si existe registrar la oferta
+-- Si no existe detectar la excepción y volver a intentar registrar la oferta
+ SELECT * INTO l_subasta FROM subasta WHERE k_idPer = lk_idPer AND  k_tipoBuque=lk_tipoBuque  AND k_fecha = lk_fecha AND k_sentido = lk_sentido;
+ --Alamcenar el registro de la oferta
+  INSERT INTO OFERTA(k_oferta,k_subasta,v_oferta,f_oferta,k_idAgente) VALUES (OFERTA_SEQ.NEXTVAL,l_subasta.k_subasta,lv_oferta,sysdate,ln_id_agente);
+  commit;
+ EXCEPTION
+  WHEN no_data_found THEN
+  --Registrar la  subasta
+  INSERT INTO subasta (k_subasta,f_fecha,v_tope_minimo,k_idPer,k_tipoBuque,k_fecha,k_sentido) VALUES (SUBASTA_SEQ.NEXTVAL,sysdate,'100',lk_idPer,lk_tipoBuque,lk_fecha,lk_sentido);
+  --volver a intentar almacenar la oferta
+  PR_REGISTRAR_OFERTA_EN_SUBASTA(
+  lk_idPer,
+  lk_tipoBuque,
+  lk_fecha,
+  lk_sentido,
+  ln_id_agente,
+  lv_oferta
+  );
+END PR_REGISTRAR_OFERTA_EN_SUBASTA;
+/
