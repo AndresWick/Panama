@@ -42,8 +42,11 @@ END IF;
  IF lq_numero_cupos_disponibles = 0 THEN
     RAISE_APPLICATION_ERROR (-20203, 'No hay Cupos Disponibles');
  END IF;
- --- Si solo queda un cupo disponible hacer subasta ---
- IF lq_numero_cupos_disponibles = 1 THEN
+ --- Si solo queda un cupo disponible y el buque pasara por la esclusa PANAMAX hacer subasta ---
+ --Tipos Buque que pasan por la esclusa PANAMAX
+ --Tipo Buque 1 --> Regular
+ --Tipo Buque 2 --> Super
+ IF lq_numero_cupos_disponibles = 1 AND (lk_tipo_buque = 1 OR lk_tipo_buque = 2)  THEN
     RAISE_APPLICATION_ERROR (-20204, 'Solo queda un Cupo para Subasta');
  END IF;
  dbms_output.put_line('Cupos disponibles '||lq_numero_cupos_disponibles);
