@@ -9,7 +9,7 @@ BEGIN
   PF_ETA := to_date('15/04/2019','dd/mm/yyyy');
   PN_PUERTO_SALIDA := NULL;
   PN_PUERTO_LLEGADA := NULL;
-  PK_NUM_SERIE := 123;
+  PK_NUM_SERIE := 1234;
   PV_CARGATRANSPORTADA := 10;
   PN_SENTIDO := 'Sur';
 
