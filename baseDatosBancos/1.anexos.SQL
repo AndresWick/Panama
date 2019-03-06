@@ -21,7 +21,14 @@ GRANT resource TO BANCO;
 */
 
 /* DENTRO DE BANCO */
+CREATE ROLE cliente;
 
+GRANT connect TO cliente;
+GRANT create session TO cliente;
+GRANT EXECUTE ON pk_bancos TO cliente;
+
+GRANT cliente TO PEPEAGENTEB;
+GRANT cliente TO CAMILOAGENTEB;
 
 DROP SEQUENCE MOVIMIENTOS_SEQ;
 
@@ -31,15 +38,32 @@ INCREMENT BY   1
 NOCACHE
 NOCYCLE;
 
+GRANT SELECT ON V_TITULARES_CUENTAS TO cliente;
+GRANT SELECT ON BANCO TO cliente;
+GRANT SELECT ON TITULAR TO cliente;
+GRANT SELECT ON CUENTA TO cliente;
+GRANT SELECT ON CONCEPTO TO cliente;
+GRANT SELECT ON DETALLEMOVIMIENTO TO cliente;
+GRANT SELECT ON MOVIMIENTO TO cliente;
 
-/* listar tablas */
+GRANT INSERT ON MOVIMIENTO TO cliente;
+GRANT INSERT ON DETALLEMOVIMIENTO TO cliente;
+
+
+/*
+
+---------- listar tablas ------- 
 SELECT table_name,owner FROM all_tables WHERE owner='BANCO';
 
-/* Para leer o escribir archivos es necesario crear un objeto directory desde SQL: */
+----Para leer o escribir archivos es necesario crear un objeto directory desde SQL: ------
+-- Desde Banco --
 create directory dir_tmp as 'C:\temporal\banco\facturas';
-grant read, write on directory dir_tmp to BANCO;
+grant read, write on directory dir_tmp to cliente;
 
-/* Permisos de UTL_FILE a BANCO*/
+---- Permisos de UTL_FILE -----
 conn / as sysdba
-Connected.
-SQL> grant execute on UTL_FILE TO BANCO;
+
+grant execute on UTL_FILE TO BANCO;
+grant execute on UTL_FILE TO cliente;
+
+*/

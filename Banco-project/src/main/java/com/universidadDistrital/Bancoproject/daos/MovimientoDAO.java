@@ -18,7 +18,7 @@ public class MovimientoDAO {
 	private ODBManager odbManager;
 	
 	public void registrarMovimiento(Cuenta cuenta, Movimiento movimiento, Concepto concepto) throws SQLException {
-			String strSQL = "EXECUTE PK_BANCOS.PR_REGISTRAR_MOVIMIENTO(?,?,?,?,?,?);";
+			String strSQL = "begin BANCO.PK_BANCOS.PR_REGISTRAR_MOVIMIENTO(?,?,?,?,?,?);";
 	        Connection conexion = odbManager.tomarConexion();
 	        PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
 	        
