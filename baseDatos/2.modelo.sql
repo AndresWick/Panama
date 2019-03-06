@@ -208,7 +208,7 @@ CREATE TABLE ResumenPagoPaso
 (
 	k_paso             NUMBER(8) NOT NULL,
 	v_saldo_pendiente  NUMBER(8,2) NOT NULL,
-	f_ultimo_pago      DATE NOT NULL
+	f_ultimo_pago      DATE NULL
 )
 ;
 
@@ -217,7 +217,7 @@ CREATE TABLE ResumenPagoReserva
 (
 	k_reserva          NUMBER(8) NOT NULL,
 	v_saldo_pendiente  NUMBER(8,2) NOT NULL,
-	f_ultimo_pago      DATE NOT NULL
+	f_ultimo_pago      DATE NULL
 )
 ;
 
@@ -503,6 +503,14 @@ ADD CONSTRAINT CK_k_id CHECK (k_id > 0)
 
 ALTER TABLE Reserva
 ADD CONSTRAINT CK_n_sentido_reserva CHECK (n_sentido in ('Norte','Sur'))
+;
+
+ALTER TABLE ResumenPagoPaso
+ADD CONSTRAINT CK_v_saldo_pteP CHECK (v_saldo_pendiente >= 0)
+;
+
+ALTER TABLE ResumenPagoReserva
+ADD CONSTRAINT CK_v_saldo_pteR CHECK (v_saldo_pendiente >= 0)
 ;
 
 ALTER TABLE Subasta
