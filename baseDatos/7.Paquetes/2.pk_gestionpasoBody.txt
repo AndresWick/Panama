@@ -1,0 +1,103 @@
+CREATE OR REPLACE PACKAGE BODY pk_gestionPaso AS
+
+	FUNCTION FU_PRECIO_PASO (        
+        						pk_idReserva IN PASO.k_idReserva%TYPE,
+        						pn_esclusa IN PASO.n_esclusa%TYPE       
+    						)
+    	RETURN PASO.v_costo%TYPE
+	    IS
+			lk_num_serie BUQUE.k_num_serie%TYPE;
+	        lk_idCarga TIPOCARGA.k_id%TYPE;
+	        lv_cargaTransportada RESERVA.v_cargaTransportada%TYPE;
+	        lv_carga_max BUQUE.v_carga_max%TYPE;        
+	        lv_porcentajeCarga NUMBER(4,2) := 0;
+	        lv_costo PARAMETROSPASO.v_costo%TYPE;
+	    BEGIN
+	        SELECT R.k_num_serie INTO lk_num_serie FROM Reserva R WHERE R.k_id = pk_idReserva;
+	        SELECT TP.k_id INTO lk_idCarga FROM tipocarga TP, buque B WHERE TP.k_id = B.k_idCarga AND B.k_num_serie = lk_num_serie;
+	        SELECT R.v_cargaTransportada INTO lv_cargaTransportada FROM Reserva R WHERE R.k_id = pk_idReserva;
+	        SELECT B.v_carga_max INTO lv_carga_max FROM buque B WHERE B.k_num_serie = lk_num_serie;
+	        
+	        lv_porcentajeCarga := (lv_cargaTransportada * 100) / lv_carga_max;
+
+	        IF (lk_idCarga = 2) THEN        
+	            IF (lv_porcentajeCarga > 40) THEN            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.v_porcentaje > 40;            
+	            ELSE            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.v_porcentaje <= 40;            
+	            END IF;        
+	        ELSIF (lk_idCarga = 1) THEN        
+	            IF (pn_esclusa = 'Neopanamax') THEN            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa = 'Neopanamax';      
+	            ELSE            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa = 'Panamax';
+	            END IF;
+	            lv_costo := lv_costo * lv_cargaTransportada;
+	        
+	        ELSIF (lk_idCarga = 3) THEN        
+	            IF (lv_porcentajeCarga > 35) THEN            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.v_porcentaje > 35;            
+	            ELSE            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.v_porcentaje <= 35;            
+	            END IF;
+	        
+	        ELSIF (lk_idCarga = 4) THEN        
+	            IF (lv_porcentajeCarga > 60) THEN            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa = 'Neopanamax';            
+	            ELSE            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa = 'Panamax';            
+	            END IF;        
+	        ELSE        
+	            IF (lv_porcentajeCarga < 50) THEN            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa = 'Neopanamax';            
+	            ELSE            
+	                SELECT PP.v_costo INTO lv_costo FROM parametrospaso PP WHERE PP.k_tipocarga = lk_idCarga AND PP.n_esclusa != 'Neopanamax';            
+	            END IF;        
+	        END IF;
+	        RETURN lv_costo;
+	    EXCEPTION
+	    	WHEN NO_DATA_FOUND THEN
+	    		RETURN 0;
+	    	WHEN VALUE_ERROR THEN
+	    		RETURN 0;
+	    	WHEN INVALID_NUMBER THEN
+	    		RETURN 0;
+	    	WHEN TOO_MANY_ROWS THEN
+	    		RETURN 0;
+	END FU_PRECIO_PASO;
+
+	PROCEDURE PR_REGISTRAR_PASO	(		
+									pk_idReserva IN RESERVA.k_id%TYPE,		
+									pf_fecha IN PASO.f_fecha%TYPE,
+									pq_pasajeros IN PASO.q_pasajeros%TYPE,		
+									pn_esclusa IN PASO.n_esclusa%TYPE,
+									pc_error OUT NUMBER,
+                  					pm_error OUT VARCHAR2
+								)
+		AS		
+			lv_costo PASO.v_costo%TYPE;
+			
+		BEGIN		
+			lv_costo := FU_PRECIO_PASO(pk_idReserva,pn_esclusa);		
+			INSERT INTO PASO (k_id, v_costo, k_idReserva, f_fecha, q_pasajeros, n_esclusa) 
+				VALUES 
+	 				(paso_seq.NEXTVAL, lv_costo, pk_idReserva, pf_fecha, pq_pasajeros, pn_esclusa);
+	 		pc_error := 1;
+	 		pm_error := null;
+	 	EXCEPTION
+		 	WHEN NOT_LOGGED_ON THEN
+		 		pc_error := -1012;
+		 		pm_error := 'No se encuentra conectado a la base de datos';
+		 	WHEN STORAGE_ERROR THEN
+		 		pc_error := -6500;
+		 		pm_error := 'PLSQL se quedo sin memoria o hay problema con el disco';
+		 	WHEN TIMEOUT_ON_RESOURCE THEN
+		 		pc_error := -51;
+		 		pm_error := 'Conexion timed out';
+		 	
+
+	END PR_REGISTRAR_PASO;
+
+end pk_gestionPaso;
+/
+show errors
