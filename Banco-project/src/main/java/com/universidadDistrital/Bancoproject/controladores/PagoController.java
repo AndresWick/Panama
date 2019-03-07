@@ -31,33 +31,40 @@ public class PagoController {
 	@Autowired
 	private ODBManager odbManager;
 	
-	@RequestMapping(value="/pago",method=RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> registrarPago(@RequestBody ObjectNode json)  {
-		try {
+	@RequestMapping(value="/pago",method=RequestMethod.POST)	
+	public String registrarPago(@RequestBody ObjectNode json)  {
 			Usuario cliente = new Usuario();
 			cliente.setUser(json.get("user").asText());
 			cliente.setPassword(json.get("password").asText());
-			odbManager.conectar(cliente);
 			
-			movimientoDAO = new MovimientoDAO();
-			Cuenta cuenta = new Cuenta();
-			Movimiento movimiento = new Movimiento();
-			Concepto concepto = new Concepto();
+			
+			try {
+		    	odbManager.conectar(cliente);
+		    }catch(Exception e) {
+		    	return (e.getMessage());
 
-			cuenta.setK_id(json.get("pk_cuenta").asText());
-			cuenta.setK_idBanco(json.get("pk_banco").asText());
-			cuenta.setK_idTitular(json.get("user").asText());
-			cuenta.setV_clave(json.get("password").asText());
-			concepto.setK_concepto(json.get("pk_concepto").asText());
-			movimiento.setV_valor(json.get("pv_valor").asText());
-					
-			movimientoDAO.registrarMovimiento(cuenta,movimiento,concepto);
-			return new ResponseEntity<>("Pago Registrado",HttpStatus.OK);
-			
-	    }catch(Exception e) {
-	    	return new ResponseEntity<>(e.getMessage(),HttpStatus.UNAUTHORIZED);
-	    }
+		    }
+			try {
+				Cuenta cuenta = new Cuenta();
+				Movimiento movimiento = new Movimiento();
+				Concepto concepto = new Concepto();
+
+				cuenta.setK_id(json.get("pk_cuenta").asText());
+				cuenta.setK_idBanco(json.get("pk_banco").asText());
+				cuenta.setK_idTitular(json.get("user").asText());
+				cuenta.setV_clave(json.get("password").asText());
+				concepto.setK_concepto(json.get("pk_concepto").asText());
+				movimiento.setV_valor(json.get("pv_valor").asText());
+				movimientoDAO.registrarMovimiento(cuenta,movimiento,concepto);
+				return ("exito");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return (e.getMessage());
+			}finally {
+				odbManager.liberarConexion();
+			}	
+				    
 		
 	}	
 		

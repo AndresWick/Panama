@@ -417,11 +417,13 @@
 		
 		var k_agente = $('#user').val();	
 		var v_costo = $('#input_costo').val();
-		var i_tipo = "1";		
+		var i_tipo = "1";
+		var ref = $('#idReserva').val();
 		var datos = {
 			agente: k_agente,
 			costo : v_costo,
-			concepto: i_tipo
+			concepto: i_tipo,
+			ref: ref
 		};	
 		  			  
 		window.location.href = "banco.html?"+ $.param(datos);

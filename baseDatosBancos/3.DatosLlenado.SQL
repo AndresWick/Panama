@@ -10,17 +10,17 @@ INSERT INTO banco (k_id,n_nombre)
 
 /* CREACIÓN DE TITULARES*/
 INSERT INTO titular (k_id,n_nombre,n_apellido)
-	VALUES ('PEPEAGENTE','Pepe','Gutierrez');
+	VALUES ('PEPEAGENTEB','Pepe','Gutierrez');
 
 INSERT INTO titular (k_id,n_nombre,n_apellido)
-	VALUES ('CAMILOAGENTE','Camilo','Lopez');
+	VALUES ('CAMILOAGENTEB','Camilo','Lopez');
 
 /* CREACIÓN DE CUENTAS*/
 INSERT INTO cuenta (k_id,k_idtitular,v_saldo,v_clave,k_idbanco)
-	VALUES (12345,'PEPEAGENTE',100000.00,1234,1);	
+	VALUES (12345,'PEPEAGENTEB',100000.00,1234,1);	
 
 INSERT INTO cuenta (k_id,k_idtitular,v_saldo,v_clave,k_idbanco)
-	VALUES (11111,'CAMILOAGENTE',0.0,1111,1);
+	VALUES (11111,'CAMILOAGENTEB',0.0,1111,1);
 
 /* CREACIÓN DE CONCEPTOS*/
 INSERT INTO concepto (k_concepto,n_descripcion)
