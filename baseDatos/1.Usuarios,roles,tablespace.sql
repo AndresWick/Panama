@@ -1,5 +1,5 @@
 -- DENTRO DE SYSTEM --
-/*
+
 CREATE TABLESPACE canalPanDatos DATAFILE 'C:\temporal\canalPanDatos.DBF' SIZE 1024M EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
 CREATE TEMPORARY TABLESPACE canalPanTemp TEMPFILE 'C:\temporal\canalPanTemp.DBF' SIZE 300M;
 
@@ -20,6 +20,8 @@ CREATE PUBLIC SYNONYM Periodo FOR canalDePanama.Periodo;
 CREATE PUBLIC SYNONYM TipoBuque FOR canalDePanama.TipoBuque;
 CREATE PUBLIC SYNONYM Reserva FOR canalDePanama.Reserva;
 CREATE PUBLIC SYNONYM PR_REGISTRAR_RESERVA FOR canalDePanama.PR_REGISTRAR_RESERVA;
+CREATE PUBLIC SYNONYM subasta FOR canalDePanama.subasta;
+
 
 -- ROL AGENTE --
 CREATE ROLE Agente;
@@ -32,7 +34,7 @@ CREATE USER CamiloAgente IDENTIFIED BY camilo111 DEFAULT TABLESPACE CamAgDatos T
 GRANT dba TO CanalDePanama;
 GRANT connect TO CanalDePanama;
 GRANT resource TO CanalDePanama;
-*/
+
 /* DENTRO DE CANAL DE PANAMA */
 CREATE ROLE Agente;
 CREATE ROLE GerentePersonal; -- Se encarga de lo pertinente a los agentes del canal de panama --
@@ -74,8 +76,8 @@ GRANT ANY ROLE TO GerenteTecnico;
 
 GRANT SELECT ON Agente TO Agente;
 ---Permisos del Role Agente ---
-GRANT CONNECT TO Agente;
 GRANT SELECT ON canalDePanama.Buque TO Agente;
+GRANT SELECT ON canalDePanama.subasta TO Agente;
 GRANT SELECT ON canalDePanama.Cronograma TO Agente;
 GRANT SELECT ON canalDePanama.Periodo TO Agente;
 GRANT SELECT ON canalDePanama.TipoBuque TO Agente;
@@ -91,7 +93,6 @@ GRANT SELECT ON canalDePanama.Agente TO Agente;
 GRANT SELECT ON paso TO  Agente;
 GRANT SELECT ON pasosAgente TO Agente;
 GRANT SELECT ON abonosPaso TO  Agente;
-GRANT SELECT ON reserva TO Agente;
 GRANT SELECT ON reservasagente TO Agente;
 GRANT SELECT ON abonosReserva TO  Agente;
 GRANT SELECT ON buque TO Agente;
@@ -120,6 +121,7 @@ GRANT INSERT ON tripulacion TO Agente;
 GRANT INSERT ON tripulante TO Agente;
 GRANT INSERT ON oferta TO Agente;
 GRANT SELECT ON canaldepanama.reserva_seq TO agente;
+GRANT SELECT ON canaldepanama.oferta_seq TO agente;
 
 
 GRANT SELECT ON Agente TO GerentePersonal;

@@ -1,7 +1,11 @@
+connect CanalDePanama/panamaUD
+@C:\Users\tony_\Documents\Panama\baseDatos\2.modelo.sql
+
 conn system/oracle2018
 @C:\Users\tony_\Documents\Panama\baseDatos\1.Usuarios,roles,tablespace.sql
-connect CanalDePanama/panamaUD
 
+
+connect CanalDePanama/panamaUD
 --Procedimientos y Funciones ---
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\fu_calcular_periodo.txt
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\fu_cupos_disponibles.txt 
@@ -12,8 +16,12 @@ connect CanalDePanama/panamaUD
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\pr_programacion_diaria.txt
 @C:\Users\tony_\Documents\Panama\baseDatos\procedimientosFunciones\pr_registrar_oferta_en_subasta.txt
 
-@C:\Users\tony_\Documents\Panama\baseDatos\2.modelo.sql
 @C:\Users\tony_\Documents\Panama\baseDatos\3.InsertDatos.txt
 @C:\Users\tony_\Documents\Panama\baseDatos\4.sequencias.txt
 @C:\Users\tony_\Documents\Panama\baseDatos\5.vistas.txt
+@C:\Users\tony_\Documents\Panama\baseDatos\6.Sinonimos.txt
+@C:\Users\tony_\Documents\Panama\baseDatos\7.Triggers.txt
+@C:\Users\tony_\Documents\Panama\baseDatos\1.Usuarios,roles,tablespace.sql
+
+
 

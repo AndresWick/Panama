@@ -17,6 +17,7 @@ AS
  lq_numero_cupos_disponibles NUMBER;
  lk_tipo_buque buque.k_idbuque%type;
  lk_idAgente agente.k_id%type;
+ lf_llegada reserva.f_llegada%type;
 BEGIN
 
 -- Verificar el agente que esta haciendo la peticion ---
@@ -55,9 +56,20 @@ END IF;
  lv_costo_reserva := FU_PRECIO_RESERVA(lv_beam,lv_loa);
 dbms_output.put_line('Costo Reserva '||lv_costo_reserva);
 
+--Establecer la fecha de llegada ---
+--Por defecto es igual a la fecha estimada
+lf_llegada :=pf_eta;
+--Dependiendo del tipo buque cambia
+IF lk_tipo_buque=3 THEN
+   lf_llegada := lf_llegada - interval '22' hour;
+ELSE
+   lf_llegada := lf_llegada - interval '14' hour;
+END IF;
+
+
  --- Hacer el registro de la reserva ---------------
- INSERT INTO RESERVA (k_id, f_eta, n_puerto_salida, n_puerto_llegada,k_num_serie,v_cargaTransportada,v_costo,i_estado,k_idAgente,n_sentido) VALUES
- (reserva_seq.NEXTVAL,pf_eta,pn_puerto_salida,pn_puerto_llegada,pk_num_serie,pv_cargaTransportada,lv_costo_reserva,'Pen',lk_idAgente,pn_sentido);
+ INSERT INTO RESERVA (k_id, f_eta, n_puerto_salida, n_puerto_llegada,k_num_serie,v_cargaTransportada,v_costo,i_estado,k_idAgente,n_sentido,f_llegada,f_salida) VALUES
+ (reserva_seq.NEXTVAL,pf_eta,pn_puerto_salida,pn_puerto_llegada,pk_num_serie,pv_cargaTransportada,lv_costo_reserva,'Pen',lk_idAgente,pn_sentido,lf_llegada,pf_eta);
 
  ------- Actualizar los cupos disponibles -----------
  UPDATE cronograma c SET c.q_cupos_disp = c.q_cupos_disp-1 WHERE c.k_idper=lk_periodo AND c.k_sentido=pn_sentido AND c.k_idper = lk_periodo AND c.k_tipobuque = lk_tipo_buque;
@@ -67,10 +79,12 @@ dbms_output.put_line('Reserva Registrada');
  EXCEPTION
   WHEN no_data_found THEN
     IF lk_idAgente IS NULL THEN
-        RAISE_APPLICATION_ERROR (-20201, 'No esta logeado como un Agente');
+        RAISE_APPLICATION_ERROR (-20211, 'No esta logeado como un Agente');
     ELSE
-        RAISE_APPLICATION_ERROR (-20201, 'Datos no encontrados para el buque '||pk_num_serie);
+        RAISE_APPLICATION_ERROR (-20212, 'Datos no encontrados para el buque '||pk_num_serie);
     END IF;
+  WHEN others THEN
+        RAISE;
 
 END PR_REGISTRAR_RESERVA;
 /

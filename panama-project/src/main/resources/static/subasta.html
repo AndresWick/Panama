@@ -1,0 +1,145 @@
+<style>
+	.txtBusqueda, #optTipoBusqueda {
+		width: 30%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.pnl_busqueda {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		color: #444;
+	}
+	
+	.modal-backdrop.fade.in {
+    	display: none;
+	}
+	
+	.modal {
+    	background-color: rgba(0,0,0,0.5)!important;
+	}
+
+	.widget-title {
+		height: 20%;
+		text-align: center;
+		padding-top: 1em;
+		text-shadow: 1px 1px 2px #444;
+		color: #444;
+	}
+
+	@media ( max-width : 600px) {
+		.txtBusqueda {
+			width: 50%;
+			margin-top: 2%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+
+	@media ( max-width : 400px) {
+		.card-view {
+    		padding-left: 0%;
+		}
+	}
+	
+	@media (min-width:601px){
+		.card-view {
+    		padding-left: 30%;
+		}
+	}
+	
+	.no-records-found{
+		display:none;
+	}
+	
+	#closeExit {
+    	margin-top: -20px;
+	}
+	
+	#modal_edit_user .modal-dialog{
+    overflow-y: initial !important
+	}
+	#modal_edit_user .modal-body{
+	    height: 420px;
+	    overflow-y: auto;
+	}
+	
+	@media (min-width: 1000px) {
+	#modal_edit_user .modal-body{
+		height: 420px!important;
+   	 	overflow-y: auto!important;
+	}
+}
+
+@media (min-height: 800px){
+#modal_edit_user .modal-body {
+    height: 690px!important;
+    overflow-y: auto!important;
+}
+
+
+</style>
+<meta charset="ISO-8859-1">
+<div id="busqUsuarios" class="widget-box">
+	<div class="widget-title">
+		<h2 id="title_usuarios">Subastas Abiertas</h2>
+	</div>
+	<div class="widget-content nopadding">
+		<div class="pnl_busqueda">
+			<list id="subastas"></list>	
+			<label style="font-weight:bold;">ID Subasta: </label>
+			<input id="idSubasta"></input>
+			<label style="font-weight:bold;">Valor a Ofertar: </label>
+			<input id="valorOferta"></input>	
+			<button onclick="ofertar()">Ofertar</button>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function ofertar(){
+	oferta = {
+			k_subasta:$("#idSubasta").val(),
+			v_oferta:$("#valorOferta").val()
+	}
+	$.ajax({
+        url: 'subasta',
+        type: 'POST',
+        data: JSON.stringify(oferta),
+        processData: false,
+        contentType: "application/json",
+        success:function(data){
+        	alert(data);
+        },
+        error:function(data){
+        	alert(data.responseText)
+        }
+    })
+	console.log(oferta);
+}
+$.ajax({
+    url: 'subasta',
+    type: 'GET',
+    processData: false,
+    contentType: "application/json",
+    success:function(data){
+    	var cList = $('#subastas');
+    	console.log(data);
+    	$.each(data, function(i)
+    	{
+    		
+    	    var li = $('<li/>')
+    	        .text("ID: "+data[i].k_subasta+", Fecha: "+data[i].f_fecha+", Periodo: "+data[i].k_idPer+", Tipo Buque: "+data[i].k_tipoBuque+", Sentido: "+data[i].k_sentido	)
+    	        .appendTo(cList);
+    	});
+    },
+    error:function(data){
+    	alert(data.responseText)
+    }
+})
+	
+</script>
