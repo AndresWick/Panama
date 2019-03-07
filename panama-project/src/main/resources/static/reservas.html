@@ -101,16 +101,20 @@
 				<input id=puerto_salida type="text" placeholder="Puerto Salida" class="form-control txtBusqueda" required />
 				<div>Puerto Llegada</div>
 				<input id=puerto_llegada type="text" placeholder="Puerto Llegada" class="form-control txtBusqueda" required />
+				<!--
 				<div>Fecha de Salida</div>		
 				<input id="f_salida" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />
 				<div>Fecha de Llegada</div>
 				<input id="f_llegada" type="date" placeholder="Fecha dd-mm-yyyy" class="form-control txtBusqueda" required />			
+				 -->
 				<div>Numero de Serie de Buque</div>
 				<input id="numSerie" type="text" placeholder="Numero de serie" class="form-control txtBusqueda" required />
 				<div>Carga a transportar</div>
 				<input id="carga" type="text" placeholder="Total Carga" class="form-control txtBusqueda" required />
+				<!--
 				<div>Id de Agente</div>
 				<input id="idAgente" type="text" placeholder="Id Agente" class="form-control txtBusqueda" required />
+				-->
 				<div>
 				  <button class="btn btn-success"  onclick="registarCupo()">Registrar Reserva</button>
 				</div>
@@ -127,11 +131,11 @@ function registarCupo(){
 			 f_eta: $('#f_eta').val(),
 			 n_puerto_salida:$('#puerto_salida').val(),
 			 n_puerto_llegada:$('#puerto_llegada').val(),
-			 f_salida:$('#f_salida').val(),
-			 f_llegada:$('#f_llegada').val(),
+			 //f_salida:$('#f_salida').val(),
+			 //f_llegada:$('#f_llegada').val(),
 			 num_serie:$('#numSerie').val(),
 			 v_cargaTransportada:$('#carga').val(),
-			 k_idAgente:$('#idAgente').val(),
+			 //k_idAgente:$('#idAgente').val(),
 			 n_sentido:$('select[id="sentido"] option:selected').val()
 	}
 	 

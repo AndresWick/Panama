@@ -36,18 +36,44 @@ END tg_compruebaPagos;
 	COLUMNAS: v_costo
 	EXCEPTION: Si se agota el tiempo para actualizar o insertar el registro
 */
+
 CREATE OR REPLACE TRIGGER tg_insercionRmenPagoR
 	AFTER INSERT OR UPDATE OF v_costo ON reserva
-	FOR EACH ROW				
+	FOR EACH ROW
+	DECLARE
+		l_user varchar2(25);		
+				 
+		CURSOR C_columnas IS 
+		  	SELECT COLUMN_NAME   FROM ALL_TAB_COLS
+		  		WHERE TABLE_NAME =  'RESERVA' AND OWNER = 'CANALDEPANAMA';
+		Rc_columna C_columnas%ROWTYPE;
+
+		ln_columnvalue auditoria.va_nuevo%TYPE;				
 	BEGIN
+		SELECT user INTO l_user FROM DUAL;
+		
 		IF INSERTING THEN		
 			INSERT INTO resumenPagoReserva (k_reserva, v_saldo_pendiente, f_ultimo_pago) VALUES (:NEW.k_id, :NEW.v_costo, NULL);
+			OPEN C_columnas;
+			LOOP
+				FETCH C_columnas INTO Rc_columna;
+				EXIT WHEN C_columnas%NOTFOUND;
+					ln_columnvalue := Rc_columna.COLUMN_NAME;
+					INSERT INTO auditoria (k_id, n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
+					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'INSERT','RESERVA',ln_columnvalue,NULL,ln_columnvalue);					
+						
+			END LOOP;
+			CLOSE C_columnas;
 		ELSE
 			UPDATE resumenPagoReserva  SET v_saldo_pendiente=:NEW.v_costo WHERE k_reserva = :NEW.k_id;
+			INSERT INTO auditoria (k_id,n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
+					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'UPDATE','RESERVA','V_COSTO',:OLD.V_COSTO,:NEW.V_COSTO);
 		END IF;		
 	EXCEPTION
 		WHEN TIMEOUT_ON_RESOURCE THEN
 			RAISE_APPLICATION_ERROR(-51,'tiempo de espera maximo alcanzado');
+		WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(-20302,SQLCODE);
 END tg_insercionRmenPagoR;
 /
 /* 
@@ -88,12 +114,21 @@ END tg_comprobacionPagoReserva;
 */
 CREATE OR REPLACE TRIGGER tg_updateRmenPagoR
 	AFTER INSERT ON pagoReserva
-	FOR EACH ROW				
-	BEGIN		
-		UPDATE resumenPagoReserva SET v_saldo_pendiente = (v_saldo_pendiente - :NEW.v_valor), f_ultimo_pago = sysdate  WHERE k_reserva = :NEW.k_idReserva;		
+	FOR EACH ROW
+	DECLARE
+		l_user varchar2(25);
+		lv_anterior resumenpagoreserva.v_saldo_pendiente%TYPE;
+	BEGIN
+		SELECT user INTO l_user FROM DUAL;	
+		SELECT v_saldo_pendiente INTO lv_anterior FROM resumenpagoreserva;	
+		UPDATE resumenPagoReserva SET v_saldo_pendiente = (v_saldo_pendiente - :NEW.v_valor), f_ultimo_pago = sysdate  WHERE k_reserva = :NEW.k_idReserva;
+		INSERT INTO auditoria (k_id,n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
+					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'UPDATE','RESUMENPAGORESERVA','V_SALDO_PENDIENTE',lv_anterior,lv_anterior - :NEW.v_valor);		
 	EXCEPTION
 		WHEN TIMEOUT_ON_RESOURCE THEN
 			RAISE_APPLICATION_ERROR(-51,'tiempo de espera maximo alcanzado');
+		WHEN NO_DATA_FOUND THEN
+			RAISE_APPLICATION_ERROR(-20400,'No se puede encontrar los datos');
 END tg_updateRmenPagoR;
 /
 show errors
@@ -139,12 +174,35 @@ END tg_compruebaPagosPaso;
 */
 CREATE OR REPLACE TRIGGER tg_insercionRmenPagoP
 	AFTER INSERT OR UPDATE OF v_costo ON paso
-	FOR EACH ROW				
+	FOR EACH ROW
+	DECLARE
+		l_user varchar2(25);		
+				 
+		CURSOR C_columnas IS 
+		  	SELECT COLUMN_NAME   FROM ALL_TAB_COLS
+		  		WHERE TABLE_NAME =  'PASO' AND OWNER = 'CANALDEPANAMA';
+		Rc_columna C_columnas%ROWTYPE;
+
+		ln_columnvalue auditoria.va_nuevo%TYPE;	
+
+		v_SQLCommand VARCHAR2(4000);				
 	BEGIN
+		SELECT user INTO l_user FROM DUAL;
 		IF INSERTING THEN		
 			INSERT INTO resumenPagoPaso (k_paso, v_saldo_pendiente, f_ultimo_pago) VALUES (:NEW.k_id, :NEW.v_costo, NULL);
+			OPEN C_columnas;
+			LOOP
+				FETCH C_columnas INTO Rc_columna;
+				EXIT WHEN C_columnas%NOTFOUND;
+					ln_columnvalue := Rc_columna.COLUMN_NAME;
+					INSERT INTO auditoria (k_id, n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
+					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'INSERT','PASO',ln_columnvalue,NULL,ln_columnvalue);						
+			END LOOP;
+			CLOSE C_columnas;
 		ELSE
 			UPDATE resumenPagoPaso  SET v_saldo_pendiente=:NEW.v_costo WHERE k_paso = :NEW.k_id;
+			INSERT INTO auditoria (k_id,n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
+					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'UPDATE','PASO','V_COSTO',:OLD.V_COSTO,:NEW.V_COSTO);
 		END IF;		
 	EXCEPTION
 		WHEN TIMEOUT_ON_RESOURCE THEN
@@ -189,9 +247,16 @@ END tg_comprobacionPagoPaso;
 */
 CREATE OR REPLACE TRIGGER tg_updateRmenPagoP
 	AFTER INSERT ON pagoPaso
-	FOR EACH ROW				
+	FOR EACH ROW
+	DECLARE
+		l_user varchar2(25);
+		lv_anterior resumenpagoreserva.v_saldo_pendiente%TYPE;
 	BEGIN		
+		SELECT user INTO l_user FROM DUAL;
+		SELECT v_saldo_pendiente INTO lv_anterior FROM resumenpagoreserva;
 		UPDATE resumenPagoPaso SET v_saldo_pendiente = (v_saldo_pendiente - :NEW.v_valor), f_ultimo_pago = sysdate  WHERE k_paso = :NEW.k_paso;		
+		INSERT INTO auditoria (k_id,n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
+					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'UPDATE','RESUMENPAGORESERVA','V_SALDO_PENDIENTE',lv_anterior,lv_anterior - :NEW.v_valor);
 	EXCEPTION
 		WHEN TIMEOUT_ON_RESOURCE THEN
 			RAISE_APPLICATION_ERROR(-51,'tiempo de espera maximo alcanzado');
@@ -207,7 +272,7 @@ show errors
 	EXCEPTION: Si se agota el tiempo para actualizar o insertar el registro
 */
 CREATE OR REPLACE TRIGGER tg_registroAgente
-	BEFORE INSERT ON agente
+	BEFORE INSERT OR UPDATE ON agente
 	FOR EACH ROW
 	BEGIN
 		:NEW.k_id := UPPER(:NEW.k_id);
