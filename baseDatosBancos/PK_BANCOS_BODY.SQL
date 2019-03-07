@@ -46,9 +46,7 @@ CREATE OR REPLACE PACKAGE BODY PK_BANCOS AS
         exception
             when no_data_found then
                 return 1;
-            when le_ctaNoExistente then
-                DBMS_OUTPUT.PUT_LINE('La cuenta no existente.');
-                /*RAISE_APPLICATION_ERROR(-20100,'La cuenta no existente.');*/
+            when le_ctaNoExistente then                
                 return 2;                       
     END FU_VALIDAR_TITULAR;
 
@@ -103,17 +101,14 @@ CREATE OR REPLACE PACKAGE BODY PK_BANCOS AS
                 RAISE le_ctaNoExistente;
             end if;
         exception
-            when le_ctaNoExistente then
-                DBMS_OUTPUT.PUT_LINE('La cuenta no existente.');
-                /*RAISE_APPLICATION_ERROR(-20100,'La cuenta no existente.');*/  
-            when le_datosErroneos then
-                DBMS_OUTPUT.PUT_LINE('Las credenciales son erroneas.');
-                /*RAISE_APPLICATION_ERROR(-20110,'Las credenciales son erroneas.');*/
-            when le_saldoInsuficiente then
-                DBMS_OUTPUT.PUT_LINE('La cuenta no posee saldo suficiente para el movimiento.');
-                /*RAISE_APPLICATION_ERROR(-20210,'La cuenta no posee saldo suficiente para el movimiento.');*/
+            when le_ctaNoExistente then                
+                RAISE_APPLICATION_ERROR(-20100,'La cuenta no existente.');
+            when le_datosErroneos then                
+                RAISE_APPLICATION_ERROR(-20110,'Las credenciales son erroneas.');
+            when le_saldoInsuficiente then                
+                RAISE_APPLICATION_ERROR(-20210,'La cuenta no posee saldo suficiente para el movimiento.');
             WHEN OTHERS THEN
-                DBMS_OUTPUT.PUT_LINE('Ha ocurrido un error');      
+                RAISE_APPLICATION_ERROR(-20211,'Ha ocurrido un error');      
     END PR_REGISTRAR_MOVIMIENTO;
                 
     FUNCTION FU_VALIDAR_SALDO(pk_cuenta   IN cuenta.k_id%TYPE,
@@ -136,9 +131,7 @@ CREATE OR REPLACE PACKAGE BODY PK_BANCOS AS
                 RAISE le_ctaNoExistente;
             END IF;
         exception
-            when le_ctaNoExistente then
-                DBMS_OUTPUT.PUT_LINE('La cuenta no existente.');
-                /*RAISE_APPLICATION_ERROR(-20100,'La cuenta no existente.');*/
+            when le_ctaNoExistente then                
                 return 2;                   
     END FU_VALIDAR_SALDO;
 
@@ -192,8 +185,7 @@ CREATE OR REPLACE PACKAGE BODY PK_BANCOS AS
             end if;
             exception
             when le_ctaNoExistente then
-                DBMS_OUTPUT.PUT_LINE('La cuenta no existente.');
-                /*RAISE_APPLICATION_ERROR(-20100,'La cuenta no existente.');*/       
+                RAISE_APPLICATION_ERROR(-20100,'La cuenta no existente.');      
     END PR_GENERAR_FACTURA;
 
 END PK_BANCOS;

@@ -1,0 +1,4 @@
+(-20100,'La cuenta no existente.')
+(-20110,'Las credenciales son erroneas.')
+(-20210,'La cuenta no posee saldo suficiente para el movimiento.');
+(-20211,'Ha ocurrido un error'); 

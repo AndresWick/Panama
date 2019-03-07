@@ -36,6 +36,7 @@
 											<p> Titular: <span id="agente"></span> </p>
 											<p> Valor: <span id="valor"></span> </p>
 											<p> Concepto: <span id="concepto"></span> </p>
+											<p> Referencia: <span id="ref"></span> </p>
 										</h3>
 												
 									</div>
@@ -47,9 +48,9 @@
 			<form>
 				<div style="margin-left: 20px;"> Cuenta: <input type="number" id="cuenta"/></div>
 				<div style="margin-left: 20px;"> Clave: <input type="password" id="clave"/></div>
-				<div id="box1"><h2><input type="radio" name="banco" value="popular">Banco Popular</h2></div>
-				<div id="box2"><h2><input type="radio" name="banco" value="davivienda">Davivienda</h2></div>
-				<div id="box3"><h2><input type="radio" name="banco" value="bbva">BBVA</h2></div>
+				<div id="box1"><h2><input type="radio" name="banco" value="3">Banco Popular</h2></div>
+				<div id="box2"><h2><input type="radio" name="banco" value="2">Davivienda</h2></div>
+				<div id="box3"><h2><input type="radio" name="banco" value="1">BBVA</h2></div>
 				
 				<div id="menu" style="margin-top: 60px; margin-left: 20px;">
 					<ul>						
@@ -80,36 +81,112 @@
 	    var agente = params.agente;
 	    var costo = params.costo;
 	    var concepto = params.concepto;
+	    var ref = params.ref;
 	    
 	    $('#agente').text(agente);
 	    $('#valor').text(costo);
 	    $('#concepto').text(concepto);
+	    $('#ref').text(ref)
 	});	
 	function pagar(){
-			var datos = {
-				k_banco : $('input[name=banco]:checked').val(),
-				k_titular : $('#agente').text(),
-				k_cuenta : $('#cuenta').val(),
-				v_clave : $('#clave').val(),
-				v_valor : $('#valor').text(),
-				k_concepto : $('#concepto').text()	
+		
+			var referencia = $('#ref').text();
+			var k_concepto = $('#concepto').text();
+			
+			var use = $('#agente').text()+'B';				
+		 	var passwor = $('#clave').val();				
+			var	k_banco = $('input[name=banco]:checked').val();
+			var	k_cuenta = $('#cuenta').val();
+			var	v_valor = $('#valor').text();
+			
+			var dataa;
+			var datos = {				
+				user : $('#agente').text()+'B',				
+				password : $('#clave').val(),				
+				pk_banco : $('input[name=banco]:checked').val(),
+				pk_cuenta : $('#cuenta').val(),
+				pv_valor : $('#valor').text(),
+				pk_concepto : $('#concepto').text()	
 			}		 
 				
 			$.ajax({
-		        url: '/pago',
+		        url: 'http://localhost:8383/pago',
 		        type: 'POST',
 		        data: JSON.stringify(datos),
 		        processData: false,
 		        contentType: "application/json",
 		        success:function(data){
-		        	alert(data);
+					if(data=="exito"){
+						
+						registrarPago(data, k_concepto, referencia, v_valor);
+					}
+					else{
+						dataa = 'fail';
+						alert(data);
+					}
+
 		        },
 		        error:function(data){
 		        	alert(data.responseText)
 		        }
-		    })  
+		    })   
 		    
-		}
+		    
+		    function registrarPago(dataa, k_concepto, referencia, v_valor){
+				console.log(dataa);
+				console.log(k_concepto);
+				console.log(referencia);
+				console.log(v_valor);
+		    	if(dataa=='exito' && k_concepto==1){
+		    		var pagoReserva = {
+		    				k_idReserva:  referencia,
+		    				v_valor: v_valor,		    				
+		    				k_idTipoPago: 3 
+		    		}
+		    		$.ajax({
+				        url: '/pagoReserva',
+				        type: 'POST',
+				        data: JSON.stringify(pagoReserva),
+				        processData: false,
+				        contentType: "application/json",
+				        success:function(data){
+							alert(data);
+							window.location.href = "indexP.html";
+
+				        },
+				        error:function(data){
+				        	alert(data.responseText)
+				        }
+				    })
+				}
+				else{
+					if(dataa=='exito' && k_concepto==2){
+						var pagoPaso = {
+								k_paso:  referencia,
+			    				v_valor: v_valor,		    				
+			    				k_idTipoPago: 3 
+			    		}
+						$.ajax({
+					        url: '/pagoPaso',
+					        type: 'POST',
+					        data: JSON.stringify(pagoPaso),
+					        processData: false,
+					        contentType: "application/json",
+					        success:function(data){
+								alert(data);
+								window.location.href = "indexP.html";
+
+					        },
+					        error:function(data){
+					        	alert(data.responseText)
+					        }
+					    })
+					}
+					
+				}
+			}
+	
+    }
 			
 	</script>	
 </body>
