@@ -1,0 +1,46 @@
+/*Paquete que contiene todo lo relacionado en PLSQL*/
+
+CREATE OR REPLACE PACKAGE pk_gestionPaso AS
+	/*----------------------------------------------------------------------------------
+    /  Contiene los procedimientos asociados a la gestion del paso del Canal de Panama.    /    
+    /    Fecha de creación:	26/02/19
+    /    Fecha de última modificación:	26/02/19
+    /-------------------------------------------------------------------------------------*/
+
+  /*---------------------------------------------------------------------
+     Función para buscar obtener el precio de un paso segun la reserva y la esclusa a utilizar
+     Parametros de Entrada: pk_idReserva       Identificador de la reserva para la cual esta asociada el paso
+                            pn_esclusa         Nombre de la esclusa que va a utilizar el buque para el paso
+      Parametros de Salida: Ninguno
+      Retorna: Costo del paso para el buque segun sus especificaciones
+      Excepción: Si se tiene dos precios distintos para los mismos parametros
+     -----------------------------------------------------------------------*/
+	FUNCTION FU_PRECIO_PASO (        
+        						pk_idReserva IN PASO.k_idReserva%TYPE,
+        						pn_esclusa IN PASO.n_esclusa%TYPE       
+    						)
+    						RETURN PASO.v_costo%TYPE;
+    /*---------------------------------------------------------------------
+     Procedimiento para registrar el paso en la base de datos
+     Parametros de Entrada: pk_idReserva		Identificador de la reserva para la cual esta asociada el paso
+							pf_fecha			Fecha de cuando va a realizar el paso el buque por el canal de panama
+							pq_pasajeros		Cantidad de pasajeros totales que van a abordar el buque
+							pn_esclusa          Nombre de la esclusa que va a utilizar el buque para el paso
+
+      Parametros de Salida: pc_error            = 1 si el paso se registra correctamente,
+                                                = 0 si existe algun error y no se puede guardar
+                            pm_error             Mensaje de error o null en caso contrario      
+     -----------------------------------------------------------------------*/
+	PROCEDURE PR_REGISTRAR_PASO	(		
+									pk_idReserva IN RESERVA.k_id%TYPE,		
+									pf_fecha IN PASO.f_fecha%TYPE,
+									pq_pasajeros IN PASO.q_pasajeros%TYPE,		
+									pn_esclusa IN PASO.n_esclusa%TYPE,
+                  pc_error OUT NUMBER,
+                  pm_error OUT VARCHAR2
+								);
+
+end pk_gestionPaso;
+/
+show errors
+

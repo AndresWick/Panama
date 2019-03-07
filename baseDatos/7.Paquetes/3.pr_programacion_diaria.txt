@@ -1,0 +1,48 @@
+DROP FUNCTION fu_programacion_diaria;
+DROP TYPE gtt_tablapaso;
+DROP TYPE gto_paso;
+
+  -- Declaración del tipo de objeto con los datos básicos para un paso --
+create or replace type gto_paso as object (
+  k_num_serie  number(8),
+  f_salida date,
+  n_puerto_salida varchar2 (20),
+  f_llegada date,
+  n_puerto_llegada varchar2 (20),
+  n_esclusa varchar2(10),
+  f_eta date
+);
+/
+
+ -- Declaración del tipo de tabla que contendra la informacion de gto_paso (los datos básicos del paso) --
+create or replace type gtt_tablapaso as table of gto_paso;
+/
+
+ /*---------------------------------------------------------------------
+      Función para buscar la programacion diaria de los buques que van a pasar el dia deseado
+      Parametros de Entrada: pf_deseada       Fecha deseada para realizar la busqueda
+                            
+      Parametros de Salida: Ninguno
+      Retorna: Tabla de tipo gto_paso con la informacion de cada paso para el dia deseado
+      Excepción: TODO
+     -----------------------------------------------------------------------*/
+
+CREATE OR REPLACE FUNCTION fu_programacion_diaria(pf_eta date)
+	RETURN gtt_tablapaso 
+	IS
+		ltmptabla gtt_tablapaso;
+	BEGIN
+		select 
+		cast( multiset( 
+		SELECT * FROM infopasos WHERE f_eta = pf_eta    
+			) as gtt_tablapaso)
+		into ltmptabla
+		from dual;          
+    RETURN ltmptabla;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      return null;
+    WHEN COLLECTION_IS_NULL THEN 
+      return null;
+END;
+/
