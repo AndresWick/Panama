@@ -120,10 +120,11 @@ CREATE OR REPLACE TRIGGER tg_updateRmenPagoR
 		lv_anterior resumenpagoreserva.v_saldo_pendiente%TYPE;
 	BEGIN
 		SELECT user INTO l_user FROM DUAL;	
-		SELECT v_saldo_pendiente INTO lv_anterior FROM resumenpagoreserva;	
+		SELECT v_saldo_pendiente INTO lv_anterior FROM resumenpagoreserva WHERE k_reserva = :NEW.k_idReserva;	
 		UPDATE resumenPagoReserva SET v_saldo_pendiente = (v_saldo_pendiente - :NEW.v_valor), f_ultimo_pago = sysdate  WHERE k_reserva = :NEW.k_idReserva;
 		INSERT INTO auditoria (k_id,n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
 					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'UPDATE','RESUMENPAGORESERVA','V_SALDO_PENDIENTE',lv_anterior,lv_anterior - :NEW.v_valor);		
+		
 	EXCEPTION
 		WHEN TIMEOUT_ON_RESOURCE THEN
 			RAISE_APPLICATION_ERROR(-51,'tiempo de espera maximo alcanzado');
@@ -250,13 +251,14 @@ CREATE OR REPLACE TRIGGER tg_updateRmenPagoP
 	FOR EACH ROW
 	DECLARE
 		l_user varchar2(25);
-		lv_anterior resumenpagoreserva.v_saldo_pendiente%TYPE;
+		lv_anterior resumenpagopaso.v_saldo_pendiente%TYPE;
 	BEGIN		
 		SELECT user INTO l_user FROM DUAL;
-		SELECT v_saldo_pendiente INTO lv_anterior FROM resumenpagoreserva;
+		SELECT v_saldo_pendiente INTO lv_anterior FROM resumenpagopaso WHERE k_paso = :NEW.k_paso;
 		UPDATE resumenPagoPaso SET v_saldo_pendiente = (v_saldo_pendiente - :NEW.v_valor), f_ultimo_pago = sysdate  WHERE k_paso = :NEW.k_paso;		
 		INSERT INTO auditoria (k_id,n_usuario,f_proceso,i_tipo,n_tabla,n_columna,va_anterior,va_nuevo) 
 					VALUES (auditoria_seq.NEXTVAL,l_user,sysdate,'UPDATE','RESUMENPAGORESERVA','V_SALDO_PENDIENTE',lv_anterior,lv_anterior - :NEW.v_valor);
+		
 	EXCEPTION
 		WHEN TIMEOUT_ON_RESOURCE THEN
 			RAISE_APPLICATION_ERROR(-51,'tiempo de espera maximo alcanzado');

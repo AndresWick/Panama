@@ -75,7 +75,12 @@ GRANT SELECT ON abonosReserva TO  Agente;
 GRANT SELECT ON pasosAgente TO Agente;
 GRANT SELECT ON reservasagente TO Agente;
 -- SECUENCIAS --
-GRANT SELECT ON canaldepanama.reserva_seq TO agente;
+GRANT SELECT reserva_seq TO Agente;
+GRANT SELECT paso_seq TO Agente;
+GRANT SELECT subasta_seq TO Agente;
+GRANT SELECT auditoria_seq TO Agente;
+GRANT SELECT pagoPaso_seq; TO Agente;
+GRANT SELECT pagoReserva_seq TO Agente;
 
 -- GERENTE PERSONAL --
 GRANT SELECT ON Agente TO GerentePersonal;
@@ -129,6 +134,8 @@ GRANT INSERT ON oferta TO Agente;
 GRANT INSERT ON reserva TO Agente;
 GRANT INSERT ON tripulacion TO Agente;
 GRANT INSERT ON tripulante TO Agente;
+GRANT INSERT ON pagoPaso to Agente;
+GRANT INSERT ON pagoReserva to Agente;
 
 -- GERENTE PERSONAL --
 GRANT INSERT ON Agente TO GerentePersonal;

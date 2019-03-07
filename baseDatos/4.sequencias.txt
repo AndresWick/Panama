@@ -2,6 +2,8 @@ DROP SEQUENCE reserva_seq;
 DROP SEQUENCE paso_seq;
 DROP SEQUENCE subasta_seq;
 DROP SEQUENCE auditoria_seq;
+DROP SEQUENCE pagoPaso_seq;
+DROP SEQUENCE pagoReserva_seq;
 
 CREATE SEQUENCE reserva_seq
   MINVALUE 4
@@ -22,6 +24,18 @@ CREATE SEQUENCE subasta_seq
   CACHE 20;
 
 CREATE SEQUENCE auditoria_seq
+  MINVALUE 1
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE SEQUENCE pagoPaso_seq
+  MINVALUE 1
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE SEQUENCE pagoReserva_seq
   MINVALUE 1
   START WITH 1
   INCREMENT BY 1
