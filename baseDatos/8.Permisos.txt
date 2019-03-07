@@ -99,6 +99,7 @@ GRANT SELECT ON resumenPagoPaso TO Auditor;
 GRANT SELECT ON resumenPagoReserva TO Auditor;
 GRANT SELECT ON subasta TO Auditor;
 GRANT SELECT ON tipopago TO Auditor;
+GRANT SELECT ON auditoria TO Auditor;
 
 -- GERENTE TECNICO --
 GRANT SELECT ON buque TO GerenteTecnico;
