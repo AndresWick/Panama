@@ -238,6 +238,8 @@ GRANT DELETE ON tipocarga TO GerenteTecnico;
 GRANT DELETE ON tipopago TO GerenteTecnico;
 GRANT DELETE ON tripulacion TO GerenteTecnico;
 GRANT DELETE ON tripulante TO GerenteTecnico;
+GRANT DELETE ON resumenpagoReserva TO GerenteTecnico;
+GRANT DELETE ON resumenpagoPaso TO GerenteTecnico;
 
 ------ PAQUETES ---
 GRANT EXECUTE ON pk_gestionPaso TO Agente;

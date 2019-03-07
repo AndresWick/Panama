@@ -5,3 +5,4 @@
 (-20601,'No se pudo identificar el numero de pagos realizados')
 (-20700,'Ya se registra un pago para ese paso');
 (-20300,'Error al recuperar la deuda actual');
+(-20400,'No se puede encontrar los datos')
